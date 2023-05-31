@@ -37,8 +37,8 @@ We hope that this tool will contribute to a safer and more ethical online enviro
 ---
 
 
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/NRbmsWdpRR0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+Youtube:
+[![Nom de la vidéo](https://img.youtube.com/vi/NRbmsWdpRR0/maxresdefault.jpg)](https://www.youtube.com/watch?v=NRbmsWdpRR0)
 
 
 ## <a id="content"></a>🌐 〢 Content
