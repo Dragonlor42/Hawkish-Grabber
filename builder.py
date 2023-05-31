@@ -546,8 +546,8 @@ def rpcloop_thread(stop_event):
 
 
 if __name__ == "__main__":
-    #hide = win32gui.GetForegroundWindow()
-    #win32gui.ShowWindow(hide, win32con.SW_HIDE)
+    hide = win32gui.GetForegroundWindow()
+    win32gui.ShowWindow(hide, win32con.SW_HIDE)
     stop_event = threading.Event()
     
     app_thread = threading.Thread(target=app_thread, args=(stop_event,))
