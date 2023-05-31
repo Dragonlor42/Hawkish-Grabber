@@ -7,6 +7,7 @@
 ![](https://raw.githubusercontent.com/Hawkishx/assets/main/banner.gif)
 
 
+##### [Youtube](https://youtu.be/NRbmsWdpRR0)
 
 ##### [🔱 More](https://t.me/+WvJrz6yv5AxkYjY8)
 
