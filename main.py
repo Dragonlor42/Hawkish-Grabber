@@ -1021,7 +1021,7 @@ class first_srdl_func(Functions):
                 
                 with open(main_file, 'r') as f:
                     filedata = f.read()
-                    if self.apilink != "%API_LINK%":
+                    if self.apilink != "%API_" + "LINK%":
                         newdata = filedata.replace('%API_URL%', self.apilink)
                     else:
                         newdata = filedata.replace('%WEBHOOK%', self.this_so_webh)
@@ -1031,7 +1031,7 @@ class first_srdl_func(Functions):
 
                 with open(main_file2, 'r') as f:
                     filedata = f.read()
-                    if self.apilink != "%API_LINK%":
+                    if self.apilink != "%API_" + "LINK%":
                         newdata = filedata.replace('%API_URL%', self.apilink)
                     else:
                         newdata = filedata.replace('%WEBHOOK%', self.this_so_webh)

