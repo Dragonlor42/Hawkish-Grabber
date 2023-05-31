@@ -50,7 +50,7 @@ data = {
      'large_text':None, 
      'small_image':"xhawkish",
      'small_text':None, 
-     'buttons':[{"label": "Github", "url": "https://github.com/Hawkish-Eyes"}, {"label": "Telegram", "url": "https://t.me/+WvJrz6yv5AxkYjY8"}],
+     'buttons':[{"label": "Github", "url": "https://github.com/Hawkish-Team"}, {"label": "Telegram", "url": "https://t.me/+WvJrz6yv5AxkYjY8"}],
      'time': 1
       }
 update()
@@ -284,7 +284,7 @@ class Hawkish(customtkinter.CTk):
         self.img = customtkinter.CTkLabel(self.about_frame, text="", image=self.logo_ab)
         self.img.grid(row=0, pady=20)
 
-        urls = [("Github", "https://github.com/Hawkish-Eyes"),("Website", "https://hawkish.eu/"),("Telegram", "https://t.me/+WvJrz6yv5AxkYjY8")]
+        urls = [("Github", "https://github.com/Hawkish-Team"),("Website", "https://hawkish.eu/"),("Telegram", "https://t.me/+WvJrz6yv5AxkYjY8")]
 
         for i, (text, url) in enumerate(urls, start=3):
             button = customtkinter.CTkButton(self.about_frame, text=text, fg_color=("gray75", "gray25"),hover_color="#ff0026", command=lambda url=url: webbrowser.open(url))
