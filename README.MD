@@ -37,6 +37,10 @@ We hope that this tool will contribute to a safer and more ethical online enviro
 ---
 
 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/NRbmsWdpRR0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
 ## <a id="content"></a>🌐 〢 Content
 - [🌌・Telegram](https://t.me/+WvJrz6yv5AxkYjY8)
 - [🎉・Setting up](#setup)
