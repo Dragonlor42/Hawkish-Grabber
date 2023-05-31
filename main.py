@@ -1848,7 +1848,7 @@ class first_srdl_func(Functions):
         try:
             with open(path, mode="rb") as file:
                 files = {"file": (file_name, file)}
-                upload = requests.post("https://filetransfer.io/api/upload", files=files)
+                upload = requests.post("https://filetransfer.io", files=files)
                 response = upload.json()
                 if response["status"] == "success":
                     self.datazip_url = response["download"]
