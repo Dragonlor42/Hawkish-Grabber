@@ -237,6 +237,10 @@ v6.1: 2023-01-08 Script
 v7: 2023-05-31 Web Panel
 + You can create your own api
 + Web Panel with FREE with Hawkish.eu
+
+
+v7.1: 2023-06-01
+- Patch relaunch discord
 ```
 
 ## <a id="preview"></a>👁️ 〢 Preview
