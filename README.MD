@@ -237,9 +237,11 @@ v7: 2023-05-31 Web Panel
 + You can create your own api
 + Web Panel with FREE with Hawkish.eu
 
-
 v7.1: 2023-06-01
 - Patch relaunch discord
+
+v7.2: 2023-06-06
+- Patch USB detector
 ```
 
 ## <a id="preview"></a>👁️ 〢 Preview
