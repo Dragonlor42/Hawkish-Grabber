@@ -16,3 +16,4 @@ customtkinter
 pyfiglet
 tqdm
 pypresence
+opencv-python
