@@ -244,6 +244,10 @@ v7.1: 2023-06-01
 
 v7.2: 2023-06-06
 - Patch USB detector
+
+v7.2.5: 2023-06-06
+- Fix Disable Defender
+- Fix Ip/googlemap
 ```
 
 ## <a id="preview"></a>👁️ 〢 Preview
