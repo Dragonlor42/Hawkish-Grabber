@@ -35,9 +35,9 @@ and we strongly condemn any illegal or unethical actions that may result from it
 We hope that this tool will contribute to a safer and more ethical online environment for everyone.
 ---
 
-https://dai.ly/k6j06fNNLxmYiHzbTHU
-Youtube:
-[![SHOWCASE](src="https://s1.dmcdn.net/v/U_gzM1aWFvjGrFaU3/x240")](https://dai.ly/k6j06fNNLxmYiHzbTHU)
+
+Showcase:
+[![SHOWCASE](https://s1.dmcdn.net/v/U_gzM1aWFvjGrFaU3/x240)](https://dai.ly/k6j06fNNLxmYiHzbTHU)
 
 
 ## <a id="content"></a>🌐 〢 Content
