@@ -26,7 +26,7 @@ custom_username = ""
 
 # DISCORD RPC
 try:
-    client_id = '1106609314430472224'
+    client_id = '1117394410808807491'
     RPC = Presence(client_id)
     RPC.connect()
 except:
@@ -46,9 +46,9 @@ def update():
 data = {
      'state':"Build Some Eyes",
      'details':"with Hawkish-Builder V5",
-     'large_image':"hawkishx",
+     'large_image': ("https://thumbs.gfycat.com/EllipticalThornyHypacrosaurus-max-1mb.gif"),
      'large_text':None, 
-     'small_image':"xhawkish",
+     'small_image':"hawkish",
      'small_text':None, 
      'buttons':[{"label": "Github", "url": "https://github.com/Hawkish-Team"}, {"label": "Telegram", "url": "https://t.me/+WvJrz6yv5AxkYjY8"}],
      'time': 1
