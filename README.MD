@@ -1,10 +1,10 @@
 
 <h1 align="center">
   Hawkish Eyes v7
+  ![](https://raw.githubusercontent.com/Hawkishx/assets/main/banner.gif)
 </h1>
 
 
-![](https://raw.githubusercontent.com/Hawkishx/assets/main/banner.gif)
 
 
 ##### [Youtube](https://youtu.be/XKsKsqfxoAw)
