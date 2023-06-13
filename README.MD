@@ -44,6 +44,7 @@ Showcase:
 - [🌌・Telegram](https://t.me/+WvJrz6yv5AxkYjY8)
 - [🎉・Setting up](#setup)
 - [🔰・Features](#features)
+- [👾・Detections](#detection)
 - [👁️・Preview](#preview)
 - [📝・Changelog](#changelog)
 - [🦜・Injection](https://github.com/Hawkish-Team/Hawkish-Injection)
@@ -117,8 +118,12 @@ Showcase:
 > + More!
 ```
 
+## <a id="detection"></a>👾 〢 Detection
+# Hawkish - Grabber  |  3/68 DETECT (-1 False, premium = 0/68) :
+![](https://raw.githubusercontent.com/Hawkish-Team/Hawkish-Grabber/main/Hawkish_assets/img/hawkishdetection.png)
 
-
+# Other (empyrean, luna token grabber, Discord Token Grabber, pysilon):
+![](https://raw.githubusercontent.com/Hawkish-Team/Hawkish-Grabber/main/Hawkish_assets/img/alldiscordgrabber.png)
 
 ## <a id="changelog"></a>💭 〢 ChangeLog
 
