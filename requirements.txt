@@ -17,3 +17,4 @@ pyfiglet
 tqdm
 pypresence
 opencv-python
+configparser
