@@ -1,6 +1,6 @@
 
 <h1 align="center">
-  Hawkish Eyes v7
+  Hawkish Eyes v7.5
 </h1>
 
 
@@ -72,7 +72,8 @@ Showcase:
 
 - Steal Steam / Minecraft / Metamask / Exodus / Roblox / NationGlory login
 - Add a Fake error
-- Steal Chrome Passwords / Cookies / History
+- Steal Firefox Passwords
+- Steal Browsers Passwords / Cookies / History
 - Systeme Informations
 - Inject Discord / Discord Canary / Lightcord / Ripcord / Xcord
 - Steal AntiVirus Detected
@@ -253,6 +254,9 @@ v7.2.5: 2023-06-10
 - Fix Disable Defender
 - Fix Ip/googlemap
 + Uptade Rich Presence
+
+v7.5: 2023-06-15
++ Can Steal Firefox Passwords
 ```
 
 ## <a id="preview"></a>👁️ 〢 Preview
