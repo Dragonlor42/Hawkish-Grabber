@@ -257,6 +257,14 @@ v7.2.5: 2023-06-10
 
 v7.5: 2023-06-15
 + Can Steal Firefox Passwords
+
+v7.5: 2023-06-15
+- Remove the 2ond passwords/cookies logger cuz the first is better
++ Parse Credits Cards From Mozilla
++ Parse Cookies From Mozilla
++ Parse History From Mozilla
++ Parse Bookmarks From Mozilla
++ Parse Bookmarks From Chromium based browsers
 ```
 
 ## <a id="preview"></a>👁️ 〢 Preview
