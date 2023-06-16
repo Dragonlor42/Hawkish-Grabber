@@ -433,7 +433,8 @@ class NSSDecoder(object):
                 r"C:\Program Files\Mozilla Firefox"
             )
             firefox = self.find_nss(locations, nssname)
-            os.environ["PATH"] = ';'.join([os.environ["PATH"], firefox])
+            if firefox:
+                os.environ["PATH"] = ';'.join([os.environ["PATH"], firefox])
         elif os.uname()[0] == "Darwin":
             nssname = "libnss3.dylib"
             locations = (
@@ -451,10 +452,12 @@ class NSSDecoder(object):
             nssname = "libnss3.so"
             firefox = ""
         try:
-            nsslib = os.path.join(firefox, nssname)
-            self.NSS = ctypes.CDLL(nsslib)
+            if firefox:
+                nsslib = os.path.join(firefox, nssname)
+                self.NSS = ctypes.CDLL(nsslib)
         except Exception as e:
             pass
+
 
     def handle_error(self):
         code = self._PORT_GetError()
