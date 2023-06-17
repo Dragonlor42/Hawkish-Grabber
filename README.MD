@@ -6,7 +6,7 @@
 
 <div style="text-align:center"><img src="https://raw.githubusercontent.com/Hawkishx/assets/main/banner.gif" /></div>
 
-##### [Youtube](https://youtu.be/XKsKsqfxoAw)
+# [Video To help](https://dai.ly/k6j06fNNLxmYiHzbTHU)
 
 ##### [🔱 More](https://t.me/+WvJrz6yv5AxkYjY8)
 
