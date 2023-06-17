@@ -64,6 +64,15 @@ Showcase:
 
 
 
+```md
+- Webhook: Can be found on your discord server settings
+- Api Link: Can be found here https://hawkish.eu/ (create an account and create your api)
+- Name: Your .exe Name
+- Icon: File in .ico only
+```
+
+
+
 
 ## <a id="features"></a>🔰 〢 Features
 # 🔱 = Join Telegram
