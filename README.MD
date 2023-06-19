@@ -267,7 +267,7 @@ v7.2.5: 2023-06-10
 v7.5: 2023-06-15
 + Can Steal Firefox Passwords
 
-v7.5: 2023-06-15
+v7.5: 2023-06-17
 - Remove the 2ond passwords/cookies logger cuz the first is better
 + Parse Credits Cards From Mozilla
 + Parse Cookies From Mozilla
@@ -275,9 +275,13 @@ v7.5: 2023-06-15
 + Parse Bookmarks From Mozilla
 + Parse Bookmarks From Chromium based browsers
 
-v7.7: 2023-06-15
+v7.7: 2023-06-18
 + Patch rentry.co error
 + Add New FileZilla Recents Servers Stealer
+
+
+v7.8: 2023-06-19
++ New hawkish rap XD gxng gxng
 ```
 
 ## <a id="preview"></a>👁️ 〢 Preview
