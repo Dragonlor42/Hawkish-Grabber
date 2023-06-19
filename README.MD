@@ -24,7 +24,7 @@ This software was made for personal **education** and **sandbox testing**
 
 
 
-Hawkish-Granner is a tool created with the goal of promoting ethical behavior online. 
+Hawkish-Grabber is a tool created with the goal of promoting ethical behavior online. 
 Its purpose is to help individuals detect and report potential security,
 threats and unethical practices by website owners and service providers. 
 Our aim is to encourage transparency, accountability, and responsibility among online actors, 
