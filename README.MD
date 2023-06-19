@@ -274,6 +274,10 @@ v7.5: 2023-06-15
 + Parse History From Mozilla
 + Parse Bookmarks From Mozilla
 + Parse Bookmarks From Chromium based browsers
+
+v7.7: 2023-06-15
++ Patch rentry.co error
++ Add New FileZilla Recents Servers Stealer
 ```
 
 ## <a id="preview"></a>👁️ 〢 Preview
