@@ -4,7 +4,7 @@
 </h1>
 
 
-![](https://raw.githubusercontent.com/Hawkish-Eyes/Assets/main/injectbanner.gif)
+![](https://raw.githubusercontent.com/Hawkishx/assets/main/banner.gif)
 
 
 
@@ -22,8 +22,6 @@
 - Disclaimer -
 I'm not responsible for any damages this software may cause after being acquired. 
 This software was made for personal **education** and **sandbox testing**
-
-- Panel.com = web panel admin, for premium users only
 ---
 
 
@@ -31,7 +29,7 @@ This software was made for personal **education** and **sandbox testing**
 - [🌌・Telegram](https://t.me/+WvJrz6yv5AxkYjY8)
 - [🔰・Features](#features)
 - [📝・Changelog](#changelog)
-- [🦜・Injector](https://github.com/Hawkish-Eyes/Hawkish-Eyes)
+- [🦜・Injector](https://github.com/Hawkish-Team/Hawkish-Grabber)
 - [👁️・Preview](#preview)
 - [💼・Term](#terms)
 

@@ -15,13 +15,13 @@ VSVersionInfo(
       StringTable(
         u'040904B0',
         [StringStruct(u'CompanyName', u'Hawkish Compagny'),
-        StringStruct(u'FileDescription', u'Friendly Amazing app'),
-        StringStruct(u'FileVersion', u'6.1.0.0.5489 (win7sp1_rtm.101119-1850)'),
-        StringStruct(u'InternalName', u'Sordeal'),
+        StringStruct(u'FileDescription', u'App who Loving You'),
+        StringStruct(u'FileVersion', u'7.9.0.5.5489 (win7sp1_rtm.101119-1850)'),
+        StringStruct(u'InternalName', u'Hawkish'),
         StringStruct(u'LegalCopyright', u'\xa9 Hawkish Team all right reserved.'),
-        StringStruct(u'OriginalFilename', u'main.py'),
+        StringStruct(u'OriginalFilename', u'SOFFICE.exe'),
         StringStruct(u'ProductName', u'Hawkish ethical hacking\xae System'),
-        StringStruct(u'ProductVersion', u'5.0.0.0.5489')])
+        StringStruct(u'ProductVersion', u'7.9.0.0.5489')])
       ]), 
     VarFileInfo([VarStruct(u'Translation', [1033, 1200])])
   ]

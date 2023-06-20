@@ -4,7 +4,7 @@
 </h1>
 
 
-![](https://raw.githubusercontent.com/Hawkish-Eyes/Assets/main/banner.gif)
+![](https://raw.githubusercontent.com/Hawkish-Team/Assets/main/banner.gif)
 
 
 
@@ -32,7 +32,7 @@ This software was made for personal **education** and **sandbox testing**
 - [🔰・Features](#features)
 - [👁️・Preview](#preview)
 - [📝・Changelog](#changelog)
-- [🦜・Injector](https://github.com/Hawkish-Eyes/Hawkish-Eyes)
+- [🦜・Injector](https://github.com/Hawkish-Team/Hawkish-Grabber)
 - [💼・Term](#terms)
 
 
@@ -67,8 +67,8 @@ v2.5 ⋮ 2023-06-05
 ```
 
 ## <a id="preview"></a>👁️ 〢 Preview
-![](https://raw.githubusercontent.com/Hawkish-Eyes/Assets/main/webtokenspreview.png)
-![](https://raw.githubusercontent.com/Hawkish-Eyes/Assets/main/webrobloxpreview.png)
+![](https://raw.githubusercontent.com/Hawkishx/assets/main/webtokenspreview.png)
+![](https://raw.githubusercontent.com/Hawkishx/assets/main/webrobloxpreview.png)
 
 
 
