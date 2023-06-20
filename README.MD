@@ -1,6 +1,6 @@
 
 <h1 align="center">
-  Hawkish Eyes v7.5
+  Hawkish Eyes v7.9
 </h1>
 
 
@@ -282,6 +282,9 @@ v7.7: 2023-06-18
 
 v7.8: 2023-06-19
 + New hawkish rap XD gxng gxng
+
+v7.9: 2023-06-20
+- Injection patched (bruh i've put the bad link)
 ```
 
 ## <a id="preview"></a>👁️ 〢 Preview
